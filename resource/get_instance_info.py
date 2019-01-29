@@ -7,7 +7,7 @@ def do(payload, config, plugin_config, inputs):
     project = client.get_project(pkey)
     
     if payload["funtastic"] == "datasets":
-        project_list = project.list_datasets()
+        dataset_list = project.list_datasets()
     
         return{'projects' : project_list}
     
