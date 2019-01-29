@@ -1,7 +1,7 @@
 {
     "meta" : {
-        "label" : "Retrain Stale Models",
-        "description" : "Retrain all models instance-wide that have not been updated since your date of choice.",
+        "label" : "Flow",
+        "description" : "",
         "category" : "DSS maintenance",
         "icon" : "icon-moon"
     },
