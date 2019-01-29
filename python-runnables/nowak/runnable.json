@@ -77,6 +77,27 @@
             ]
         },
         {
+            "name": "connection_type",
+            "label": "File connection type",
+            "type": "SELECT",
+            "description": "Type of connection for each dataset in flow, where applicable.",
+            "mandatory": true,
+            "selectChoices": [
+                {
+                    "value": "sql",
+                    "label": "sql"
+                },
+                {
+                    "value": "file_system_managed",
+                    "label": "file_system_managed"
+                },
+                {
+                    "value": "hdfs",
+                    "label": "hdfs"
+                }
+            ]
+        },
+        {
             "name": "engineType",
             "label": "Recipe compute engine type",
             "type": "SELECT",
