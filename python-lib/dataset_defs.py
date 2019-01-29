@@ -12,7 +12,7 @@ formatParams = {
 						'compress': '',
   						'representsNullFields': False
 					},
-		"csv" :		{
+		u"csv" :		{
 		    			'arrayItemSeparator': '\x02',
 					    'arrayMapFormat': 'hive',
 					    'charset': 'utf8',
