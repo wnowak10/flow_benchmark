@@ -198,6 +198,10 @@ class checkpoint_flow(object):
             ds = project.get_dataset(input['ref'])
             r_type = ds.get_definition()['type']
             input_file_types.append(r_type)
+            
+            
+        if compute_type == 'HIVE' and 'postgres-10' in input_file_types:
+            print('Incompitable. Can not set {0} compute engine with {1} file type.'.format(compute_type, input_file_types))
         # if incompatible with recipe type.
         if recipe_type in ['sync']:
             # Don't allow a sync recipe to be set to SQL.
