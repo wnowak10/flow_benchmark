@@ -2,20 +2,21 @@ var app = angular.module('update_instance_info.module', []);
 
 app.controller('FoobarController', function($scope) {
 
-    var updateProjects = function() {
+    var updateDatasets = function() {
         // the parameter to callPythonDo() is passed to the do() method as the payload
         // the return value of the do() method comes back as the data parameter of the fist function()
-        $scope.callPythonDo({"funtastic": "projects"}).then(function(data) {
+        $scope.callPythonDo({"funtastic": "Datasets"}).then(function(data) {
             // success
-            $scope.projects = data.projects;
+            $scope.Datasets = data.Datasets;
         }, function(data) {
             // failure
-            $scope.projects = [];
+            $scope.Datasets = [];
         });
     };
-    updateProjects();
-    $scope.$watch('config.allProjects', updateProjects);
-   
+    updateDatasets();
+    $scope.$watch('config.allDatasets', updateDatasets);
+    
+    
 });
 
 
