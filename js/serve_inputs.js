@@ -5,7 +5,7 @@ app.controller('FoobarController', function($scope) {
     var updateProjects = function() {
         // the parameter to callPythonDo() is passed to the do() method as the payload
         // the return value of the do() method comes back as the data parameter of the fist function()
-        $scope.callPythonDo({"funtastic": "projects"}).then(function(data) {
+        $scope.callPythonDo({"funtastic": "datasets"}).then(function(data) {
             // success
             $scope.projects = data.projects;
         }, function(data) {
