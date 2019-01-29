@@ -14,7 +14,7 @@ app.controller('FoobarController', function($scope) {
         });
     };
     updateProjects();
-    $scope.$watch('config.allDataset', updateProjects);
+    $scope.$watch('config.allDatasets', updateProjects);
     
     var updateFolders = function() {
         // the parameter to callPythonDo() is passed to the do() method as the payload
