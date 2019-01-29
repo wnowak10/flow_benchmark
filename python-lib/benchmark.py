@@ -171,8 +171,7 @@ class checkpoint_flow(object):
                         recipe_name,
                         recipe_type,
                         compute_type):
-        """ Given a dataset in with an initial format `initial_format`,
-        change the format to the new format. 
+        """
         
         Args:
         
