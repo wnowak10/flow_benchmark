@@ -99,6 +99,10 @@ class checkpoint_flow(object):
                         dataset_name, 
                         connection_type, 
                         new_format):
+    def set_file_format(self,
+                        dataset_name, 
+                        new_format,
+                        connection_type):
                         # initial_format = None):
         """ Given a dataset in with an initial format `initial_format`,
         change the format to the new format. 
@@ -134,7 +138,7 @@ class checkpoint_flow(object):
         print(dataset_defs.formatParams.keys())
         print(dataset_defs.formatParams['file_system_managed'].keys())
         print(dataset_defs.formatParams[connection_type])
-
+@
         formatParams = dataset_defs.formatParams[connection_type][new_format]
         changed['formatParams'] = formatParams
         if connection_type == 'sql': del changed['formatParams']  # No formatParams for SQL
