@@ -1,0 +1,38 @@
+<div ng-controller="FoobarController">
+    <div class="control-group" >
+        <label class="control-label">Projects</label>
+        <div class="controls" >
+            <select dku-bs-select="{liveSearch:true}" data-actions-box="true" id="selectedusers" ng-model="config.selectedProjects" ng-options="v for v in projects" multiple/>
+            <span class="help-inline">Only train models from these projects</span>
+        </div>
+    </div>
+    <div class="control-group" >
+        <label class="control-label">Models Older than</label>
+        <div class="controls" >
+            <input type="text" ng-model="config.date" ng-required="true"/>
+            <span class="help-inline">MM/dd/YY</span>
+        </div>
+    </div>
+    <div class="control-group" >
+        <label class="control-label">Perform Training?</label>
+        <div class="controls">
+            <input type="checkbox" ng-model="config.performTraining" value=""/>
+            <span class="help-inline">If not checked, only lists which models will be trained</span>
+        </div>
+    </div>
+    <div class="control-group" >
+        <label class="control-label">Number of Concurrent Trainings</label>
+        <div class="controls">
+            <input type="number" step="1" ng-model="config.concurrentTrainings"/>
+            <span class="help-inline">Make sure it doesn't exceed your cores!</span>
+        </div>
+    </div>
+    <div class="control-group" >
+        <label class="control-label">Folder to Hold Retraining Output Logs</label>
+        <div class="controls" >
+            <select dku-bs-select="{liveSearch:true}" ng-model="config.logFolder" ng-options="w for w in folders"/>
+            <span class="help-inline">Folder in this project</span>
+        </div>
+    </div>    
+</div>
+
