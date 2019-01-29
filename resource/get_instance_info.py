@@ -9,7 +9,7 @@ def do(payload, config, plugin_config, inputs):
     if payload["funtastic"] == "datasets":
         dataset_list = project.list_datasets()
     
-        return{'projects' : project_list}
+        return{'datasets' : dataset_list}
     
     if payload["funtastic"] == "folders":
         current_proj_key = dataiku.get_custom_variables()['projectKey']
