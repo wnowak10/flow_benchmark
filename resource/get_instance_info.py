@@ -4,7 +4,7 @@ def do(payload, config, plugin_config, inputs):
     
     client = dataiku.api_client()
     pkey = dataiku.get_custom_variables()['projectKey']
-    client.get_project(pkey)
+    project = client.get_project(pkey)
     
     if payload["funtastic"] == "projects":
         project_list = client.list_project_keys()
