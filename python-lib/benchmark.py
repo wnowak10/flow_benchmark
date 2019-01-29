@@ -95,10 +95,10 @@ class checkpoint_flow(object):
         self.client      = dataiku.api_client()
         self.project     = self.client.get_project(self.project_key)
         
-    def set_file_format(self,
-                        dataset_name, 
-                        connection_type, 
-                        new_format):
+#     def set_file_format(self,
+#                         dataset_name, 
+#                         connection_type, 
+#                         new_format):
     def set_file_format(self,
                         dataset_name, 
                         new_format,
