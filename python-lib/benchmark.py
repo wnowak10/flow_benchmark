@@ -133,11 +133,11 @@ class checkpoint_flow(object):
         #       * formatType
         #       * type
         #       * params
-        print(connection_type)
-        print(new_format)
-        print(dataset_defs.formatParams.keys())
-        print(dataset_defs.formatParams['file_system_managed'].keys())
-        print(dataset_defs.formatParams[connection_type])
+#         print(connection_type)
+#         print(new_format)
+#         print(dataset_defs.formatParams.keys())
+#         print(dataset_defs.formatParams['file_system_managed'].keys())
+#         print(dataset_defs.formatParams[connection_type])
 
         formatParams = dataset_defs.formatParams[connection_type][new_format]
         changed['formatParams'] = formatParams
