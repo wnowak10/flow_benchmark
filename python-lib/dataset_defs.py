@@ -12,7 +12,7 @@ formatParams = {
 						'compress': '',
   						'representsNullFields': False
 					},
-		u"csv" :		{
+		"csv" :		{
 		    			'arrayItemSeparator': '\x02',
 					    'arrayMapFormat': 'hive',
 					    'charset': 'utf8',
@@ -45,7 +45,7 @@ formatParams = {
 				},
 	"file_system_managed" :	{
 		"csv" : 	{
-						'arrayMapFormat': 'json',
+				  'arrayMapFormat': 'json',
 				  'charset': 'utf8',
 				  'compress': 'gz',
 				  'dateSerializationFormat': 'ISO',

@@ -57,7 +57,7 @@
     "params": [
         {
             "name": "formatType",
-            "label": "File format tpe",
+            "label": "File format type",
             "type": "SELECT",
             "description": "Type of file for each dataset in flow, where applicable.",
             "mandatory": true,
@@ -78,7 +78,7 @@
         },
         {
             "name": "connection_type",
-            "label": "File connection type",
+            "label": "Data connection type",
             "type": "SELECT",
             "description": "Type of connection for each dataset in flow, where applicable.",
             "mandatory": true,
