@@ -149,9 +149,9 @@ class checkpoint_flow(object):
 
         if connection_type == "file_system_managed":
             changed['type']= 'Filesystem'
-        elif connect_type == 'hdfs': 
+        elif connection_type == 'hdfs': 
             changed['type'] = HDFS
-        elif connect_type == 'sql':
+        elif connection_type == 'sql':
             changed['type'] = 'PostgreSQL'
         # to_change_json = json.loads(NEW_DATASET_DEFINITION_DICTIONARIES[new_format])
         # changed = change_def_dict(to_change_json, 
