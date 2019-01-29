@@ -15,20 +15,7 @@ app.controller('FoobarController', function($scope) {
     };
     updateProjects();
     $scope.$watch('config.allProjects', updateProjects);
-    
-    var updateFolders = function() {
-        // the parameter to callPythonDo() is passed to the do() method as the payload
-        // the return value of the do() method comes back as the data parameter of the fist function()
-        $scope.callPythonDo({"funtastic": "folders"}).then(function(data) {
-            // success
-            $scope.folders = data.folders;
-        }, function(data) {
-            // failure
-            $scope.folders = [];
-        });
-    };
-    updateFolders();
-    $scope.$watch('config.logFolder', updateFolders);
+   
 });
 
 
