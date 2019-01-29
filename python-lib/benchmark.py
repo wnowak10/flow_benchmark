@@ -141,10 +141,10 @@ class checkpoint_flow(object):
 
         formatParams = dataset_defs.formatParams[connection_type][new_format]
         changed['formatParams'] = formatParams
-        if connection_type == 'sql': del changed['formatParams']  # No formatParams for SQL
-      
+        if connection_type == 'sql': 
+            del changed['formatParams']  # No formatParams for SQL
+            del changed['formatType']
         changed['formatType'] = new_format
-        if connection_type == 'sql': del changed['formatType']
             
         changed['params'] = dataset_defs.params[connection_type]
 
