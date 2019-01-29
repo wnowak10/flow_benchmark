@@ -144,7 +144,8 @@ class checkpoint_flow(object):
         if connection_type == 'sql': del changed['formatParams']  # No formatParams for SQL
       
         changed['formatType'] = new_format
-
+        if connection_type == 'sql': del changed['formatType']
+            
         changed['params'] = dataset_defs.params[connection_type]
 
         if connection_type == "file_system_managed":
@@ -153,6 +154,7 @@ class checkpoint_flow(object):
             changed['type'] = HDFS
         elif connection_type == 'sql':
             changed['type'] = 'PostgreSQL'
+            
         # to_change_json = json.loads(NEW_DATASET_DEFINITION_DICTIONARIES[new_format])
         # changed = change_def_dict(to_change_json, 
         #                           dataset_name, 
