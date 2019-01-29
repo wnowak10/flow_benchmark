@@ -85,24 +85,7 @@ params = {
       u'includeRules': [],
       u'mode': u'ALL'},
      u'notReadyIfEmpty': False,
-     u'path': u'${projectKey}/filesystem_managed_csv'}
-    
-    
-    
-    {
-      'connection': 'postgresql-10',
-	  'mode': 'table',
-	  'normalizeDoubles': True,
-	  'notReadyIfEmpty': False,
-	  'partitioningType': 'custom',
-	  'readColsWithUnknownTzAsDates': False,
-	  'readSQLDateColsAsDSSDates': True,
-	  'table': '${projectKey}_postgres-10',
-	  'tableCreationMode': 'auto',
-	  'writeInsertBatchSize': 10000,
-	  'writeJDBCBadDataBehavior': 'DISCARD_ROW',
-	  'writeWithCopyBadDataBehavior': 'NOVERIFY_ERROR'
-	  },
+     u'path': u'${projectKey}/filesystem_managed_csv'},
 	"sql" : {
 	  'connection': 'postgresql-10',
 	  'mode': 'table',
