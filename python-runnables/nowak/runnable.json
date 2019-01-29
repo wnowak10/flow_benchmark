@@ -3,7 +3,7 @@
         "label" : "Flow",
         "description" : "",
         "category" : "DSS maintenance",
-        "icon" : "icon-moon"
+        "icon" : "icon-foursquare"
     },
     "impersonate" : false,
     "permissions" : ["ADMIN"],
