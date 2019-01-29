@@ -79,13 +79,14 @@ formatParams = {
 	}
 
 params = {
-	"file_system_managed" : {u'connection': u'filesystem_managed',
-     u'filesSelectionRules': {u'excludeRules': [],
-      u'explicitFiles': [],
-      u'includeRules': [],
-      u'mode': u'ALL'},
-     u'notReadyIfEmpty': False,
-     u'path': u'${projectKey}/filesystem_managed_csv'},
+	"file_system_managed" : {
+        u'connection': u'filesystem_managed',
+         u'filesSelectionRules': {u'excludeRules': [],
+          u'explicitFiles': [],
+          u'includeRules': [],
+          u'mode': u'ALL'},
+         u'notReadyIfEmpty': False,
+         u'path': u'${projectKey}/filesystem_managed_csv'},
 	"sql" : {
 	  'connection': 'postgresql-10',
 	  'mode': 'table',
