@@ -23,10 +23,10 @@ logger.setLevel(logging.INFO)
 # _____________________________________________________________________________
 # Global variables.
 
-NEW_DATASET_DEFINITION_DICTIONARIES = {'csv'     : new_definitions.csv_def,
-                                       'parquet' : new_definitions.parquet_def,
-                                       'avro'    : new_definitions.avro_def,
-                                       'postgres': new_definitions.postgres_def}
+# NEW_DATASET_DEFINITION_DICTIONARIES = {'csv'     : new_definitions.csv_def,
+#                                        'parquet' : new_definitions.parquet_def,
+#                                        'avro'    : new_definitions.avro_def,
+#                                        'postgres': new_definitions.postgres_def}
 
 # _____________________________________________________________________________
 # Global functions
@@ -43,46 +43,46 @@ def _time_job(job):
     return [sum(int(i) for i in re.findall( r"(?<=processed in )\d+(?=ms)" , job.get_log()))][0]/1000.0
 
 
-def change_def_dict(to_change_json, 
-                    dataset_name, 
-                    project,
-                    project_key,
-                    filetype):
-    """ Very hacky function to change a DSS dataset defintion
-    dictionary to a new formatType.
+# def change_def_dict(to_change_json, 
+#                     dataset_name, 
+#                     project,
+#                     project_key,
+#                     filetype):
+#     """ Very hacky function to change a DSS dataset defintion
+#     dictionary to a new formatType.
 
-    Get dataset definition (a static JSON) from `new_definitions.py` module. 
+#     Get dataset definition (a static JSON) from `new_definitions.py` module. 
     
-    We take a working template for a dataset format and then 
-    replace a few key values and then set this defintion dictionary back to the dataset. 
+#     We take a working template for a dataset format and then 
+#     replace a few key values and then set this defintion dictionary back to the dataset. 
     
-    Thanks to @JeanYves for this idea.
+#     Thanks to @JeanYves for this idea.
     
-    WARNING: This will probably break on DSS upgrades. Tested on DSS 5.1.0
+#     WARNING: This will probably break on DSS upgrades. Tested on DSS 5.1.0
 
-    Later, in another function `build_dataset`, we clear and rebuild the dataset.
-    """
-    new_dict = to_change_json.copy()
+#     Later, in another function `build_dataset`, we clear and rebuild the dataset.
+#     """
+#     new_dict = to_change_json.copy()
 
-    # Make changes to new dictionary `new_dict`.
-    new_dict['name']       = dataset_name
-    new_dict['projectKey'] = project_key
-    new_dict['schema']     = project.get_dataset(dataset_name).get_definition()['schema']
+#     # Make changes to new dictionary `new_dict`.
+#     new_dict['name']       = dataset_name
+#     new_dict['projectKey'] = project_key
+#     new_dict['schema']     = project.get_dataset(dataset_name).get_definition()['schema']
     
-    if filetype in ['csv', 'avro', 'parquet']:
-        new_dict['smartName']               = dataset_name
-        new_dict['params']['path']          = "/${projectKey}/" + dataset_name
-        new_dict['params']['hiveTableName'] = "${projectKey}_"  + dataset_name
+#     if filetype in ['csv', 'avro', 'parquet']:
+#         new_dict['smartName']               = dataset_name
+#         new_dict['params']['path']          = "/${projectKey}/" + dataset_name
+#         new_dict['params']['hiveTableName'] = "${projectKey}_"  + dataset_name
         
-    elif filetype == 'postgres':
-        new_dict['schema']                  = project.get_dataset(dataset_name).get_definition()['schema']
-        new_dict['params']['table']         = "${projectKey}_" + dataset_name
-    # TO DO
-    # Change lastModifiedBy, creationTag. Ensure that we are not making 
-    # any changes which will cause builds to break. E.g. are there configuration
-    # parameters set in `new_defintions.py` that we need to be aware of / handle?
+#     elif filetype == 'postgres':
+#         new_dict['schema']                  = project.get_dataset(dataset_name).get_definition()['schema']
+#         new_dict['params']['table']         = "${projectKey}_" + dataset_name
+#     # TO DO
+#     # Change lastModifiedBy, creationTag. Ensure that we are not making 
+#     # any changes which will cause builds to break. E.g. are there configuration
+#     # parameters set in `new_defintions.py` that we need to be aware of / handle?
 
-    return new_dict
+#     return new_dict
 
 # _____________________________________________________________________________
 # Checkpoint flow class.
@@ -95,9 +95,10 @@ class checkpoint_flow(object):
         self.project     = self.client.get_project(self.project_key)
         
     def set_file_format(self,
-                        dataset_name,  
-                        new_format,
-                        initial_format = None):
+                        dataset_name, 
+                        connection_type, 
+                        new_format):
+                        # initial_format = None):
         """ Given a dataset in with an initial format `initial_format`,
         change the format to the new format. 
         
@@ -116,16 +117,38 @@ class checkpoint_flow(object):
         Returns:
             bool: The return value. True for success, False otherwise.
         """
-        if self.project.get_dataset(dataset_name).get_definition()['type'] == 'UploadedFiles':
+        dataset_def = self.project.get_dataset(dataset_name).get_definition()
+        if dataset_def['type'] == 'UploadedFiles':
             print('Do not change type of "{}" as this file was uploaded.'.format(dataset_name))
             return
-        
-        to_change_json = json.loads(NEW_DATASET_DEFINITION_DICTIONARIES[new_format])
-        changed = change_def_dict(to_change_json, 
-                                  dataset_name, 
-                                  self.project,
-                                  self.project_key,
-                                  new_format)
+
+        changed = dataset_def.copy()
+        # Essential definition keys to change are:
+        #       * formatParams
+        #       * formatType
+        #       * type
+        #       * params
+
+        formatParams = dataset_defs.formatParams[connection_type][new_format]
+        changed['formatParams'] = formatParams
+        if connection_type == 'sql': del changed['formatParams']  # No formatParams for SQL
+      
+        changed['formatType'] = new_format
+
+        changed['params'] = dataset_defs.params[connection_type]
+
+        if connection_type == "file_system_managed":
+            changed['type']= 'Filesystem'
+        elif connect_type == 'hdfs': 
+            changed['type'] = HDFS
+        elif connect_type == 'sql':
+            changed['type'] = 'PostgreSQL'
+        # to_change_json = json.loads(NEW_DATASET_DEFINITION_DICTIONARIES[new_format])
+        # changed = change_def_dict(to_change_json, 
+        #                           dataset_name, 
+        #                           self.project,
+        #                           self.project_key,
+        #                           new_format)
         self.project.get_dataset(dataset_name).set_definition(changed)
         print('Dataset definition changed. Need to clear data and rebuild. Call `build_dataset()`.')
         return
@@ -297,6 +320,7 @@ class checkpoint_flow(object):
     
     def reformat_flow(self, 
                       formatType, 
+                      connection_type,
                       names = None,
                       verbose = True):
         """ Reformat an entire data flow.
@@ -314,7 +338,7 @@ class checkpoint_flow(object):
 
         for i, dataset in enumerate(names):
             print('Trying to change connection type for {}.'.format(dataset))
-            self.set_file_format(dataset, formatType)
+            self.set_file_format(dataset, formatType, connection_type)
 
     def build_flow(self, 
                    names = None):
