@@ -11,6 +11,7 @@ import numpy as np
 import dataiku
 
 import new_definitions
+import dataset_defs
 
 import logging
 
@@ -213,7 +214,7 @@ class checkpoint_flow(object):
             jso['engineType'] = compute_type
             rdp.set_json_payload(jso)
             return self.project.get_recipe(recipe_name).set_definition_and_payload(rdp)['msg']       
-        
+
     def list_dataset_names(self):
         """ Helper function.
         
