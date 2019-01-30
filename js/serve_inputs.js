@@ -9,7 +9,7 @@ app.controller('FoobarController', function($scope) {
             $scope.choices = data.choices;
         }, function(data) {
             // failure
-            $scope.choices = [];
+            $scope.choices = [1,2,3];
         });
     };
     updateChoices();
