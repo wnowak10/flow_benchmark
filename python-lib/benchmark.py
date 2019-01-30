@@ -277,6 +277,8 @@ class checkpoint_flow(object):
         Spark pipelines when we build datasets one by one
         as we do in `build_flow`?
         """
+        print("XXXXXXX \n\n\n\n")
+        print(able)
         s = self.client.get_project(self.project_key).get_settings()
         r = s.get_raw()
         r['settings']['flowBuildSettings']['mergeSparkPipelines'] = able
