@@ -74,7 +74,7 @@ formatParams = {
 				  }
 		    },
 	"SQL" :	{
-			"postgres" : "None"
+			"SQL" : "None"
 			    },
 	}
 
