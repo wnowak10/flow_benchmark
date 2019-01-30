@@ -59,6 +59,7 @@ class MyRunnable(Runnable):
         
         cf.reformat_flow(self.config['formatType'], self.config['filterValue'])  # Works.
         
+        print(self.config)
         cf.set_compute_engines(self.config['computeEngine']) # Works
         flow_results = cf.build_flow()
 
