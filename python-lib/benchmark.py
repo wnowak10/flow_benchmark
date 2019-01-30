@@ -143,6 +143,8 @@ class checkpoint_flow(object):
         if connectionType == "file_system_managed":
             changed['params']['path'] = '${projectKey}/'+dataset_name
             
+            
+        # Ideally we get these from list_connections.
         if connectionType == "file_system_managed":
             changed['type']= 'Filesystem'
         elif connectionType == 'hdfs': 
