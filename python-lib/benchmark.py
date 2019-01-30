@@ -139,7 +139,7 @@ class checkpoint_flow(object):
         changed['formatParams'] = formatParams
         changed['formatType'] = new_format
 
-        if connection_type == 'sql': 
+        if connection_type == 'SQL': 
             del changed['formatParams']  # No formatParams for SQL
             del changed['formatType']
             
