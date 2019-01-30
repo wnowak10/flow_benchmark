@@ -57,7 +57,7 @@ class MyRunnable(Runnable):
         cf = benchmark.checkpoint_flow(project_key = self.project_key)
         cf.set_spark_pipelinability(self.config['sparkPipeline'])
         
-        cf.reformat_flow(self.config['formatType'], self.config['connectionType'])  # Works.
+        cf.reformat_flow(self.config['formatType'], self.config['filterValue'])  # Works.
         
         cf.set_compute_engines(self.config['computeEngine']) # Works
         flow_results = cf.build_flow()
