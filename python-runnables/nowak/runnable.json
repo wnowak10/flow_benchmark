@@ -3,7 +3,7 @@
         "label" : "Flow benchmark 2.0",
         "description" : "Retrain all models instance-wide that have not been updated since your date of choice.",
         "category" : "DSS maintenance",
-        "icon" : "icon-moon"
+        "icon" : "icon-long-arrow-right"
     },
     "impersonate" : false,
     "permissions" : ["ADMIN"],
