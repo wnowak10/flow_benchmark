@@ -53,11 +53,18 @@ class MyRunnable(Runnable):
     def run(self, progress_callback):
         if self.bad_config():
             return 'Configuration settings impossible - try another combination.'
+        
+        recipe_config = get_recipe_config()
+        formatType = recipe_config.get('formatType', False)
+        computeEngine = recipe_config.get('formatType', False)
+        sparkPipeline = recipe_config.get('sparkPipeline', False)
+        computeEngine = recipe_config.get('formatType', False)
          
         cf = benchmark.checkpoint_flow(project_key = self.project_key)
         cf.set_spark_pipelinability(self.config['sparkPipeline'])
+        cf.reformat_flow(formatType, computeEngine)
         
-        cf.reformat_flow(self.config['formatType'], self.config['filterValue'])  # Works.
+#         cf.reformat_flow(self.config['formatType'], self.config['filterValue'])  # Works.
         print("XXXXXXXXXX \n\n\n\n\n")
         print(self.config)
         cf.set_compute_engines(self.config['computeEngine']) # Works
