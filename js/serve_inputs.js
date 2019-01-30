@@ -6,9 +6,11 @@ app.controller('FoobarController', function($scope) {
         // the return value of the do() method comes back as the data parameter of the fist function()
         $scope.callPythonDo({}).then(function(data) {
             // success
+            console.log(data);
             $scope.choices = data.choices;
         }, function(data) {
             // failure
+            console.log(data);
             $scope.choices = [];
         });
     };
