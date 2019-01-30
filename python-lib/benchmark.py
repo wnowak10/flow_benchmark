@@ -195,7 +195,7 @@ class checkpoint_flow(object):
 #        do some logic here so that we dont set inappropriate compute engine
         input_file_types = []
         for input in inputs:
-            ds = project.get_dataset(input['ref'])
+            ds = self.project.get_dataset(input['ref'])
             r_type = ds.get_definition()['type']
             input_file_types.append(r_type)
             
