@@ -143,7 +143,7 @@ class checkpoint_flow(object):
             del changed['formatType']
             
             
-        changed['params'] = dataset_defs.params[connection_type]
+        changed['params'] = dataset_defs.params[connectionType]
         if connection_type == "file_system_managed":
             changed['params']['path'] = '${projectKey}/'+dataset_name
             
