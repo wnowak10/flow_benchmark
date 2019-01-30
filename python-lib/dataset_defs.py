@@ -86,7 +86,7 @@ params = {
           u'includeRules': [],
           u'mode': u'ALL'},
          u'notReadyIfEmpty': False,
-         u'path': u'${projectKey}/filesystem_managed'
+         u'path': u'${projectKey}/filesystem_managed_csv'
     },
 	"sql" : {
 	  'connection': 'postgresql-10',
