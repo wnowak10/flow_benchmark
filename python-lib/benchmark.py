@@ -349,7 +349,7 @@ class checkpoint_flow(object):
     
     def reformat_flow(self, 
                       formatType, 
-                      connection_type,
+                      connectionType,
                       names = None,
                       verbose = True):
         """ Reformat an entire data flow.
@@ -367,7 +367,7 @@ class checkpoint_flow(object):
 
         for i, dataset in enumerate(names):
             print('Trying to change connection type for {}.'.format(dataset))
-            self.set_file_format(dataset, formatType, connection_type)
+            self.set_file_format(dataset, formatType, connectionType)
 
     def build_flow(self, 
                    names = None):
