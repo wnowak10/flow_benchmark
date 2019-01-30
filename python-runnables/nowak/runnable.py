@@ -60,6 +60,7 @@ class MyRunnable(Runnable):
         connectionType = self.config.get('connectionType')
         sparkPipeline = self.config.get('sparkPipeline')
         computeEngine = self.config.get('computeEngine')
+        computeEngine = computeEngine.upper()
          
         cf = benchmark.checkpoint_flow(project_key = self.project_key)
 #         cf.set_spark_pipelinability(self.config['sparkPipeline'])
