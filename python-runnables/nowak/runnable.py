@@ -16,10 +16,10 @@ class MyRunnable(Runnable):
         self.project_key = project_key
         self.config = config
         self.plugin_config = plugin_config
-        self.formatType = self.config.get('formatType')
+        self.formatType     = self.config.get('formatType')
         self.connectionType = self.config.get('connectionType')
-        self.sparkPipeline = self.config.get('sparkPipeline')
-        self.computeEngine = self.config.get('computeEngine').upper()
+        self.sparkPipeline  = self.config.get('sparkPipeline')
+        self.computeEngine  = self.config.get('computeEngine').upper()
         
     def bad_config(self):
         """
