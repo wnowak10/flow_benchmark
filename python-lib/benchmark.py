@@ -189,19 +189,19 @@ class checkpoint_flow(object):
         rdp = self.project.get_recipe(recipe_name).get_definition_and_payload()
         # Hacky way to ensure that a user compute engine does not get set
         
-        recipe_raw_def = rdp.get_recipe_raw_definition()
-        inputs = recipe['inputs']['main']['items']
-#         check type of input dataset
-#        do some logic here so that we dont set inappropriate compute engine
-        input_file_types = []
-        for input in inputs:
-            ds = project.get_dataset(input['ref'])
-            r_type = ds.get_definition()['type']
-            input_file_types.append(r_type)
+#         recipe_raw_def = rdp.get_recipe_raw_definition()
+#         inputs = recipe['inputs']['main']['items']
+# #         check type of input dataset
+# #        do some logic here so that we dont set inappropriate compute engine
+#         input_file_types = []
+#         for input in inputs:
+#             ds = project.get_dataset(input['ref'])
+#             r_type = ds.get_definition()['type']
+#             input_file_types.append(r_type)
             
             
-        if compute_type == 'HIVE' and 'postgres-10' in input_file_types:
-            print('Incompitable. Can not set {0} compute engine with {1} file type.'.format(compute_type, input_file_types))
+#         if compute_type == 'HIVE' and 'postgres-10' in input_file_types:
+#             print('Incompitable. Can not set {0} compute engine with {1} file type.'.format(compute_type, input_file_types))
         # if incompatible with recipe type.
         if recipe_type in ['sync']:
             # Don't allow a sync recipe to be set to SQL.
