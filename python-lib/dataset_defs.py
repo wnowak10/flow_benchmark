@@ -88,7 +88,7 @@ params = {
          u'notReadyIfEmpty': False,
          u'path': u'${projectKey}/filesystem_managed_csv'
     },
-	"sql" : {
+	"SQL" : {
 	  'connection': 'postgresql-10',
 	  'mode': 'table',
 	  'normalizeDoubles': True,
