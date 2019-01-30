@@ -14,12 +14,12 @@ def do(payload, config, plugin_config, inputs):
     # get name of column providing the choices
     column_name = config.get('filterColumn', '')
     if len(column_name) == 0:
-        return {'choices' : []}
+        return {'choices' : [inputs]}
     # check that the column is in the schema
     schema = dataset.read_schema()
     schema_columns = [col for col in schema if col['name'] == column_name]
     if len(schema_columns) != 1:
-        return {'choices' : []}
+        return {'choices' : [inputs]}
     schema_column = schema_columns[0]
     # get the data and build the set of values
     choices = Set()
