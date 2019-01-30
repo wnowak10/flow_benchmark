@@ -55,11 +55,11 @@ class MyRunnable(Runnable):
             return 'Configuration settings impossible - try another combination.'
         
         import dataiku
-        recipe_config = dataiku.customrecipe.get_recipe_config()
-        formatType = recipe_config.get('formatType')
-        computeEngine = recipe_config.get('formatType')
-        sparkPipeline = recipe_config.get('sparkPipeline')
-        computeEngine = recipe_config.get('computeEngine')
+#         recipe_config = dataiku.customrecipe.get_recipe_config()
+        formatType = self.config.get('formatType')
+        computeEngine = self.config.get('formatType')
+        sparkPipeline = self.config.get('sparkPipeline')
+        computeEngine = self.config.get('computeEngine')
          
         cf = benchmark.checkpoint_flow(project_key = self.project_key)
 #         cf.set_spark_pipelinability(self.config['sparkPipeline'])
