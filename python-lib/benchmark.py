@@ -149,7 +149,8 @@ class checkpoint_flow(object):
             
             
         changed['params'] = dataset_defs.params[connection_type]
-
+        connection_type == "file_system_managed":
+            changed['params']['path'] = '${projectKey}/'+dataset_name
         if connection_type == "file_system_managed":
             changed['type']= 'Filesystem'
         elif connection_type == 'hdfs': 
