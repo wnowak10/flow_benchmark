@@ -1,5 +1,5 @@
 from dataiku import Dataset
-import dataike
+import dataiku
 from sets import Set
 
 # paylaod is sent from the javascript's callPythonDo()
