@@ -1,4 +1,4 @@
-var app = angular.module('foobar', []);
+var app = angular.module('update_instance_info.module', []);
 
 app.controller('FoobarController', function($scope) {
     var updateChoices = function() {
