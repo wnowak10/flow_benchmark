@@ -133,11 +133,11 @@ class checkpoint_flow(object):
         #       * formatType
         #       * type
         #       * params
-        print(connection_type)
-        print(new_format)
-        print(dataset_defs.formatParams.keys())
-        print(dataset_defs.formatParams['file_system_managed'].keys())
-        print(dataset_defs.formatParams[connection_type])
+#         print(connection_type)
+#         print(new_format)
+#         print(dataset_defs.formatParams.keys())
+#         print(dataset_defs.formatParams['file_system_managed'].keys())
+#         print(dataset_defs.formatParams[connection_type])
 
         formatParams = dataset_defs.formatParams[connection_type][new_format]
         changed['formatParams'] = formatParams
@@ -185,7 +185,7 @@ class checkpoint_flow(object):
         Returns:
             bool: The return value. True for success, False otherwise.
         """
-        
+        print(compute_type)
         rdp = self.project.get_recipe(recipe_name).get_definition_and_payload()
         # Hacky way to ensure that a user compute engine does not get set
         
