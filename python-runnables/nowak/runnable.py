@@ -54,6 +54,7 @@ class MyRunnable(Runnable):
         if self.bad_config():
             return 'Configuration settings impossible - try another combination.'
         
+        import dataiku
         recipe_config = dataiku.customrecipe.get_recipe_config()
         formatType = recipe_config.get('formatType')
         computeEngine = recipe_config.get('formatType')
