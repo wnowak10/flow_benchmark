@@ -6,7 +6,7 @@ from sets import Set
 # config and plugin_config are the recipe/dataset and plugin configured values
 # inputs is the list of input roles (in case of a recipe)
 def do(payload, config, plugin_config, inputs):
-    return {'choices': ['a','will']}
+    return {'choices': dataiku.list_datasets()}
 #     role_name = 'input_role'
 #     # get dataset name then dataset handle
 #     dataset_full_names = [i['fullName'] for i in inputs if i['role'] == role_name]
