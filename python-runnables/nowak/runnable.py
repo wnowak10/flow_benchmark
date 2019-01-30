@@ -57,7 +57,7 @@ class MyRunnable(Runnable):
         import dataiku
 #         recipe_config = dataiku.customrecipe.get_recipe_config()
         formatType = self.config.get('formatType')
-        computeEngine = self.config.get('formatType')
+        connectionType = self.config.get('connectionType')
         sparkPipeline = self.config.get('sparkPipeline')
         computeEngine = self.config.get('computeEngine')
          
