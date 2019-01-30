@@ -9,27 +9,6 @@ def do(payload, config, plugin_config, inputs):
     client      = dataiku.api_client()
     project = client.get_project(dataiku.default_project_key())
     engines = project.get_settings().get_raw()['metrics']['engineConfig'].keys()
-#     projects = [i['name'] for i in client.list_projects()]
+    
 #     connections = client.list_connections().keys()
     return {'choices': engines}
-#     role_name = 'input_role'
-#     # get dataset name then dataset handle
-#     dataset_full_names = [i['fullName'] for i in inputs if i['role'] == role_name]
-#     if len(dataset_full_names) == 0:
-#         return {'choices' : []}
-#     dataset = Dataset(dataset_full_names[0])
-#     # get name of column providing the choices
-#     column_name = config.get('filterColumn', '')
-#     if len(column_name) == 0:
-#         return {'choices' : []}
-#     # check that the column is in the schema
-#     schema = dataset.read_schema()
-#     schema_columns = [col for col in schema if col['name'] == column_name]
-#     if len(schema_columns) != 1:
-#         return {'choices' : []}
-#     schema_column = schema_columns[0]
-#     # get the data and build the set of values
-#     choices = Set()
-#     for row in dataset.iter_tuples(sampling='head', limit=10000, columns=[column_name]):
-#         choices.add(row[0])
-#     return {'choices' : list(choices)}
