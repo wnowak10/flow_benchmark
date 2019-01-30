@@ -73,7 +73,7 @@ formatParams = {
 				  'writeDataTypeMismatchBehavior': 'DISCARD_WARNING'
 				  }
 		    },
-	"sql" :	{
+	"SQL" :	{
 			"postgres" : "None"
 			    },
 	}
