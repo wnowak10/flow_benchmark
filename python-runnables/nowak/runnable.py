@@ -58,7 +58,7 @@ class MyRunnable(Runnable):
         cf.set_spark_pipelinability(self.config['sparkPipeline'])
         
         cf.reformat_flow(self.config['formatType'], self.config['filterValue'])  # Works.
-        
+        print("XXXXXXXXXX \n\n\n\n\n")
         print(self.config)
         cf.set_compute_engines(self.config['computeEngine']) # Works
         flow_results = cf.build_flow()
