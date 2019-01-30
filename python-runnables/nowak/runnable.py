@@ -58,7 +58,7 @@ class MyRunnable(Runnable):
         formatType = recipe_config.get('formatType', False)
         computeEngine = recipe_config.get('formatType', False)
         sparkPipeline = recipe_config.get('sparkPipeline', False)
-        computeEngine = recipe_config.get('formatType', False)
+        computeEngine = recipe_config.get('computeEngine', False)
          
         cf = benchmark.checkpoint_flow(project_key = self.project_key)
 #         cf.set_spark_pipelinability(self.config['sparkPipeline'])
