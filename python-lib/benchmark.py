@@ -134,6 +134,7 @@ class checkpoint_flow(object):
         #       * type
         #       * params
         print(connection_type)
+        print("XXXXXX", '\n\n\n\n\n')
 #         print(new_format)
 #         print(dataset_defs.formatParams.keys())
 #         print(dataset_defs.formatParams['file_system_managed'].keys())
