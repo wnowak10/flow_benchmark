@@ -7,6 +7,7 @@ from sets import Set
 # inputs is the list of input roles (in case of a recipe)
 def do(payload, config, plugin_config, inputs):
     client      = dataiku.api_client()
+    project = client.get_project(dataiku.default_project_key())
     engines = project.get_settings().get_raw()['metrics']['engineConfig'].keys()
 #     projects = [i['name'] for i in client.list_projects()]
     return {'choices': engines}
