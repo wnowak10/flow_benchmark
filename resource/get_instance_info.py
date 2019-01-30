@@ -10,8 +10,8 @@ def do(payload, config, plugin_config, inputs):
     project = client.get_project(dataiku.default_project_key())
     engines = project.get_settings().get_raw()['metrics']['engineConfig'].keys()
 #     projects = [i['name'] for i in client.list_projects()]
-    connections = client.list_connections().keys()
-    return {'choices': connections}
+#     connections = client.list_connections().keys()
+    return {'choices': engines}
 #     role_name = 'input_role'
 #     # get dataset name then dataset handle
 #     dataset_full_names = [i['fullName'] for i in inputs if i['role'] == role_name]
