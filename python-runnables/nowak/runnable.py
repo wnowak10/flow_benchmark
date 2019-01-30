@@ -63,7 +63,7 @@ class MyRunnable(Runnable):
 
         cf.set_spark_pipelinability(self.sparkPipeline)
         cf.reformat_flow(self.formatType, self.connectionType)
-#         cf.set_compute_engines(self.computeEngine)
+        cf.set_compute_engines(self.computeEngine)
 
         flow_results = cf.build_flow()
 
