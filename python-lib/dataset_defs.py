@@ -1,5 +1,5 @@
 formatParams = {	
-	"hdfs" :	{
+	"hdfs_managed" :	{
 		"parquet" :	{
 							'parquetBlockSizeMB': 128,
 						  	'parquetCompressionMethod': 'SNAPPY',
