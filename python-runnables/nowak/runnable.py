@@ -15,6 +15,10 @@ class MyRunnable(Runnable):
         self.project_key = project_key
         self.config = config
         self.plugin_config = plugin_config
+        self.formatType = self.config.get('formatType')
+        self.connectionType = self.config.get('connectionType')
+        self.sparkPipeline = self.config.get('sparkPipeline')
+        self.computeEngine = self.config.get('computeEngine').upper()
         
     def bad_config(self):
         """
@@ -56,11 +60,7 @@ class MyRunnable(Runnable):
         
         import dataiku
 #         recipe_config = dataiku.customrecipe.get_recipe_config()
-        formatType = self.config.get('formatType')
-        connectionType = self.config.get('connectionType')
-        sparkPipeline = self.config.get('sparkPipeline')
-        computeEngine = self.config.get('computeEngine')
-        computeEngine = computeEngine.upper()
+        
          
         cf = benchmark.checkpoint_flow(project_key = self.project_key)
 #         cf.set_spark_pipelinability(self.config['sparkPipeline'])
