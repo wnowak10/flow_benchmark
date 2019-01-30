@@ -205,8 +205,8 @@ class checkpoint_flow(object):
         # if incompatible with recipe type.
         if recipe_type in ['sync']:
             # Don't allow a sync recipe to be set to SQL.
-            if compute_type == 'SQL':
-                new_compute_type = 'DSS'
+            if compute_type == 'sql':
+                new_compute_type = 'dss'
             else:
                 new_compute_type = compute_type
             raw_def = rdp.get_recipe_raw_definition()
