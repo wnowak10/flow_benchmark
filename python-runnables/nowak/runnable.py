@@ -2,6 +2,7 @@
 from dataiku.runnables import Runnable, ResultTable
 import benchmark
 import html_template 
+import dataiku
 
 class MyRunnable(Runnable):
     """The base interface for a Python runnable"""
@@ -58,10 +59,6 @@ class MyRunnable(Runnable):
         if self.bad_config():
             return 'Configuration settings impossible - try another combination.'
         
-        import dataiku
-#         recipe_config = dataiku.customrecipe.get_recipe_config()
-        
-         
         cf = benchmark.checkpoint_flow(project_key = self.project_key)
 #         cf.set_spark_pipelinability(self.config['sparkPipeline'])
         cf.set_spark_pipelinability(sparkPipeline)
