@@ -193,8 +193,8 @@ class checkpoint_flow(object):
         
 #         if recipe_type in [ 'python', 'r']:
 #             Ignore, as these happen in memory DSS.
+        # TO DO: Deal w containerization?
 
-            
         elif recipe_type in ['shaker']:
             # Keep payload
             json_payload= rdp.get_json_payload()
