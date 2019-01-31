@@ -139,6 +139,8 @@ class checkpoint_flow(object):
             connectionType = 'Filesystem'
         elif 'sql' in connectionType.lower():
             connectionType = 'SQL'
+        elif 's3' in connectionType.lower():
+            connectionType= 'S3'
         
         # Get the formatParams from my dictionary
         formatParams = dataset_defs.formatParams[connectionType][formatType]
