@@ -16,6 +16,7 @@ class MyRunnable(Runnable):
         self.project_key = project_key
         self.config = config
         self.plugin_config = plugin_config
+        
         self.formatType     = self.config.get('formatType')
         self.connectionType = self.config.get('connectionType')
         self.sparkPipeline  = self.config.get('sparkPipeline')
