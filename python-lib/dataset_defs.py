@@ -1,5 +1,5 @@
 formatParams = {	
-	"hdfs_over_s3_root" :	{
+	"HDFS" :	{
 		"parquet" :	{
 						'parquetBlockSizeMB': 128,
 						'parquetCompressionMethod': 'SNAPPY',
@@ -43,7 +43,7 @@ formatParams = {
 					    'writeDataTypeMismatchBehavior': 'DISCARD_WARNING'
 					}
 				},
-	"filesystem_managed" :	{
+	"Filesystem" :	{
 		"csv" : 	{
 				  'arrayMapFormat': 'json',
 				  'charset': 'utf8',
@@ -79,7 +79,7 @@ formatParams = {
 	}
 
 params = {
-	"file_system_managed" : {
+	"Filesystem" : {
         u'connection': u'filesystem_managed',
          u'filesSelectionRules': {u'excludeRules': [],
           u'explicitFiles': [],
@@ -102,7 +102,7 @@ params = {
 	  'writeJDBCBadDataBehavior': 'DISCARD_ROW',
 	  'writeWithCopyBadDataBehavior': 'NOVERIFY_ERROR'
   },
-  	"hdfs_over_s3_root" : {
+  	"HDFS" : {
   	  'connection': 'hdfs_managed',
       'filesSelectionRules': {'excludeRules': [],
 	  'explicitFiles': [],
