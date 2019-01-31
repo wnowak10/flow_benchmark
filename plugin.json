@@ -3,7 +3,7 @@
     "version" : "0.2.0",
     "meta" : {
         "label" : "Flow benchmark 2.0",
-        "description" : "Retrain all models instance-wide that have not been updated since your date of choice.",
+        "description" : "Set configurations for your flow and time a full rebuild.",
         "author" : "Dataiku (Will Nowak)",
         "icon" : "icon-long-arrow-right",
         "licenseInfo" : "Apache Software License",
