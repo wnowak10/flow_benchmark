@@ -15,7 +15,7 @@ app.controller('FoobarController', function($scope) {
         });
     };
     updateChoices();
-    $scope.$watch('config.filterColumn', updateChoices);
+    $scope.$watch('config.computeEngine', updateChoices);
     
     var updateConnections = function() {
         // the parameter to callPythonDo() is passed to the do() method as the payload
