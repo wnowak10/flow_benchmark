@@ -162,7 +162,6 @@ class checkpoint_flow(object):
             # Include path for a dataset on filesystem.
             changed['params']['path'] = '${projectKey}/'+dataset_name
             
-        # Do I still need this?
         if connectionType == "Filesystem":
             changed['type']= 'Filesystem'
         elif connectionType == 'HDFS': 
