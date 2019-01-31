@@ -53,7 +53,7 @@ class MyRunnable(Runnable):
         - Consider all possibilities and edit accordingly.
 
         """
-        set_combination = (self.config['formatType'], self.config['ComputeEngine'])
+        set_combination = (self.config['formatType'], self.config['computeEngine'])
         bad_combinations = [
             ('postgres', 'SPARK'),
             ('postgres', 'HIVE'),
