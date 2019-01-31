@@ -214,8 +214,8 @@ class checkpoint_flow(object):
 
         elif recipe_type in ['distinct',
                              'group',
-#                              'join',
-                             'pivot'
+                             'join',
+                             'pivot',
                              'sort',
                              'split',
                              'stack',
