@@ -9,7 +9,7 @@ def do(payload, config, plugin_config, inputs):
         engines = project.get_settings().get_raw()['metrics']['engineConfig'].keys()
 
     #     connections = client.list_connections().keys()
-        return {'choices': engines}
+        return {'engines': engines}
     
     
     if payload["funtastic"] == "connections":
