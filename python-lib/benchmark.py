@@ -117,7 +117,9 @@ class checkpoint_flow(object):
             del changed['formatType']
         if connectionType == "Filesystem": # Include path for a dataset on filesystem.
             changed['params']['path'] = '${projectKey}/'+dataset_name
-            
+        
+        # These types are a mandatory part of a dataset definition JSON,
+        # but it is unclear to me what all possible options are.
         if connectionType == "Filesystem":
             changed['type']= 'Filesystem'
         elif connectionType == 'HDFS': 
