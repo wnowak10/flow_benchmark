@@ -159,6 +159,7 @@ class checkpoint_flow(object):
             del changed['formatParams']  # No formatParams for SQL connections.
             del changed['formatType']
         if connectionType == "Filesystem":
+            # Include path for a dataset on filesystem.
             changed['params']['path'] = '${projectKey}/'+dataset_name
             
         # Do I still need this?
