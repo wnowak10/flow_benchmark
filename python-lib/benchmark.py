@@ -156,7 +156,7 @@ class checkpoint_flow(object):
             
         # Exceptions / particular cases.
         if connectionType == 'SQL': 
-            del changed['formatParams']  # No formatParams for SQL
+            del changed['formatParams']  # No formatParams for SQL connections.
             del changed['formatType']
         if connectionType == "Filesystem":
             changed['params']['path'] = '${projectKey}/'+dataset_name
