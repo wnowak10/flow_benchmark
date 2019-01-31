@@ -19,7 +19,7 @@ class MyRunnable(Runnable):
         
         self.formatType     = self.config.get('formatType')
         self.connectionType = self.config.get('connectionType')
-        self.sparkPipeline  = True if self.config.get('sparkPipeline') == "True" else False
+        self.sparkPipeline  = True if self.config.get('sparkPipeline') == "True" else False # config.get('sparkPipeline') is a string sent from HTML checkbox value
         self.computeEngine  = self.config.get('computeEngine').upper()
         
     def bad_config(self):
