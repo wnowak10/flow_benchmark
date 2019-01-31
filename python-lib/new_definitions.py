@@ -1,4 +1,7 @@
-""" To store Dataiku public API csv dataset dictionary.
+""" 
+TO DELETE
+
+To store Dataiku public API csv dataset dictionary.
 """
 
 csv_def = '''
