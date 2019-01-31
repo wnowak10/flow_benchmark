@@ -23,14 +23,14 @@ app.controller('FoobarController', function($scope) {
         $scope.callPythonDo({"funtastic": "connections"}).then(function(data) {
             // success
             console.log(data);
-            $scope.choices = data.choices;
+            $scope.connections = data.connections;
         }, function(data) {
             // failure
             console.log(data);
-            $scope.choices = [];
+            $scope.connections = [];
         });
     };
-    updateChoices();
+    updateConnections();
     $scope.$watch('config.filterColumn', updateConnections);
 // });
 });
