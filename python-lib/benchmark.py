@@ -130,11 +130,22 @@ class checkpoint_flow(object):
         #       * formatType
         #       * type
         #       * params
-        formatParams = dataset_defs.formatParams[connectionType][formatType]
-        changed['formatParams'] = formatParams
         
+        # Connection type can be named by user, so rely on string search
+        # to map user connection type to valid backend data connection type.
+        if 'hdfs' in connectionType.lower():
+            connectionType = 'HDFS'
+        elif 'file_system' in connectionType.lower() or 'filesystem' in connectionType.lower():
+            connectionType = 'Filesystem'
+        elif 'sql' in connectionType.lower():
+            connectionType = 'SQL'
+        
+        # Get the formatParams from my dictionary
+        formatParams = dataset_defs.formatParams[connectionType][formatType]
+        # Set the new formatParams key in the dataset definition JSON
+        changed['formatParams'] = formatParams
         changed['formatType'] = formatType
-
+         
         if connectionType == 'SQL': 
             del changed['formatParams']  # No formatParams for SQL
             del changed['formatType']
@@ -145,9 +156,9 @@ class checkpoint_flow(object):
             changed['params']['path'] = '${projectKey}/'+dataset_name
             
         # Do I still need this?
-        if connectionType == "file_system_managed":
+        if connectionType == "Filesystem":
             changed['type']= 'Filesystem'
-        elif connectionType == 'hdfs_over_s3_root': 
+        elif connectionType == 'HDFS': 
             changed['type'] = 'HDFS'
         elif connectionType == 'SQL':
             changed['type'] = 'PostgreSQL'
