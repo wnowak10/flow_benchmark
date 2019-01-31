@@ -101,7 +101,10 @@ class checkpoint_flow(object):
         elif 's3' in connectionType.lower():
             connectionType= 'S3'
         
-        # Get the formatParams from my dictionary
+        # Get the formatParams from my dictionary. 
+        # `dataset_defs.py` contains Python dictionaries which contain
+        # appropriate content to populate Dataiku dataset JSON definitions
+        # according to a new definition.
         formatParams = dataset_defs.formatParams[connectionType][formatType]
         # Set the new formatParams key in the dataset definition JSON
         changed['formatParams'] = formatParams
