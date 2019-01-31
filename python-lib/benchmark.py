@@ -125,7 +125,8 @@ class checkpoint_flow(object):
             print('Do not change type of "{}" as this file was uploaded.'.format(dataset_name))
             return
         changed = dataset_def.copy()
-        # Essential definition keys to change are:
+        
+        # Essential definition keys to change in this JSON are:
         #       * formatParams
         #       * formatType
         #       * type
