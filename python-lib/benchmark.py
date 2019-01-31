@@ -191,7 +191,7 @@ class checkpoint_flow(object):
             rdp.set_json_payload(raw_def)
             return self.project.get_recipe(recipe_name).set_definition_and_payload(rdp)['msg']
         
-        elif recipe_type == 'shaker':
+        elif recipe_type in ['shaker', 'python']:
             # Keep payload
             json_payload= rdp.get_json_payload()
 
@@ -213,7 +213,6 @@ class checkpoint_flow(object):
                              'stack',
                              'topn',
                              'window',
-                             'python',
                              'r']:  # TO DO: Check to make sure all SQL recipes are as so.
             jso = rdp.get_json_payload()
             jso['engineType'] = compute_type
