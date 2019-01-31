@@ -130,12 +130,6 @@ class checkpoint_flow(object):
         elif connectionType == 'S3':
             changed['type'] = 'S3'
             
-        # to_change_json = json.loads(NEW_DATASET_DEFINITION_DICTIONARIES[new_format])
-        # changed = change_def_dict(to_change_json, 
-        #                           dataset_name, 
-        #                           self.project,
-        #                           self.project_key,
-        #                           new_format)
         self.project.get_dataset(dataset_name).set_definition(changed)
         print('Dataset definition changed. Need to clear data and rebuild. Call `build_dataset()`.')
         return
