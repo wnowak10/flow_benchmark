@@ -213,10 +213,13 @@ class checkpoint_flow(object):
             r_type = ds.get_definition()['type']
             input_file_types.append(r_type)
             
-            
+        # Logic to prevent bad combinations of computeType and input file types.
+        # For example, "HIVE" as computeType will not work with "postgres-10"
+        # as a file type for one of the recipe inputs.
         if compute_type == 'HIVE' and 'postgres-10' in input_file_types:
             print('Incompitable. Can not set {0} compute engine with {1} file type.'.format(compute_type, input_file_types))
-        # if incompatible with recipe type.
+
+        # Logic to prevent incompatible computeTypes with various recipe types.
         if recipe_type in ['sync']:
             # Don't allow a sync recipe to be set to SQL.
             if compute_type == 'sql':
