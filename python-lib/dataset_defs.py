@@ -43,7 +43,7 @@ formatParams = {
 					    'writeDataTypeMismatchBehavior': 'DISCARD_WARNING'
 					}
 				},
-	"file_system_managed" :	{
+	"filesystem_managed" :	{
 		"csv" : 	{
 				  'arrayMapFormat': 'json',
 				  'charset': 'utf8',
