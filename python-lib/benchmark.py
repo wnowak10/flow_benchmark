@@ -204,11 +204,11 @@ class checkpoint_flow(object):
         # Hacky way to ensure that a user compute engine does not get set
         
         recipe_raw_def = rdp.get_recipe_raw_definition()
-        inputs = recipe_raw_def['inputs']['main']['items']
+        input_datasets = recipe_raw_def['inputs']['main']['items']
 #         check type of input dataset
 #        do some logic here so that we dont set inappropriate compute engine
         input_file_types = []
-        for input in inputs:
+        for input in input_datasets:
             ds = self.project.get_dataset(input['ref'])
             r_type = ds.get_definition()['type']
             input_file_types.append(r_type)
