@@ -10,3 +10,12 @@ def do(payload, config, plugin_config, inputs):
 
     #     connections = client.list_connections().keys()
         return {'choices': engines}
+    
+    
+    if payload["funtastic"] == "connections":
+        client      = dataiku.api_client()
+        project = client.get_project(dataiku.default_project_key())
+        engines = project.get_settings().get_raw()['metrics']['engineConfig'].keys()
+
+    #     connections = client.list_connections().keys()
+        return {'choices': engines}
