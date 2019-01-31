@@ -1,7 +1,7 @@
 {
     "meta" : {
         "label" : "Flow benchmark 2.0",
-        "description" : "Retrain all models instance-wide that have not been updated since your date of choice.",
+        "description" : "Set configurations for your flow and time a full rebuild.",
         "category" : "DSS maintenance",
         "icon" : "icon-long-arrow-right"
     },
