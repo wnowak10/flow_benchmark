@@ -8,7 +8,7 @@
     "impersonate" : false,
     "permissions" : ["ADMIN"],
     "resultType" : "HTML",
-    "paramsTemplate" : "model_retraining_form.html",
+    "paramsTemplate" : "form.html",
     "paramsModule" : "update_instance_info.module",
     "paramsPythonSetup" : "get_instance_info.py"
 }
