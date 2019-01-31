@@ -73,7 +73,10 @@ class checkpoint_flow(object):
             bool: The return value. True for success, False otherwise.
         """
         # Get the dataset's JSON definition.
-        dataset_def = self.project.get_dataset(dataset_name).get_definition()
+        try:
+            dataset_def = self.project.get_dataset(dataset_name).get_definition()
+        except: # Datasets that are exposed from other projects mysteriously don't have a JSON definition available.
+            return
         if dataset_def['type'] == 'UploadedFiles':
             print('Do not change type of "{}" as this file was uploaded.'.format(dataset_name))
             return
