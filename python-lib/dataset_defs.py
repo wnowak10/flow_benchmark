@@ -102,7 +102,7 @@ params = {
 	  'writeJDBCBadDataBehavior': 'DISCARD_ROW',
 	  'writeWithCopyBadDataBehavior': 'NOVERIFY_ERROR'
   },
-  	"hdfs_managed" : {
+  	"hdfs_over_s3_root" : {
   	  'connection': 'hdfs_managed',
       'filesSelectionRules': {'excludeRules': [],
 	  'explicitFiles': [],
