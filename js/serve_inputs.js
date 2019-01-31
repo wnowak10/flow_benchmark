@@ -6,11 +6,9 @@ app.controller('FoobarController', function($scope) {
         // the return value of the do() method comes back as the data parameter of the fist function()
         $scope.callPythonDo({"funtastic": "engines"}).then(function(data) {
             // success
-            console.log(data);
             $scope.choices = data.choices;
         }, function(data) {
             // failure
-            console.log(data);
             $scope.choices = [];
         });
     };
@@ -22,11 +20,9 @@ app.controller('FoobarController', function($scope) {
         // the return value of the do() method comes back as the data parameter of the fist function()
         $scope.callPythonDo({"funtastic": "connections"}).then(function(data) {
             // success
-            console.log(data);
             $scope.connections = data.connections;
         }, function(data) {
             // failure
-            console.log(data);
             $scope.connections = [];
         });
     };
