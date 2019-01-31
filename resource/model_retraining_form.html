@@ -15,7 +15,13 @@
             <span class="help-inline">Value to keep</span>
         </div>
     </div>
-    
+    <div class="control-group" >
+        <label class="control-label"> Compute Engines </label>
+        <div class="controls" >
+            <select dku-bs-select="{liveSearch:true}" ng-model="config.connectionType" ng-options="v for v in connections" />
+            <span class="help-inline">Value to keep</span>
+        </div>
+    </div>
     
     
     <div class="control-group" >
@@ -41,12 +47,12 @@
               <option value="parquet">parquet</option>
         </select>
     </div>
-    <div class = "control-group">
-        <label class="control-label">Connection type?</label>
-        <select ng-model="config.connectionType">
-              <option value="file_system_managed">file_system_managed</option>
-              <option value="hdfs_managed">hdfs_managed</option>
-              <option value="SQL">SQL</option>
-        </select>
-    </div>
+<!--     <div class = "control-group"> -->
+<!--         <label class="control-label">Connection type?</label> -->
+<!--         <select ng-model="config.connectionType"> -->
+<!--               <option value="file_system_managed">file_system_managed</option> -->
+<!--               <option value="hdfs_managed">hdfs_managed</option> -->
+<!--               <option value="SQL">SQL</option> -->
+<!--         </select> -->
+<!--     </div> -->
 </div>
