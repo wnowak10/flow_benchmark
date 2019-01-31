@@ -180,7 +180,7 @@ class checkpoint_flow(object):
             print('Incompitable. Can not set {0} compute engine with {1} file type.'.format(compute_type, input_file_types))
 
         # Logic to prevent incompatible computeTypes with various recipe types.
-        if recipe_type in ['sync']:
+        if recipe_type in ['sync', 'python']:
             # Don't allow a sync recipe to be set to SQL.
             if compute_type == 'sql':
                 new_compute_type = 'dss'
@@ -191,10 +191,10 @@ class checkpoint_flow(object):
             rdp.set_json_payload(raw_def)
             return self.project.get_recipe(recipe_name).set_definition_and_payload(rdp)['msg']
         
-        elif recipe_type == 'python':
-            print("ERROR")
-            print(recipe_type)
-            json_payload= rdp.get_json_payload()
+#         elif recipe_type == 'python':
+#             print("ERROR")
+#             print(recipe_type)
+#             json_payload= rdp.get_json_payload()
             
         elif recipe_type in ['shaker']:
             # Keep payload
