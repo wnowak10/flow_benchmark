@@ -257,6 +257,7 @@ class checkpoint_flow(object):
             jso['engineType'] = compute_type
             rdp.set_json_payload(jso)
             return self.project.get_recipe(recipe_name).set_definition_and_payload(rdp)['msg']
+
         # What about code recipes!?!?!
 
     def list_dataset_names(self):
