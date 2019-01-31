@@ -229,6 +229,7 @@ class checkpoint_flow(object):
         names = []
         for item in self.client.get_project(self.project_key).list_datasets():
             names.append(item['name'])
+        print("Recipes are {}.".format(names))
         return names
     
     def list_recipe_names(self):
