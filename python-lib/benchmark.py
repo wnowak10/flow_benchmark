@@ -191,7 +191,12 @@ class checkpoint_flow(object):
             rdp.set_json_payload(raw_def)
             return self.project.get_recipe(recipe_name).set_definition_and_payload(rdp)['msg']
         
-        elif recipe_type in ['shaker', 'python']:
+        elif recipe_type == 'python':
+            print("ERROR")
+            print(recipe_type)
+            json_payload= rdp.get_json_payload()
+            
+        elif recipe_type in ['shaker']:
             # Keep payload
             json_payload= rdp.get_json_payload()
 
