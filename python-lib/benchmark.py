@@ -147,7 +147,7 @@ class checkpoint_flow(object):
         # Do I still need this?
         if connectionType == "file_system_managed":
             changed['type']= 'Filesystem'
-        elif connectionType == 'hdfs': 
+        elif connectionType == 'hdfs_over_s3_root': 
             changed['type'] = 'HDFS'
         elif connectionType == 'SQL':
             changed['type'] = 'PostgreSQL'
