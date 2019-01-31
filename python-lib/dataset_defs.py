@@ -1,11 +1,11 @@
 formatParams = {	
-	"hdfs_managed" :	{
+	"hdfs_over_s3_root" :	{
 		"parquet" :	{
-							'parquetBlockSizeMB': 128,
-						  	'parquetCompressionMethod': 'SNAPPY',
-							'parquetFlavor': 'HIVE',
-							'parquetLowerCaseIdentifiers': False,
-							'representsNullFields': False
+						'parquetBlockSizeMB': 128,
+						'parquetCompressionMethod': 'SNAPPY',
+						'parquetFlavor': 'HIVE',
+						'parquetLowerCaseIdentifiers': False,
+						'representsNullFields': False
 					},
 		"avro" :	{
 						'avroCompressionMethod': 'SNAPPY',

@@ -100,13 +100,14 @@ class checkpoint_flow(object):
                         dataset_name, 
                         formatType,
                         connectionType):
-        """ Given a dataset in with an initial format `initial_format`,
-        change the format to the new format. 
+        """ Given a dataset `dataset_name`:
+        - change the format to formatType
+        - change the connection to connectionType
         
         Args:
         
         dataset_name (str) : Dataset to operate on in this project.
-        new_format   (str) : Potential options for new file format for HDFS, local. 
+        formatType   (str) : Potential options for new file format for HDFS, local. 
         
         (If this dataset is in SQL, this function is N/A, as there are not multiple
         file formats.)
@@ -143,14 +144,14 @@ class checkpoint_flow(object):
         if connectionType == "file_system_managed":
             changed['params']['path'] = '${projectKey}/'+dataset_name
             
-            
-        # Ideally we get these from list_connections.
+        # Do I still need this?
         if connectionType == "file_system_managed":
             changed['type']= 'Filesystem'
         elif connectionType == 'hdfs': 
             changed['type'] = 'HDFS'
         elif connectionType == 'SQL':
             changed['type'] = 'PostgreSQL'
+            # S3
             
         # to_change_json = json.loads(NEW_DATASET_DEFINITION_DICTIONARIES[new_format])
         # changed = change_def_dict(to_change_json, 
