@@ -24,11 +24,6 @@ logger.setLevel(logging.INFO)
 # _____________________________________________________________________________
 # Global variables.
 
-# NEW_DATASET_DEFINITION_DICTIONARIES = {'csv'     : new_definitions.csv_def,
-#                                        'parquet' : new_definitions.parquet_def,
-#                                        'avro'    : new_definitions.avro_def,
-#                                        'postgres': new_definitions.postgres_def}
-
 # _____________________________________________________________________________
 # Global functions
 
@@ -44,47 +39,6 @@ def _time_job(job):
     return [sum(int(i) for i in re.findall( r"(?<=processed in )\d+(?=ms)" , job.get_log()))][0]/1000.0
 
 
-# def change_def_dict(to_change_json, 
-#                     dataset_name, 
-#                     project,
-#                     project_key,
-#                     filetype):
-#     """ Very hacky function to change a DSS dataset defintion
-#     dictionary to a new formatType.
-
-#     Get dataset definition (a static JSON) from `new_definitions.py` module. 
-    
-#     We take a working template for a dataset format and then 
-#     replace a few key values and then set this defintion dictionary back to the dataset. 
-    
-#     Thanks to @JeanYves for this idea.
-    
-#     WARNING: This will probably break on DSS upgrades. Tested on DSS 5.1.0
-
-#     Later, in another function `build_dataset`, we clear and rebuild the dataset.
-#     """
-#     new_dict = to_change_json.copy()
-
-#     # Make changes to new dictionary `new_dict`.
-#     new_dict['name']       = dataset_name
-#     new_dict['projectKey'] = project_key
-#     new_dict['schema']     = project.get_dataset(dataset_name).get_definition()['schema']
-    
-#     if filetype in ['csv', 'avro', 'parquet']:
-#         new_dict['smartName']               = dataset_name
-#         new_dict['params']['path']          = "/${projectKey}/" + dataset_name
-#         new_dict['params']['hiveTableName'] = "${projectKey}_"  + dataset_name
-        
-#     elif filetype == 'postgres':
-#         new_dict['schema']                  = project.get_dataset(dataset_name).get_definition()['schema']
-#         new_dict['params']['table']         = "${projectKey}_" + dataset_name
-#     # TO DO
-#     # Change lastModifiedBy, creationTag. Ensure that we are not making 
-#     # any changes which will cause builds to break. E.g. are there configuration
-#     # parameters set in `new_defintions.py` that we need to be aware of / handle?
-
-#     return new_dict
-
 # _____________________________________________________________________________
 # Checkpoint flow class.
 
@@ -95,7 +49,6 @@ class checkpoint_flow(object):
         self.client      = dataiku.api_client()
         self.project     = self.client.get_project(self.project_key)
         
-
     def set_file_format(self,
                         dataset_name, 
                         formatType,
