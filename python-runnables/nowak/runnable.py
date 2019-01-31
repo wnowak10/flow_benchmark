@@ -1,8 +1,13 @@
-# This file is the actual code for the Python runnable nowak
+# ______________________________________________________________________________
+# Imports 
+
+import dataiku
+
 from dataiku.runnables import Runnable, ResultTable
+
 import benchmark
 import html_template 
-import dataiku
+
 
 class MyRunnable(Runnable):
     """The base interface for a Python runnable"""
