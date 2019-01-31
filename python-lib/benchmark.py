@@ -296,10 +296,10 @@ class checkpoint_flow(object):
         Spark pipelines when we build datasets one by one
         as we do in `build_flow`?
         """
-        s = self.client.get_project(self.project_key).get_settings()
-        r = s.get_raw()
-        r['settings']['flowBuildSettings']['mergeSparkPipelines'] = able
-        s.save()
+        settings = self.client.get_project(self.project_key).get_settings()
+        raw_settings = settings.get_raw()
+        raw_settings['settings']['flowBuildSettings']['mergeSparkPipelines'] = able
+        settings.save()
         return 
         
     def build_dataset(self,
