@@ -72,6 +72,10 @@ class checkpoint_flow(object):
         Returns:
             bool: The return value. True for success, False otherwise.
         """
+        # Don't touch if it is an input dataset
+        if 'RECIPE_OUTPU' not in [usage['type'] for usage in self.project.get_dataset(dataset_name).get_usages()]:
+            return
+        
         # Get the dataset's JSON definition.
         try:
             dataset_def = self.project.get_dataset(dataset_name).get_definition()
