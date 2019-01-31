@@ -153,8 +153,9 @@ class checkpoint_flow(object):
             bool: The return value. True for success, False otherwise.
         """
         rdp = self.project.get_recipe(recipe_name).get_definition_and_payload()
-        # Hacky way to ensure that a user compute engine does not get set
         
+        # Hacky way to ensure that a user compute engine does not get set
+        # inappropriately.
         recipe_raw_def = rdp.get_recipe_raw_definition()
         input_datasets = recipe_raw_def['inputs']['main']['items']
 #         check type of input dataset
