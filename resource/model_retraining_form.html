@@ -1,12 +1,4 @@
 <div ng-controller="FoobarController">
-<!--     <div class="control-group" > -->
-<!--         <label class="control-label">Column</label> -->
-<!--         <div class="controls" > <!-- basic text field with typeahead for the column selection, as you would get for a COLUMN parameter in a generated form -->
-<!--             <input type="text" ng-model="config.filterColumn" ng-required="true" bs-typeahead="columnsPerInputRole['input_role']"/> -->
-<!--             <span class="help-inline">Column to filter on</span> -->
-<!--         </div> -->
-<!--     </div> -->
-    
     
     <div class="control-group" >
         <label class="control-label"> Compute Engines </label>
@@ -15,6 +7,7 @@
             <span class="help-inline">Value to keep</span>
         </div>
     </div>
+    
     <div class="control-group" >
         <label class="control-label"> Connection Type </label>
         <div class="controls" >
@@ -23,7 +16,6 @@
         </div>
     </div>
     
-    
     <div class="control-group" >
         <label class="control-label">Spark pipeline-able?</label>
         <div class="controls">
@@ -31,14 +23,7 @@
             <span class="help-inline"> Enable spark pipelines in flow. </span>
         </div>
     </div>
-<!--     <div class = "control-group">
-        <label class="control-label">Compute engine?</label>
-        <select ng-model="config.computeEngine">
-              <option value="DSS">DSS</option>
-              <option value="SQL">SQL</option>
-              <option value="Spark">Spark</option>
-        </select>
-    </div> -->
+
     <div class = "control-group">
         <label class="control-label">File format type</label>
         <select ng-model="config.formatType">
@@ -47,12 +32,5 @@
               <option value="parquet">parquet</option>
         </select>
     </div>
-<!--     <div class = "control-group"> -->
-<!--         <label class="control-label">Connection type?</label> -->
-<!--         <select ng-model="config.connectionType"> -->
-<!--               <option value="file_system_managed">file_system_managed</option> -->
-<!--               <option value="hdfs_managed">hdfs_managed</option> -->
-<!--               <option value="SQL">SQL</option> -->
-<!--         </select> -->
-<!--     </div> -->
+
 </div>
