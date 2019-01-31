@@ -6,10 +6,10 @@ app.controller('FoobarController', function($scope) {
         // the return value of the do() method comes back as the data parameter of the fist function()
         $scope.callPythonDo({"funtastic": "engines"}).then(function(data) {
             // success
-            $scope.choices = data.choices;
+            $scope.engines = data.engines;
         }, function(data) {
             // failure
-            $scope.choices = [];
+            $scope.engines = [];
         });
     };
     updateChoices();
