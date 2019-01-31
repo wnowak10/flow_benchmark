@@ -155,6 +155,7 @@ class checkpoint_flow(object):
         Returns:
             bool: The return value. True for success, False otherwise.
         """
+        print("Trying to set engine for {}.".format(recipe_name))
         rdp = self.project.get_recipe(recipe_name).get_definition_and_payload()
         
         # Hacky way to ensure that a user compute engine does not get set
