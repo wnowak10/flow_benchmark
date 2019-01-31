@@ -1,6 +1,4 @@
-# from dataiku import Dataset
 import dataiku
-# from sets import Set
 
 def do(payload, config, plugin_config, inputs):
     if payload["funtastic"] == "engines":
