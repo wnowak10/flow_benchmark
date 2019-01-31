@@ -283,7 +283,7 @@ class checkpoint_flow(object):
                 self.project.get_dataset(dataset_name=output_dataset_name).clear()
                 print('Dataset {} cleared.'.format(output_dataset_name))
         
-#         https://doc.dataiku.com/dss/latest/publicapi/client-python/jobs.html
+        # https://doc.dataiku.com/dss/latest/publicapi/client-python/jobs.html
         definition = {
             "type" : "RECURSIVE_FORCED_BUILD",  # Run recursive forced build to build entire preceding flow.
             "refreshHiveMetastore" : True, # ? Will this help my issue?
