@@ -166,7 +166,10 @@ class checkpoint_flow(object):
         for input in input_datasets:
             ds = self.project.get_dataset(input['ref'])
             # Check file type of recipe's input dataset.
-            r_type = ds.get_definition()['type']
+            try:
+                r_type = ds.get_definition()['type']
+            except:
+                r_type = 'shaker' # Or sync? # Missing definition when using an exposed dataset.
             input_file_types.append(r_type)
             
         # Very hacky logic to prevent bad combinations of computeType and input file types.
