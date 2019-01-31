@@ -180,7 +180,7 @@ class checkpoint_flow(object):
             print('Incompitable. Can not set {0} compute engine with {1} file type.'.format(compute_type, input_file_types))
 
         # Logic to prevent incompatible computeTypes with various recipe types.
-        if recipe_type in ['sync', 'python', 'r']:
+        if recipe_type in ['sync']:
             # Don't allow a sync recipe to be set to SQL.
             if compute_type == 'sql':
                 new_compute_type = 'dss'
