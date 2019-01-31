@@ -158,8 +158,7 @@ class checkpoint_flow(object):
         # inappropriately.
         recipe_raw_def = rdp.get_recipe_raw_definition()
         input_datasets = recipe_raw_def['inputs']['main']['items']
-#         check type of input dataset
-#        do some logic here so that we dont set inappropriate compute engine
+
         input_file_types = []
         for input in input_datasets:
             ds = self.project.get_dataset(input['ref'])
