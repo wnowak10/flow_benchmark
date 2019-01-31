@@ -38,7 +38,6 @@ def _time_job(job):
     """
     return [sum(int(i) for i in re.findall( r"(?<=processed in )\d+(?=ms)" , job.get_log()))][0]/1000.0
 
-
 # _____________________________________________________________________________
 # Checkpoint flow class.
 
@@ -59,10 +58,11 @@ class checkpoint_flow(object):
         
         Args:
         
-        dataset_name (str) : Dataset to operate on in this project.
-        formatType   (str) : Potential options for new file format for HDFS, local. 
+        dataset_name (str)  : Dataset to operate on in this project.
+        formatType   (str)  : Potential options for new file format for HDFS, local. 
+        connectionType (str) : Potential dataset connection.
         
-        (If this dataset is in SQL, this function is N/A, as there are not multiple
+        (If this dataset is stored in SQL, this function is N/A, as there are not multiple
         file formats.)
             - 'csv'
             - 'parquet'
@@ -87,6 +87,11 @@ class checkpoint_flow(object):
         
         # ConnectionType can be named by user, so rely on string search
         # to map user connection type to valid backend data connection type.
+        
+        # TO DO!!! 
+        # This is fragile. Maybe I make a connection called Hadoop
+        # or HadoopDFS...my string match won't catch this and I will
+        # botch the mapping.
         if 'hdfs' in connectionType.lower():
             connectionType = 'HDFS'
         elif 'file_system' in connectionType.lower() or 'filesystem' in connectionType.lower():
