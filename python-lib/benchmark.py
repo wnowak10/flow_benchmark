@@ -132,7 +132,7 @@ class checkpoint_flow(object):
         #       * type
         #       * params
         
-        # Connection type can be named by user, so rely on string search
+        # ConnectionType can be named by user, so rely on string search
         # to map user connection type to valid backend data connection type.
         if 'hdfs' in connectionType.lower():
             connectionType = 'HDFS'
