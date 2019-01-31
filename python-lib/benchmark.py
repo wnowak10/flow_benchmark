@@ -171,8 +171,6 @@ class checkpoint_flow(object):
         elif connectionType == 'S3':
             changed['type'] = 'S3'
             
-            # S3? Need this if HDFS over S3
-            
         # to_change_json = json.loads(NEW_DATASET_DEFINITION_DICTIONARIES[new_format])
         # changed = change_def_dict(to_change_json, 
         #                           dataset_name, 
