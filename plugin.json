@@ -4,7 +4,7 @@
     "meta" : {
         "label" : "Flow benchmark 2.0",
         "description" : "Retrain all models instance-wide that have not been updated since your date of choice.",
-        "author" : "Dataiku (Patrick)",
+        "author" : "Dataiku (Will Nowak)",
         "icon" : "icon-moon",
         "licenseInfo" : "Apache Software License",
         "url" : "https://www.dataiku.com",
