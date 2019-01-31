@@ -162,6 +162,7 @@ class checkpoint_flow(object):
         input_file_types = []
         for input in input_datasets:
             ds = self.project.get_dataset(input['ref'])
+            # Check file type of recipe's input dataset.
             r_type = ds.get_definition()['type']
             input_file_types.append(r_type)
             
