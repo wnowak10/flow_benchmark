@@ -142,8 +142,8 @@ class checkpoint_flow(object):
         
         Args:
         
-        recipe_name (str) : Recipe to operate alter compute engine on, if possible.
-        compute_type   (str) : Potential options for new compute type. 
+        recipe_name  (str) : Recipe to operate alter compute engine on, if possible.
+        compute_type (str) : Potential options for new compute type. 
         
             - 'DSS'
             - 'SPARK'
@@ -152,7 +152,6 @@ class checkpoint_flow(object):
         Returns:
             bool: The return value. True for success, False otherwise.
         """
-        print(compute_type)
         rdp = self.project.get_recipe(recipe_name).get_definition_and_payload()
         # Hacky way to ensure that a user compute engine does not get set
         
