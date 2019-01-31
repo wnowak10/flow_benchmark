@@ -31,6 +31,6 @@ app.controller('FoobarController', function($scope) {
         });
     };
     updateConnections();
-    $scope.$watch('config.filterColumn', updateConnections);
+    $scope.$watch('config.connectionType', updateConnections);
 // });
 });
