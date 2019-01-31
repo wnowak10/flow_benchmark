@@ -205,7 +205,9 @@ class checkpoint_flow(object):
                              'split',
                              'stack',
                              'topn',
-                             'window']:  # TO DO: Check to make sure all SQL recipes are as so.
+                             'window',
+                             'python',
+                             'r']:  # TO DO: Check to make sure all SQL recipes are as so.
             jso = rdp.get_json_payload()
             jso['engineType'] = compute_type
             rdp.set_json_payload(jso)
