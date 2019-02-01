@@ -228,7 +228,7 @@ class checkpoint_flow(object):
         
         if recipe_type in ['split]']:
             # Don't allow a sync recipe to be set to SQL.
-            if compute_type == 'Spark':
+            if compute_type == 'SPARK':
                 new_compute_type = 'HIVE'
             else:
                 new_compute_type = compute_type
