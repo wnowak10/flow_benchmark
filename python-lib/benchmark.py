@@ -226,7 +226,7 @@ class checkpoint_flow(object):
             # Set back json payload and new defition.
             return self.project.get_recipe(recipe_name).set_definition_and_payload(rdp)['msg']
         
-        if recipe_type in ['split]']:
+        if recipe_type in ['split']:
             # Don't allow a sync recipe to be set to SQL.
             if compute_type == 'SPARK':
                 new_compute_type = 'HIVE'
