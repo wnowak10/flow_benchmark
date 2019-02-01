@@ -1,4 +1,36 @@
-formatParams = {	
+formatParams = {
+    "S3": {
+        "csv" :		{
+		    			'arrayItemSeparator': '\x02',
+					    'arrayMapFormat': 'hive',
+					    'charset': 'utf8',
+					    'compress': '',
+					    'dateSerializationFormat': 'HIVE',
+					    'escapeChar': '\\',
+					    'fileReadFailureBehavior': 'FAIL',
+					    'hiveSeparators': ['\x02',
+					      '\x03',
+					      '\x04',
+					      '\x05',
+					      '\x06',
+					      '\x07',
+					      '\x08'],
+					    'mapKeySeparator': '\x03',
+					    'normalizeBooleans': False,
+					    'normalizeDoubles': True,
+					    'parseHeaderRow': False,
+					    'probableNumberOfRecords': 0,
+					    'quoteChar': '"',
+					    'readAdditionalColumnsBehavior': 'INSERT_IN_DATA_WARNING',
+					    'readDataTypeMismatchBehavior': 'DISCARD_WARNING',
+					    'readMissingColumnsBehavior': 'DISCARD_SILENT',
+					    'separator': '\t',
+					    'skipRowsAfterHeader': 0,
+					    'skipRowsBeforeHeader': 0,
+					    'style': 'escape_only_no_quote',
+					    'writeDataTypeMismatchBehavior': 'DISCARD_WARNING'
+					}
+    },
 	"HDFS" :	{
 		"parquet" :	{
 						'parquetBlockSizeMB': 128,
