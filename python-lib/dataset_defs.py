@@ -134,6 +134,15 @@ params = {
 	  'writeJDBCBadDataBehavior': 'DISCARD_ROW',
 	  'writeWithCopyBadDataBehavior': 'NOVERIFY_ERROR'
   },
+    "S3": {
+      {u'connection': u'filesystem_managed',
+     u'filesSelectionRules': {u'excludeRules': [],
+      u'explicitFiles': [],
+      u'includeRules': [],
+      u'mode': u'ALL'},
+     u'notReadyIfEmpty': False,
+     u'path': u'/NOWAKINSTALLATIONSUITEDUPLICATED.weather'}  
+    },
   	"HDFS" : {
   	  'connection': 'hdfs_managed',
       'filesSelectionRules': {'excludeRules': [],
