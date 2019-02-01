@@ -125,6 +125,9 @@ class checkpoint_flow(object):
             changed['params']['table'] = '${projectKey}_postgres-10.'+dataset_name
         if connectionType == "Filesystem": # Include path for a dataset on filesystem.
             changed['params']['path'] = '${projectKey}/'+dataset_name
+        if connectionType == "S3":
+            changed['params']['path'] = '${projectKey}.'+dataset_name  
+
         
         # TO DO!!!
         # These types are a mandatory part of a dataset definition JSON,
