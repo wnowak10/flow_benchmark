@@ -127,7 +127,7 @@ class checkpoint_flow(object):
         changed['params'] = dataset_defs.params[connectionType]
             
         # Exceptions / particular cases.
-        if connectionType == 'SSQL': # No formatParams for SQL connections.
+        if connectionType == 'SQL': # No formatParams for SQL connections.
             del changed['formatParams']
             del changed['formatType']
             changed['params']['table'] = '${projectKey}_postgres-10.'+dataset_name
