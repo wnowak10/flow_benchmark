@@ -245,6 +245,12 @@ class checkpoint_flow(object):
             rdp.set_json_payload(jso)
             return self.project.get_recipe(recipe_name).set_definition_and_payload(rdp)['msg']
         
+        # TO DO - types
+#         pyspark
+        # spark_scala
+#         u'spark_sql_query
+# sparkr
+        
         elif recipe_type in ['distinct',
                              'grouping',
                              'join',
