@@ -81,24 +81,30 @@ class checkpoint_flow(object):
             dataset_def = self.project.get_dataset(dataset_name).get_definition()
         except: # Datasets that are exposed from other projects mysteriously don't have a JSON definition available.
             return
+        
+        # Don't change anything if this was an uploaded file.
         if dataset_def['type'] == 'UploadedFiles':
             print('Do not change type of "{}" as this file was uploaded.'.format(dataset_name))
             return
         changed = dataset_def.copy()
         
-        # Essential definition keys to change in this JSON are:
-        #       * formatParams
-        #       * formatType
-        #       * type
-        #       * params
+        """Essential definition keys to change in this JSON are:
+               * formatParams
+               * formatType
+               * type
+               * params
+        """
         
-        # ConnectionType can be named by user, so rely on string search
-        # to map user connection type to valid backend data connection type.
+        """
+        ConnectionType can be named by user, so rely on string search
+        to map user connection type to valid backend data connection type.
         
-        # TO DO!!! 
-        # This is fragile. Maybe I make a connection called Hadoop
-        # or HadoopDFS...my string match won't catch this and I will
-        # botch the mapping.
+        ### TO DO!!! ###
+        This is fragile. Maybe I make a connection called Hadoop
+        or HadoopDFS...my string match won't catch this and I will
+        botch the mapping.
+        """
+        
         if 'hdfs' in connectionType.lower():
             connectionType = 'HDFS'
         elif 'file_system' in connectionType.lower() or 'filesystem' in connectionType.lower():
@@ -108,10 +114,12 @@ class checkpoint_flow(object):
         elif 's3' in connectionType.lower():
             connectionType= 'S3'
         
-        # Get the formatParams from my dictionary. 
-        # `dataset_defs.py` contains Python dictionaries which contain
-        # appropriate content to populate Dataiku dataset JSON definitions
-        # according to a new definition.
+        """
+        Get the formatParams from my dictionary. 
+        `dataset_defs.py` contains Python dictionaries which contain
+        appropriate content to populate Dataiku dataset JSON definitions
+        according to a new definition.
+        """
         formatParams = dataset_defs.formatParams[connectionType][formatType]
         # Set the new formatParams key in the dataset definition JSON
         changed['formatParams'] = formatParams
@@ -242,7 +250,7 @@ class checkpoint_flow(object):
                              'pivot',
                              'sort',
                              'split',
-#                              'stack',
+#                              'vstack',
                              'topn',
                              'window']:  # TO DO: Check to make sure all SQL recipes are as so.
             jso = rdp.get_json_payload()
