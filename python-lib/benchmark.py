@@ -264,7 +264,8 @@ class checkpoint_flow(object):
                              'pivot',
                              'sort',
                              'split',
-#                              'vstack',
+                             'vstack',
+#                              'sampling', # ?
                              'topn',
                              'window']:  # TO DO: Check to make sure all SQL recipes are as so.
             jso = rdp.get_json_payload()
