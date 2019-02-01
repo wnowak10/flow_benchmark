@@ -122,6 +122,7 @@ class checkpoint_flow(object):
         if connectionType == 'SQL': # No formatParams for SQL connections.
             del changed['formatParams']
             del changed['formatType']
+            changed['params']['table'] = '${projectKey}_postgres-10.'+dataset_name
         if connectionType == "Filesystem": # Include path for a dataset on filesystem.
             changed['params']['path'] = '${projectKey}/'+dataset_name
         
