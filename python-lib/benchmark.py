@@ -213,7 +213,7 @@ class checkpoint_flow(object):
             return self.project.get_recipe(recipe_name).set_definition_and_payload(rdp)['msg']
 
         elif recipe_type in ['distinct',
-                             'group',
+                             'grouping',
                              'join',
                              'pivot',
                              'sort',
