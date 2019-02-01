@@ -135,11 +135,11 @@ class checkpoint_flow(object):
             changed['params']['path'] = '${projectKey}/'+dataset_name
         if connectionType == "S3":
             changed['params']['path'] = '${projectKey}.'+dataset_name  
-
-        
-        # TO DO!!!
-        # These types are a mandatory part of a dataset definition JSON,
-        # but it is unclear to me what all possible options are.
+        """
+        ### TO DO!!! ###
+        These types are a mandatory part of a dataset definition JSON,
+        but it is unclear to me what all possible options are.
+        """
         if connectionType == "Filesystem":
             changed['type']= 'Filesystem'
         elif connectionType == 'HDFS': 
