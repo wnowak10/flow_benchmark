@@ -193,11 +193,11 @@ class checkpoint_flow(object):
         # Very hacky logic to prevent bad combinations of computeType and input file types.
         # For example, "HIVE" as computeType will not work with "postgres-10"
         # as a file type for one of the recipe inputs.
-        if compute_type == 'HIVE' and 'postgres-10' in input_file_types:
+        if compute_type != 'HIVE' and 'postgres-10' in input_file_types:
             print('Incompitable. Can not set {0} compute engine with {1} file type.'.format(compute_type, input_file_types))
 
         # Logic to prevent incompatible computeTypes with various recipe types.
-        if recipe_type in ['sync']:
+        if recipe_type in ['sync', 'sampling']:
             # Don't allow a sync recipe to be set to SQL.
             if compute_type == 'SQL':
                 new_compute_type = 'DSS'
@@ -265,7 +265,7 @@ class checkpoint_flow(object):
                              'sort',
                              'split',
                              'vstack',
-#                              'sampling', # ?
+#                              'sampling', # Filter recipe 
                              'topn',
                              'window']:  # TO DO: Check to make sure all SQL recipes are as so.
             jso = rdp.get_json_payload()
