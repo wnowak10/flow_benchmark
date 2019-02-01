@@ -131,6 +131,7 @@ class checkpoint_flow(object):
             del changed['formatParams']
             del changed['formatType']
             changed['params']['table'] = '${projectKey}_postgres-10.'+dataset_name
+            changed['smartName'] = dataset_name
         if connectionType == "Filesystem": # Include path for a dataset on filesystem.
             changed['params']['path'] = '${projectKey}/'+dataset_name
         if connectionType == "S3":
