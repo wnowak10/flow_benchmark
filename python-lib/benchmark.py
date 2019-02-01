@@ -163,9 +163,14 @@ class checkpoint_flow(object):
         Args:
         
         recipe_name  (str) : Recipe to operate alter compute engine on, if possible.
+            - 'sync
+            - 'sampling'
+            - 'shaker'
+            - 
+            
         compute_type (str) : Potential options for new compute type. 
-        
             - 'DSS'
+            - 'SQL
             - 'SPARK'
             - 'HIVE'
 
