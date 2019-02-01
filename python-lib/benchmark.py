@@ -349,7 +349,8 @@ class checkpoint_flow(object):
                       verbose = True):
         if names is None:
             names, recipe_types = self.list_recipe_names()
-
+        print(names, recipe_types)
+        
         messages = {}
         for recipe, recipe_type in zip(names, recipe_types):
             message1 = self.set_compute_engine(recipe, recipe_type, engineType)
