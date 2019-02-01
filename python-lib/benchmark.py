@@ -208,8 +208,9 @@ class checkpoint_flow(object):
             rdp.set_json_payload(raw_def)
             return self.project.get_recipe(recipe_name).set_definition_and_payload(rdp)['msg']
         
-#         if recipe_type in [ 'python', 'r']:
-#             Ignore, as these happen in memory DSS.
+        if recipe_type in [ 'python', 'r']:
+            if compute_type != 'SPARK':
+                compute_type = "DSS"
         # TO DO: Deal w containerization?
 
         elif recipe_type in ['shaker']:
