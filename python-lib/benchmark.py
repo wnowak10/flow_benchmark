@@ -132,7 +132,7 @@ class checkpoint_flow(object):
             del changed['formatType']
             changed['params']['table'] = '${projectKey}_postgres-10.'+dataset_name
             changed['smartName'] = dataset_name
-        if connectionType in ["Filesystem", "HDFS"]: # Include path for a dataset on filesystem.
+        if connectionType in ["Filesystem", "HDFS"]: # Include path for a dataset on filesystem. HDFS untested.
             changed['params']['path'] = '${projectKey}/'+dataset_name
         if connectionType == "S3":
             changed['params']['path'] = '${projectKey}.'+dataset_name  
