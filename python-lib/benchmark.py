@@ -223,6 +223,14 @@ class checkpoint_flow(object):
             rdp.set_json_payload(jso)
             return self.project.get_recipe(recipe_name).set_definition_and_payload(rdp)['msg']
         
+        # TO DO -- delete. Just test if problem with Nowak Installation Suite Test
+        # is that I am using SQL as engine from two file system datasets?
+        if recipe_type == 'stack':
+            compute_type == 'DSS'
+            jso = rdp.get_json_payload()
+            jso['engineType'] = compute_type
+            rdp.set_json_payload(jso)
+            return self.project.get_recipe(recipe_name).set_definition_and_payload(rdp)['msg']
         
         elif recipe_type in ['distinct',
                              'grouping',
@@ -230,7 +238,7 @@ class checkpoint_flow(object):
                              'pivot',
                              'sort',
                              'split',
-                             'stack',
+#                              'stack',
                              'topn',
                              'window']:  # TO DO: Check to make sure all SQL recipes are as so.
             jso = rdp.get_json_payload()
