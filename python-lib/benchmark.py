@@ -204,7 +204,7 @@ class checkpoint_flow(object):
             json_payload= rdp.get_json_payload()
 
             # Change compute type 
-            rdp.get_recipe_raw_definition()['params']['engineType'] = compute_type
+            rdp.get_recipe_raw_definition()['params']['engineType'] = "DSS" # compute_type
 
             # Explicitly retain JSON payload
             rdp.set_json_payload(json_payload)
