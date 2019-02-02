@@ -24,7 +24,7 @@ class MyRunnable(Runnable):
         
         self.formatType     = self.config.get('formatType')
         self.connectionType = self.config.get('connectionType')
-        self.spartPipeline = self.config.get('sparkPipeline')
+        self.sparkPipeline = self.config.get('sparkPipeline')
 #         self.sparkPipeline  = True if self.config.get('sparkPipeline') == "True" else False # config.get('sparkPipeline') is a string sent from HTML checkbox value
         self.computeEngine  = self.config.get('computeEngine').upper()
         
