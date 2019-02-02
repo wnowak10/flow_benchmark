@@ -89,6 +89,6 @@ class MyRunnable(Runnable):
         </body>
         </html>
         """
-#         return res
-        return str(self.sparkPipeline)
+        return res
+#         return str(self.sparkPipeline)
 
