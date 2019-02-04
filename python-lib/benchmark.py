@@ -195,7 +195,11 @@ class checkpoint_flow(object):
         # If recipe is first after source data, don't use set engine.
         # For example, don't use Spark when input is file system csv.
         recipe_input_datsets = [i['ref'] for i in recipe_raw_def['inputs']['main']['items']]
+#         source_datasets = self.list_source_datasets()
+        print("Inputs are: ", recipe_input_datsets)
         source_datasets = self.list_source_datasets()
+        print("Project source datasets are: ", source_datasets)
+
         if recipe_input_datsets&source_datasets: # Check intersection
             compute_type = "DSS"
     
