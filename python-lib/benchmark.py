@@ -183,8 +183,8 @@ class checkpoint_flow(object):
         # Hacky way to ensure that a user compute engine does not get set
         # inappropriately.
         recipe_raw_def = rdp.get_recipe_raw_definition()
-        raw_def['params']['engineType'] = compute_type
-        rdp.set_json_payload(raw_def)
+        recipe_raw_def['params']['engineType'] = compute_type
+        rdp.set_json_payload(recipe_raw_def)
         return self.project.get_recipe(recipe_name).set_definition_and_payload(rdp)['msg']
 #         print("Loaded recipe_raw_definition.")
 #         input_datasets = recipe_raw_def['inputs']['main']['items']
