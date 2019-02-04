@@ -55,6 +55,7 @@ class checkpoint_flow(object):
         for dataset_name in dataset_names:
             if 'RECIPE_OUTPUT' not in [usage['type'] for usage in self.project.get_dataset(dataset_name).get_usages()]:
                 source_datasets.append(dataset_name)
+        return source_datasets 
 
     def set_file_format(self,
                         dataset_name, 
