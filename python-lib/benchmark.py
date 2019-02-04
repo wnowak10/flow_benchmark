@@ -181,14 +181,15 @@ class checkpoint_flow(object):
         rdp = self.project.get_recipe(recipe_name).get_definition_and_payload()
         
         # Some recipe definitions have ['params']['engineType'] key already. Use that.
-        recipe_raw_def = rdp.get_recipe_raw_definition()
-        recipe_raw_def['params']['engineType'] = compute_type
-        rdp.set_json_payload(recipe_raw_def)
-        
-        # Some recipe defintions do not. For these, we create a new key.
-        json_payload = rdp.get_json_payload()
-        json_payload['engineType'] = compute_type
-        rdp.set_json_payload(json_payload)
+        try:
+            recipe_raw_def = rdp.get_recipe_raw_definition()
+            recipe_raw_def['params']['engineType'] = compute_type
+            rdp.set_json_payload(recipe_raw_def)
+        except:
+            # Some recipe defintions do not. For these, we create a new key.
+            json_payload = rdp.get_json_payload()
+            json_payload['engineType'] = compute_type
+            rdp.set_json_payload(json_payload)
 
         return self.project.get_recipe(recipe_name).set_definition_and_payload(rdp)['msg']
     
