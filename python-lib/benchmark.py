@@ -186,6 +186,10 @@ class checkpoint_flow(object):
         rdp.set_json_payload(recipe_raw_def)
         
         # Some recipe defintions do not. For these, we create a new key.
+        json_payload = rdp.get_json_payload()
+        json_payload['engineType'] = compute_type
+        rdp.set_json_payload(json_payload)
+
         return self.project.get_recipe(recipe_name).set_definition_and_payload(rdp)['msg']
     
             # Hacky way to ensure that a user compute engine does not get set
