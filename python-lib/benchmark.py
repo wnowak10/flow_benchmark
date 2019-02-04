@@ -186,7 +186,8 @@ class checkpoint_flow(object):
             recipe_raw_def['params']['engineType'] = compute_type
             rdp.set_json_payload(recipe_raw_def)
         except KeyError:
-            # Some recipe defintions do not. For these, we create a new key.
+            # Some recipe defintions do not have ['params']['engineType'] key. 
+            # For these, we create a new key in the json payload.
             json_payload = rdp.get_json_payload()
             json_payload['engineType'] = compute_type
             rdp.set_json_payload(json_payload)
