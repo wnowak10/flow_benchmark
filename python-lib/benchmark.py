@@ -255,10 +255,10 @@ class checkpoint_flow(object):
         if recipe_type in ['pyspark', 'spark_scala', 'spark_sql_query', 'sparkr']:
             # Don't allow a sync recipe to be set to SQL.
             new_compute_type = compute_type
-#             if compute_type == 'Spark':
-#                 new_compute_type = 'HIVE'
-#             else:
-#                 new_compute_type = compute_type
+            if compute_type not in ['SPARK', "DSS"]:
+                new_compute_type = 'DSS'
+            else:
+                new_compute_type = compute_type
             jso = rdp.get_json_payload()
             jso['engineType'] = new_compute_type
             rdp.set_json_payload(jso)
