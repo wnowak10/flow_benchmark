@@ -264,6 +264,12 @@ class checkpoint_flow(object):
             rdp.set_json_payload(jso)
             return self.project.get_recipe(recipe_name).set_definition_and_payload(rdp)['msg']
         
+        if recipe_type in ['sparkr']:
+            raw_def = rdp.get_definition_and_payload().get_recipe_raw_definition()
+            raw_def['params']['engineType'] = "DSS"
+            rdp.set_json_payload(raw_def)
+            self.project.get_recipe(recipe_name).set_definition_and_payload(rdp)['msg']
+        
         elif recipe_type in ['distinct',
                              'grouping',
                              'join',
