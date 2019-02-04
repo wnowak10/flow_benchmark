@@ -299,7 +299,7 @@ class checkpoint_flow(object):
         names = []
         for item in self.client.get_project(self.project_key).list_datasets():
             names.append(item['name'])
-        print("Recipes are {}.".format(names))
+        print("Datasets are {}.".format(names))
         return names
     
     def list_recipe_names(self):
@@ -314,7 +314,8 @@ class checkpoint_flow(object):
         for item in self.client.get_project(self.project_key).list_recipes():
             names.append(item['name'])
             recipe_types.append(item['type'])
-        return zip(names, recipe_types)
+        print("Datasets are {}.".format(zip(names, recipe_types)))
+        return names, recipe_types
     
     def set_spark_pipelinability(self,
                                 able = False):
