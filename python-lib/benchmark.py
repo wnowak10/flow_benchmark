@@ -180,12 +180,18 @@ class checkpoint_flow(object):
         print("Trying to set engine for {}.".format(recipe_name))
         rdp = self.project.get_recipe(recipe_name).get_definition_and_payload()
         
-        # Hacky way to ensure that a user compute engine does not get set
-        # inappropriately.
+        # Some recipe definitions have ['params']['engineType'] key already. Use that.
         recipe_raw_def = rdp.get_recipe_raw_definition()
         recipe_raw_def['params']['engineType'] = compute_type
         rdp.set_json_payload(recipe_raw_def)
+        
+        # Some recipe defintions do not. For these, we create a new key.
         return self.project.get_recipe(recipe_name).set_definition_and_payload(rdp)['msg']
+    
+            # Hacky way to ensure that a user compute engine does not get set
+        # inappropriately.
+        
+        
 #         print("Loaded recipe_raw_definition.")
 #         input_datasets = recipe_raw_def['inputs']['main']['items']
         
