@@ -47,7 +47,15 @@ class checkpoint_flow(object):
         self.project_key = project_key
         self.client      = dataiku.api_client()
         self.project     = self.client.get_project(self.project_key)
-        
+        self.dataset_names = self.list_source_datasets()
+
+    def list_source_datasets(self):
+        source_datasets = []
+        dataset_names = [i['name'] for i in self.project.list_datasets()]
+        for dataset_name in dataset_names:
+            if 'RECIPE_OUTPUT' not in [usage['type'] for usage in self.project.get_dataset(dataset_name).get_usages()]:
+                source_datasets.append(dataset_name)
+
     def set_file_format(self,
                         dataset_name, 
                         formatType,
@@ -73,7 +81,10 @@ class checkpoint_flow(object):
             bool: The return value. True for success, False otherwise.
         """
         # Don't touch if it is an input dataset
-        if 'RECIPE_OUTPUT' not in [usage['type'] for usage in self.project.get_dataset(dataset_name).get_usages()]:
+        def _check_source_data():
+            if 'RECIPE_OUTPUT' not in [usage['type'] for usage in self.project.get_dataset(dataset_name).get_usages()]:
+                return True
+        if _check_source_data():
             return
         
         # Get the dataset's JSON definition.
@@ -83,6 +94,7 @@ class checkpoint_flow(object):
             return
         
         # Don't change anything if this was an uploaded file.
+        # This should be redundant given `_check_source_data` above.
         if dataset_def['type'] == 'UploadedFiles':
             print('Do not change type of "{}" as this file was uploaded.'.format(dataset_name))
             return
@@ -179,11 +191,17 @@ class checkpoint_flow(object):
         """
         print("Trying to set engine for {}.".format(recipe_name))
         rdp = self.project.get_recipe(recipe_name).get_definition_and_payload()
-        
+        recipe_raw_def = rdp.get_recipe_raw_definition()
+        # If recipe is first after source data, don't use set engine.
+        # For example, don't use Spark when input is file system csv.
+        recipe_input_datsets = [i['ref'] for i in recipe_raw_def['inputs']['main']['items']]
+        source_datasets = self.list_source_datasets()
+        if recipe_input_datsets&source_datasets: # Check intersection
+            compute_type = "DSS"
+    
         # Some recipe definitions have ['params']['engineType'] key already. Use that.
         try:
 #             recipe_raw_def = rdp.get_json_payload() #
-            recipe_raw_def = rdp.get_recipe_raw_definition()
             recipe_raw_def['params']['engineType'] = compute_type
             rdp.set_json_payload(recipe_raw_def)
         except KeyError:
