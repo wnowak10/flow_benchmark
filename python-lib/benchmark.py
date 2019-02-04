@@ -195,7 +195,7 @@ class checkpoint_flow(object):
             except:
                 r_type = 'shaker' # Or sync? # Missing definition when using an exposed dataset.
             input_file_types.append(r_type)
-            
+        print("Loaded input file types. They are {}.".format(input_file_types))
         # Very hacky logic to prevent bad combinations of computeType and input file types.
         # For example, "HIVE" as computeType will not work with "postgres-10"
         # as a file type for one of the recipe inputs.
