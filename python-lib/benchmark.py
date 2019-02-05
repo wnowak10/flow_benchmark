@@ -198,7 +198,7 @@ class checkpoint_flow(object):
         recipe_def = recipe.get_definition_and_payload()
         try:
             recipe_payload = recipe_def.get_json_payload()
-        except ValueError:
+        except ValueError:  # E.g. SparkR recipes don't have straight json_payload.
             recipe_payload = recipe.get_definition_and_payload()
             
         recipe_def_json = recipe_def.get_recipe_raw_definition()
