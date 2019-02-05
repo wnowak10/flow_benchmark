@@ -191,11 +191,22 @@ class checkpoint_flow(object):
             bool: The return value. True for success, False otherwise.
         """
         print("Trying to set engine for {}.".format(recipe_name))
-        rdp = self.project.get_recipe(recipe_name).get_definition_and_payload()
-        payload = rdp.get_json_payload()
-        rdp.get_recipe_raw_definition()['params']['engineType'] = compute_type
-        rdp.set_payload(payload)
-        self.project.get_recipe(recipe_name).set_definition_and_payload(rdp)
+#         project = client.get_project("MS_BENCHMARKS")
+#         recipe_name = 'compute_train_prepared'
+#         compute_type = "SQL"
+        recipe = self.project.get_recipe(recipe_name)
+        recipe_def = recipe.get_definition_and_payload()
+        recipe_payload = recipe_def.get_json_payload()
+        recipe_def_json = recipe_def.get_recipe_raw_definition()
+        recipe_def_json['params']['engineType'] = compute_type
+        recipe_def.set_json_payload(recipe_payload)
+        recipe.set_definition_and_payload(recipe_def)
+        return
+#         rdp = self.project.get_recipe(recipe_name).get_definition_and_payload()
+#         payload = rdp.get_json_payload()
+#         rdp.get_recipe_raw_definition()['params']['engineType'] = compute_type
+#         rdp.set_payload(payload)
+#         self.project.get_recipe(recipe_name).set_definition_and_payload(rdp)
 #         recipe_raw_def = rdp.get_recipe_raw_definition()
 #         # If recipe is first after source data, don't use set engine.
 #         # For example, don't use Spark when input is file system csv.
