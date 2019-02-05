@@ -208,6 +208,7 @@ class checkpoint_flow(object):
             recipe_def.set_json_payload(recipe_payload)
         except TypeError:
             recipe_def.set_payload(recipe_def_and_payload)
+            
         recipe.set_definition_and_payload(recipe_def)
         return
 #         rdp = self.project.get_recipe(recipe_name).get_definition_and_payload()
