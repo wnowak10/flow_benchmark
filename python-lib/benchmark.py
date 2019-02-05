@@ -200,6 +200,7 @@ class checkpoint_flow(object):
             recipe_payload = recipe_def.get_json_payload()
         except ValueError:
             recipe_payload = recipe.get_definition_and_payload()
+            
         recipe_def_json = recipe_def.get_recipe_raw_definition()
         recipe_def_json['params']['engineType'] = compute_type
         
