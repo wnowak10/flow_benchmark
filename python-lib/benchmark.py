@@ -192,31 +192,31 @@ class checkpoint_flow(object):
         """
         print("Trying to set engine for {}.".format(recipe_name))
         rdp = self.project.get_recipe(recipe_name).get_definition_and_payload()
-        recipe_raw_def = rdp.get_recipe_raw_definition()
-        # If recipe is first after source data, don't use set engine.
-        # For example, don't use Spark when input is file system csv.
-        recipe_input_datsets = [i['ref'] for i in recipe_raw_def['inputs']['main']['items']]
+#         recipe_raw_def = rdp.get_recipe_raw_definition()
+#         # If recipe is first after source data, don't use set engine.
+#         # For example, don't use Spark when input is file system csv.
+#         recipe_input_datsets = [i['ref'] for i in recipe_raw_def['inputs']['main']['items']]
+# #         source_datasets = self.list_source_datasets()
+#         print("Inputs are: ", recipe_input_datsets)
 #         source_datasets = self.list_source_datasets()
-        print("Inputs are: ", recipe_input_datsets)
-        source_datasets = self.list_source_datasets()
-        print("Project source datasets are: ", source_datasets)
+#         print("Project source datasets are: ", source_datasets)
 
-#         if set(recipe_input_datsets)&set(source_datasets): # Check intersection
-#             compute_type = "DSS"
+# #         if set(recipe_input_datsets)&set(source_datasets): # Check intersection
+# #             compute_type = "DSS"
     
-        # Some recipe definitions have ['params']['engineType'] key already. Use that.
-        try:
-#             recipe_raw_def = rdp.get_json_payload() #
-            recipe_raw_def['params']['engineType'] = compute_type
-            rdp.set_json_payload(recipe_raw_def)
-        except KeyError:
-            # Some recipe defintions do not have ['params']['engineType'] key. 
-            # For these, we create a new key in the json payload.
-            json_payload = rdp.get_json_payload()
-            json_payload['engineType'] = compute_type
-            rdp.set_json_payload(json_payload)
+#         # Some recipe definitions have ['params']['engineType'] key already. Use that.
+#         try:
+# #             recipe_raw_def = rdp.get_json_payload() #
+#             recipe_raw_def['params']['engineType'] = compute_type
+#             rdp.set_json_payload(recipe_raw_def)
+#         except KeyError:
+#             # Some recipe defintions do not have ['params']['engineType'] key. 
+#             # For these, we create a new key in the json payload.
+#             json_payload = rdp.get_json_payload()
+#             json_payload['engineType'] = compute_type
+#             rdp.set_json_payload(json_payload)
 
-        return self.project.get_recipe(recipe_name).set_definition_and_payload(rdp)['msg']
+#         return self.project.get_recipe(recipe_name).set_definition_and_payload(rdp)['msg']
     
             # Hacky way to ensure that a user compute engine does not get set
         # inappropriately.
@@ -241,90 +241,90 @@ class checkpoint_flow(object):
 #         if compute_type != 'HIVE' and 'postgres-10' in input_file_types:
 #             print('Incompitable. Can not set {0} compute engine with {1} file type.'.format(compute_type, input_file_types))
 
-#         # Logic to prevent incompatible computeTypes with various recipe types.
-#         if recipe_type in ['sync', 'sampling']:
-#             # Don't allow a sync recipe to be set to SQL.
-#             if compute_type == 'SQL':
-#                 new_compute_type = 'DSS'
-#             else:
-#                 new_compute_type = compute_type
-#             raw_def = rdp.get_recipe_raw_definition()
-#             raw_def['params']['engineType'] = new_compute_type
-#             rdp.set_json_payload(raw_def)
-#             return self.project.get_recipe(recipe_name).set_definition_and_payload(rdp)['msg']
+        # Logic to prevent incompatible computeTypes with various recipe types.
+        if recipe_type in ['sync', 'sampling']:
+            # Don't allow a sync recipe to be set to SQL.
+            if compute_type == 'SQL':
+                new_compute_type = 'DSS'
+            else:
+                new_compute_type = compute_type
+            raw_def = rdp.get_recipe_raw_definition()
+            raw_def['params']['engineType'] = new_compute_type
+            rdp.set_json_payload(raw_def)
+            return self.project.get_recipe(recipe_name).set_definition_and_payload(rdp)['msg']
         
-#         if recipe_type in [ 'python', 'r']:
-#             if compute_type != 'SPARK':
-#                 compute_type = "DSS"
-#         # TO DO: Deal w containerization?
+        if recipe_type in [ 'python', 'r']:
+            if compute_type != 'SPARK':
+                compute_type = "DSS"
+        # TO DO: Deal w containerization?
 
-#         elif recipe_type in ['shaker']:
-#             # Keep payload
-#             json_payload= rdp.get_json_payload()
+        elif recipe_type in ['shaker']:
+            # Keep payload
+            json_payload= rdp.get_json_payload()
 
-#             # Change compute type 
-#             raw_def = rdp.get_recipe_raw_definition()
-#             raw_def['params']['engineType'] = compute_type # compute_type
+            # Change compute type 
+            raw_def = rdp.get_recipe_raw_definition()
+            raw_def['params']['engineType'] = compute_type # compute_type
 
-#             # Explicitly retain JSON payload
-#             rdp.set_json_payload(raw_def) # was json_payload
+            # Explicitly retain JSON payload
+            rdp.set_json_payload(raw_def) # was json_payload
 
-#             # Set back json payload and new defition.
-#             return self.project.get_recipe(recipe_name).set_definition_and_payload(rdp)['msg']
+            # Set back json payload and new defition.
+            return self.project.get_recipe(recipe_name).set_definition_and_payload(rdp)['msg']
         
-#         if recipe_type in ['split']:
-#             # Don't allow a sync recipe to be set to SQL.
-#             if compute_type == 'SPARK':
-#                 new_compute_type = 'HIVE'
-#             else:
-#                 new_compute_type = compute_type
-#             jso = rdp.get_json_payload()
-#             jso['engineType'] = new_compute_type
-#             rdp.set_json_payload(jso)
-#             return self.project.get_recipe(recipe_name).set_definition_and_payload(rdp)['msg']
+        if recipe_type in ['split']:
+            # Don't allow a sync recipe to be set to SQL.
+            if compute_type == 'SPARK':
+                new_compute_type = 'HIVE'
+            else:
+                new_compute_type = compute_type
+            jso = rdp.get_json_payload()
+            jso['engineType'] = new_compute_type
+            rdp.set_json_payload(jso)
+            return self.project.get_recipe(recipe_name).set_definition_and_payload(rdp)['msg']
         
-#         # TO DO -- delete. Just test if problem with Nowak Installation Suite Test
-#         # is that I am using SQL as engine from two file system datasets?
-#         if recipe_type == 'stack':
-#             compute_type == 'DSS'
-#             jso = rdp.get_json_payload()
-#             jso['engineType'] = compute_type
-#             rdp.set_json_payload(jso)
-#             return self.project.get_recipe(recipe_name).set_definition_and_payload(rdp)['msg']
+        # TO DO -- delete. Just test if problem with Nowak Installation Suite Test
+        # is that I am using SQL as engine from two file system datasets?
+        if recipe_type == 'stack':
+            compute_type == 'DSS'
+            jso = rdp.get_json_payload()
+            jso['engineType'] = compute_type
+            rdp.set_json_payload(jso)
+            return self.project.get_recipe(recipe_name).set_definition_and_payload(rdp)['msg']
         
-#         if recipe_type in ['pyspark', 'spark_scala', 'spark_sql_query', 'sparkr']:
-#             # Don't allow a sync recipe to be set to SQL.
-#             new_compute_type = compute_type
-#             if compute_type not in ['SPARK', "DSS"]:
-#                 new_compute_type = 'DSS'
-#             else:
-#                 new_compute_type = compute_type
-#             jso = rdp.get_json_payload()
-#             jso['engineType'] = new_compute_type
-#             rdp.set_json_payload(jso)
-#             return self.project.get_recipe(recipe_name).set_definition_and_payload(rdp)['msg']
+        if recipe_type in ['pyspark', 'spark_scala', 'spark_sql_query', 'sparkr']:
+            # Don't allow a sync recipe to be set to SQL.
+            new_compute_type = compute_type
+            if compute_type not in ['SPARK', "DSS"]:
+                new_compute_type = 'DSS'
+            else:
+                new_compute_type = compute_type
+            jso = rdp.get_json_payload()
+            jso['engineType'] = new_compute_type
+            rdp.set_json_payload(jso)
+            return self.project.get_recipe(recipe_name).set_definition_and_payload(rdp)['msg']
         
-#         if recipe_type in ['sparkr']:
-#             raw_def = rdp.get_definition_and_payload().get_recipe_raw_definition()
-#             raw_def['params']['engineType'] = "DSS"
-#             rdp.set_json_payload(raw_def)
-#             self.project.get_recipe(recipe_name).set_definition_and_payload(rdp)['msg']
+        if recipe_type in ['sparkr']:
+            raw_def = rdp.get_definition_and_payload().get_recipe_raw_definition()
+            raw_def['params']['engineType'] = "DSS"
+            rdp.set_json_payload(raw_def)
+            self.project.get_recipe(recipe_name).set_definition_and_payload(rdp)['msg']
         
-#         elif recipe_type in ['distinct',
-#                              'grouping',
-#                              'join',
-#                              'pivot',
-#                              'sort',
-#                              'split',
-#                              'vstack',
-# #                              'sampling', # Filter recipe 
-#                              'topn',
-#                              'window']:  # TO DO: Check to make sure all SQL recipes are as so.
-#             jso = rdp.get_json_payload()
-#             jso['engineType'] = compute_type
-#             rdp.set_json_payload(jso)
-#             self.project.get_recipe(recipe_name).set_definition_and_payload(rdp)
-#             return 
+        elif recipe_type in ['distinct',
+                             'grouping',
+                             'join',
+                             'pivot',
+                             'sort',
+                             'split',
+                             'vstack',
+#                              'sampling', # Filter recipe 
+                             'topn',
+                             'window']:  # TO DO: Check to make sure all SQL recipes are as so.
+            jso = rdp.get_json_payload()
+            jso['engineType'] = compute_type
+            rdp.set_json_payload(jso)
+            self.project.get_recipe(recipe_name).set_definition_and_payload(rdp)
+            return 
 
     def list_dataset_names(self):
         """ Helper function.
