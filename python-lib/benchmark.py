@@ -217,7 +217,7 @@ class checkpoint_flow(object):
 #         except TypeError:
 #             recipe_def.set_payload(recipe_payload)
         # Fails when I do     
-        recipe.set_definition_and_payload(recipe_def)
+#         recipe.set_definition_and_payload(recipe_def)
         return
 #         rdp = self.project.get_recipe(recipe_name).get_definition_and_payload()
 #         payload = rdp.get_json_payload()
