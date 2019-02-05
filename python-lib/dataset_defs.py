@@ -29,6 +29,13 @@ formatParams = {
 					    'skipRowsBeforeHeader': 0,
 					    'style': 'escape_only_no_quote',
 					    'writeDataTypeMismatchBehavior': 'DISCARD_WARNING'
+					},
+        "parquet" :	{
+						'parquetBlockSizeMB': 128,
+						'parquetCompressionMethod': 'SNAPPY',
+						'parquetFlavor': 'HIVE',
+						'parquetLowerCaseIdentifiers': False,
+						'representsNullFields': False
 					}
     },
 	"HDFS" :	{
