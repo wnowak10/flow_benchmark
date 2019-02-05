@@ -200,12 +200,14 @@ class checkpoint_flow(object):
         recipe_def_json = recipe_def.get_recipe_raw_definition()
         recipe_def_json['params']['engineType'] = compute_type
         
-        try:
+        try:  # E.g. prepare recipe
             recipe_payload = recipe_def.get_json_payload()
             recipe_def.set_json_payload(recipe_payload)
+            recipe.set_definition_and_payload(recipe_def)
         except ValueError:  # E.g. SparkR recipes don't have straight json_payload.
             recipe_payload = recipe.get_definition_and_payload()
             recipe_def.set_payload(recipe_payload)
+            recipe.set_definition_and_payload(recipe_def.get_payload())
             
 #         recipe_def_json = recipe_def.get_recipe_raw_definition()
 #         recipe_def_json['params']['engineType'] = compute_type
@@ -214,7 +216,7 @@ class checkpoint_flow(object):
 #             recipe_def.set_json_payload(recipe_payload)
 #         except TypeError:
 #             recipe_def.set_payload(recipe_payload)
-            
+        # Fails when I do     
         recipe.set_definition_and_payload(recipe_def)
         return
 #         rdp = self.project.get_recipe(recipe_name).get_definition_and_payload()
