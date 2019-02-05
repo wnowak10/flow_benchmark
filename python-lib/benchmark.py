@@ -201,8 +201,8 @@ class checkpoint_flow(object):
         source_datasets = self.list_source_datasets()
         print("Project source datasets are: ", source_datasets)
 
-        if set(recipe_input_datsets)&set(source_datasets): # Check intersection
-            compute_type = "DSS"
+#         if set(recipe_input_datsets)&set(source_datasets): # Check intersection
+#             compute_type = "DSS"
     
         # Some recipe definitions have ['params']['engineType'] key already. Use that.
         try:
