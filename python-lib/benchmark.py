@@ -198,7 +198,11 @@ class checkpoint_flow(object):
         recipe_def = recipe.get_definition_and_payload()
         
         recipe_def_json = recipe_def.get_recipe_raw_definition()
-        recipe_def_json['params']['engineType'] = compute_type
+        try:
+            recipe_def_json['params']['engineType'] = compute_type
+        except KeyError:
+            recipe_def_json['params'] = {}
+            recipe_def_json['params']['engineType'] = compute_type
         
         try:  # E.g. prepare recipe
             recipe_payload = recipe_def.get_json_payload()
