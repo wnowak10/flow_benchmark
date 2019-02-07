@@ -1,6 +1,8 @@
 # ______________________________________________________________________________
 # Imports 
 
+import numpy as np
+
 import dataiku
 
 from dataiku.runnables import Runnable, ResultTable
