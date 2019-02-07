@@ -27,15 +27,15 @@ app.controller('FoobarController', function($scope) {
     updateConnections();
     $scope.$watch('config.connectionType', updateConnections);
     
-    var s3Bucket = function() {
-        $scope.callPythonDo({"funtastic": "s3Bucket"}).then(function(data) {
-            $scope.s3Bucket = data.s3Bucket;
-        }, function(data) {
-            $scope.s3Bucket = [];
-        });
-    };
-    s3Bucket();
-    $scope.$watch('config.s3Bucket', s3Bucket);
+//     var s3Bucket = function() {
+//         $scope.callPythonDo({"funtastic": "s3Bucket"}).then(function(data) {
+//             $scope.s3Bucket = data.s3Bucket;
+//         }, function(data) {
+//             $scope.s3Bucket = [];
+//         });
+//     };
+//     s3Bucket();
+//     $scope.$watch('config.s3Bucket', s3Bucket);
     
 // });
 });
