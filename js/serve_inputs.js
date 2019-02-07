@@ -29,7 +29,7 @@ app.controller('FoobarController', function($scope) {
     
     var dynamicButton = function() {
         $scope.callPythonDo({"funtastic": "dynamic"}).then(function(data) {
-            $scope.connections = data.connections;
+            $scope.dynamic = data.dynamic;
         }, function(data) {
             $scope.connections = [];
         });
