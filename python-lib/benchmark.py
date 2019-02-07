@@ -197,28 +197,31 @@ class checkpoint_flow(object):
         recipe = self.project.get_recipe(recipe_name)
         recipe_def = recipe.get_definition_and_payload()
         
-#         compute_type = "SPARK"
         recipe_def_json = recipe_def.get_recipe_raw_definition()
-        recipe_payload = recipe_def.get_json_payload()
-        recipe_payload['engineType'] = compute_type
-        recipe_def.set_json_payload(recipe_payload)
-        recipe.set_definition_and_payload(recipe_def)
         
-#         recipe_def_json = recipe_def.get_recipe_raw_definition()
-#         try:
-#             recipe_def_json['params']['engineType'] = compute_type
-#         except KeyError:
-#             recipe_def_json['params'] = {}
-#             recipe_def_json['params']['engineType'] = compute_type
         
-#         try:  # E.g. prepare recipe
-#             recipe_payload = recipe_def.get_json_payload()
-#             recipe_def.set_json_payload(recipe_payload)
-#             recipe.set_definition_and_payload(recipe_def)
-#         except ValueError:  # E.g. SparkR recipes don't have straight json_payload.
-#             recipe_payload = recipe.get_definition_and_payload()
-#             recipe_def.set_payload(recipe_payload)
-#             recipe.set_definition_and_payload(recipe_def.get_payload())
+        try: # If recipe_def has json payload.
+            recipe_payload = recipe_def.get_json_payload()
+            recipe_payload['engineType'] = compute_type
+            recipe_def.set_json_payload(recipe_payload)
+            recipe.set_definition_and_payload(recipe_def)
+        
+        except:
+
+            try:
+                recipe_def_json['params']['engineType'] = compute_type
+            except KeyError:
+                recipe_def_json['params'] = {}
+                recipe_def_json['params']['engineType'] = compute_type
+
+            try:  # E.g. prepare recipe
+                recipe_payload = recipe_def.get_json_payload()
+                recipe_def.set_json_payload(recipe_payload)
+                recipe.set_definition_and_payload(recipe_def)
+            except ValueError:  # E.g. SparkR recipes don't have straight json_payload.
+                recipe_payload = recipe.get_definition_and_payload()
+                recipe_def.set_payload(recipe_payload)
+                recipe.set_definition_and_payload(recipe_def.get_payload())
 
 
 
