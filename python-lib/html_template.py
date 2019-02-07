@@ -22,7 +22,9 @@ res = """
         </head>
         <body>
 
-        <h2> Build results:</h2>
+        """
+
+table = """<h2> Build results:</h2>
 
         <table>
           <tr>
