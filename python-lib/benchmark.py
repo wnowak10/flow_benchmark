@@ -498,6 +498,7 @@ class checkpoint_flow(object):
     def reformat_flow(self, 
                       formatType, 
                       connectionType,
+                      s3Bucket = None
                       **kwargs):
 #                       names = None,
 #                       verbose = True,
@@ -512,8 +513,8 @@ class checkpoint_flow(object):
             - 'parquet'
             ...
         """
-        if names is None:
-            names = self.list_dataset_names()
+#         if names is None:
+        names = self.list_dataset_names()
 
         for i, dataset in enumerate(names):
             print('Trying to change format type for {}.'.format(dataset))
