@@ -143,7 +143,7 @@ params = {
   },
     "S3": {
       u'connection': u'filesystem_managed',
-     u'filesSelectionRules': {u'excludeRules': [],
+      u'filesSelectionRules': {u'excludeRules': [],
       u'explicitFiles': [],
       u'includeRules': [],
       u'mode': u'ALL'},
