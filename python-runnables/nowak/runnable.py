@@ -75,8 +75,7 @@ class MyRunnable(Runnable):
         flow_results = cf.build_flow()
 
         res = html_template.res
-        res += """<h2> Build results:</h2>
-
+        res += """
                     <table>
                       <tr>
                         <th> File type </th>
