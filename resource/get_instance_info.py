@@ -12,5 +12,5 @@ def do(payload, config, plugin_config, inputs):
         connections = client.list_connections().keys()
         return {'connections': connections}
     
-    if payload["funtastic"] == "s3Bucket":
-        return {'s3Bucket': [5]}
+#     if payload["funtastic"] == "s3Bucket":
+#         return {'s3Bucket': }
