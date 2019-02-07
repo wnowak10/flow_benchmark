@@ -44,12 +44,16 @@ def _time_job(job):
 class checkpoint_flow(object):
     
     def __init__(self, project_key = None):
-        self.project_key = project_key
-        self.client      = dataiku.api_client()
-        self.project     = self.client.get_project(self.project_key)
-        self.dataset_names = self.list_source_datasets()
+        self.project_key   = project_key
+        self.client        = dataiku.api_client()
+        self.project       = self.client.get_project(self.project_key)
 
     def list_source_datasets(self):
+        """ List datasets which are the start of flows. 
+
+        These are the opposite of what I later refer to as 'terminal'
+        datasets, in some sense.
+        """
         source_datasets = []
         dataset_names = [i['name'] for i in self.project.list_datasets()]
         for dataset_name in dataset_names:
@@ -68,9 +72,10 @@ class checkpoint_flow(object):
         
         Args:
         
-        dataset_name (str)  : Dataset to operate on in this project.
-        formatType   (str)  : Potential options for new file format for HDFS, local. 
+        dataset_name (str)   : Dataset to operate on in this project.
+        formatType   (str)   : Potential options for new file format for HDFS, local. 
         connectionType (str) : Potential dataset connection.
+        s3Bucket (str)       : Bucket key if connecting to S3.
         
         (If this dataset is stored in SQL, this function is N/A, as there are not multiple
         file formats.)
@@ -100,6 +105,7 @@ class checkpoint_flow(object):
         if dataset_def['type'] == 'UploadedFiles':
             print('Do not change type of "{}" as this file was uploaded.'.format(dataset_name))
             return
+
         changed = dataset_def.copy()
         
         """Essential definition keys to change in this JSON are:
@@ -107,9 +113,7 @@ class checkpoint_flow(object):
                * formatType
                * type
                * params
-        """
         
-        """
         ConnectionType can be named by user, so rely on string search
         to map user connection type to valid backend data connection type.
         
@@ -136,6 +140,7 @@ class checkpoint_flow(object):
         """
         formatParams = dataset_defs.formatParams[connectionType][formatType]
         # Set the new formatParams key in the dataset definition JSON
+        # called `changed`.
         changed['formatParams'] = formatParams
         changed['formatType'] = formatType
         changed['params'] = dataset_defs.params[connectionType]
@@ -150,7 +155,7 @@ class checkpoint_flow(object):
             changed['params']['path'] = '${projectKey}/'+dataset_name
         if connectionType == "S3":
             changed['params']['bucket'] = s3Bucket
-            changed['params']['path'] = '/dataiku/${projectKey}/' + dataset_name #'${projectKey}.'+dataset_name  
+            changed['params']['path'] = '/dataiku/${projectKey}/' + dataset_name
         """
         ### TO DO!!! ###
         These types are a mandatory part of a dataset definition JSON,
@@ -170,48 +175,64 @@ class checkpoint_flow(object):
         return
     
     def set_compute_engine(self,
-                        recipe_name,
-                        recipe_type,
-                        compute_type):
-        """
-        
-        Args:
+                           recipe_name,
+                           recipe_type,
+                           compute_type):
+        """ Args:
         
         recipe_name  (str) : Recipe to operate alter compute engine on, if possible.
             - 'sync
             - 'sampling'
             - 'shaker'
-            - 
+            - ...
             
         compute_type (str) : Potential options for new compute type. 
-            - 'DSS'
-            - 'SQL
-            - 'SPARK'
-            - 'HIVE'
+        Given by recipe definition.
 
         Returns:
             bool: The return value. True for success, False otherwise.
         """
         print("Trying to set engine for {}.".format(recipe_name))
 
-        # Some logic to not do sync recipe?
-    
-    
-        recipe = self.project.get_recipe(recipe_name)
-        recipe_def = recipe.get_definition_and_payload()
+        # _____________________________________________________________________
+        # Ban sync recipe, as this seems to not work?
+        # !!!!!UNTESTED!!!!!
+        if recipe_type == 'sync':
+            print("Cannot change engine on sync?")
+            return
+
+        # _____________________________________________________________________
+        # Ban incompatible compute engines on first recipes.
+        # !!!!!UNTESTED!!!!!
         
+        # If recipe is first after source data, don't use set engine.
+        # For example, don't use HIVE or SQL when input is file system csv.
+        recipe_input_datsets = [i['ref'] for i in recipe_raw_def['inputs']['main']['items']]
+        source_datasets = self.list_source_datasets()
+        print("Inputs are: ", recipe_input_datsets)
+        source_datasets = self.list_source_datasets()
+        print("Project source datasets are: ", source_datasets)
+
+        if set(recipe_input_datsets)&set(source_datasets): # Check intersection
+            if compute_type in ['SQL', 'HIVE']:
+                compute_type = "DSS"
+    
+        recipe          = self.project.get_recipe(recipe_name)
+        recipe_def      = recipe.get_definition_and_payload()
         recipe_def_json = recipe_def.get_recipe_raw_definition()
         
-        
+        # _____________________________________________________________________
+        # Set new recipe definition
+
         try: # If recipe_def has json payload.
-            print('Recipe type for straight json_payload access is {}.'.format(recipe_type))
+            print('Recipe type for json_payload access is: {}.'.format(recipe_type))
             recipe_payload = recipe_def.get_json_payload()
             recipe_payload['engineType'] = compute_type
             recipe_def.set_json_payload(recipe_payload)
             recipe.set_definition_and_payload(recipe_def)
         
         except:
-            print('Recipe type for setting recipe_def_json is {}.'.format(recipe_type))
+            print('Recipe type for setting recipe_def_json is: {}.'.format(recipe_type))
             try:
                 recipe_def_json['params']['engineType'] = compute_type
             except KeyError:
@@ -227,166 +248,7 @@ class checkpoint_flow(object):
                 recipe_def.set_payload(recipe_payload)
                 recipe.set_definition_and_payload(recipe_def.get_payload())
 
-
-
-
-
-
-
-
-
-
-
-
-
-            
-#         recipe_def_json = recipe_def.get_recipe_raw_definition()
-#         recipe_def_json['params']['engineType'] = compute_type
-        
-#         try:
-#             recipe_def.set_json_payload(recipe_payload)
-#         except TypeError:
-#             recipe_def.set_payload(recipe_payload)
-        # Fails when I do     
-#         recipe.set_definition_and_payload(recipe_def)
-        return
-#         rdp = self.project.get_recipe(recipe_name).get_definition_and_payload()
-#         payload = rdp.get_json_payload()
-#         rdp.get_recipe_raw_definition()['params']['engineType'] = compute_type
-#         rdp.set_payload(payload)
-#         self.project.get_recipe(recipe_name).set_definition_and_payload(rdp)
-#         recipe_raw_def = rdp.get_recipe_raw_definition()
-#         # If recipe is first after source data, don't use set engine.
-#         # For example, don't use Spark when input is file system csv.
-#         recipe_input_datsets = [i['ref'] for i in recipe_raw_def['inputs']['main']['items']]
-# #         source_datasets = self.list_source_datasets()
-#         print("Inputs are: ", recipe_input_datsets)
-#         source_datasets = self.list_source_datasets()
-#         print("Project source datasets are: ", source_datasets)
-
-# #         if set(recipe_input_datsets)&set(source_datasets): # Check intersection
-# #             compute_type = "DSS"
-    
-        # Some recipe definitions have ['params']['engineType'] key already. Use that.
-#         try:
-#             recipe_raw_def['params']['engineType'] = compute_type
-#             rdp.set_json_payload(recipe_raw_def)
-#         except KeyError:
-#             # Some recipe defintions do not have ['params']['engineType'] key. 
-#             # For these, we create a new key in the json payload.
-#             json_payload = rdp.get_json_payload()
-#             json_payload['engineType'] = compute_type
-#             rdp.set_json_payload(json_payload)
-
-#         return self.project.get_recipe(recipe_name).set_definition_and_payload(rdp)['msg']
-    
-            # Hacky way to ensure that a user compute engine does not get set
-        # inappropriately.
-        
-        
-#         print("Loaded recipe_raw_definition.")
-#         input_datasets = recipe_raw_def['inputs']['main']['items']
-        
-#         input_file_types = []
-#         for input in input_datasets:
-#             ds = self.project.get_dataset(input['ref'])
-#             # Check file type of recipe's input dataset.
-#             try:
-#                 r_type = ds.get_definition()['type']
-#             except:
-#                 r_type = 'shaker' # Or sync? # Missing definition when using an exposed dataset.
-#             input_file_types.append(r_type)
-#         print("Loaded input file types. They are {}.".format(input_file_types))
-#         # Very hacky logic to prevent bad combinations of computeType and input file types.
-#         # For example, "HIVE" as computeType will not work with "postgres-10"
-#         # as a file type for one of the recipe inputs.
-#         if compute_type != 'HIVE' and 'postgres-10' in input_file_types:
-#             print('Incompitable. Can not set {0} compute engine with {1} file type.'.format(compute_type, input_file_types))
-
-#         # Logic to prevent incompatible computeTypes with various recipe types.
-#         if recipe_type in ['sync', 'sampling']:
-#             # Don't allow a sync recipe to be set to SQL.
-#             if compute_type == 'SQL':
-#                 new_compute_type = 'DSS'
-#             else:
-#                 new_compute_type = compute_type
-#             raw_def = rdp.get_recipe_raw_definition()
-#             raw_def['params']['engineType'] = new_compute_type
-#             rdp.set_json_payload(raw_def)
-#             return self.project.get_recipe(recipe_name).set_definition_and_payload(rdp)['msg']
-        
-#         if recipe_type in [ 'python', 'r']:
-#             if compute_type != 'SPARK':
-#                 compute_type = "DSS"
-#         # TO DO: Deal w containerization?
-
-#         elif recipe_type in ['shaker']:
-#             # Keep payload
-#             json_payload= rdp.get_json_payload()
-
-#             # Change compute type 
-#             raw_def = rdp.get_recipe_raw_definition()
-#             raw_def['params']['engineType'] = compute_type # compute_type
-
-#             # Explicitly retain JSON payload
-#             rdp.set_json_payload(raw_def) # was json_payload
-
-#             # Set back json payload and new defition.
-#             return self.project.get_recipe(recipe_name).set_definition_and_payload(rdp)['msg']
-        
-#         if recipe_type in ['split']:
-#             # Don't allow a sync recipe to be set to SQL.
-#             if compute_type == 'SPARK':
-#                 new_compute_type = 'HIVE'
-#             else:
-#                 new_compute_type = compute_type
-#             jso = rdp.get_json_payload()
-#             jso['engineType'] = new_compute_type
-#             rdp.set_json_payload(jso)
-#             return self.project.get_recipe(recipe_name).set_definition_and_payload(rdp)['msg']
-        
-#         # TO DO -- delete. Just test if problem with Nowak Installation Suite Test
-#         # is that I am using SQL as engine from two file system datasets?
-#         if recipe_type == 'stack':
-#             compute_type == 'DSS'
-#             jso = rdp.get_json_payload()
-#             jso['engineType'] = compute_type
-#             rdp.set_json_payload(jso)
-#             return self.project.get_recipe(recipe_name).set_definition_and_payload(rdp)['msg']
-        
-#         if recipe_type in ['pyspark', 'spark_scala', 'spark_sql_query', 'sparkr']:
-#             # Don't allow a sync recipe to be set to SQL.
-#             new_compute_type = compute_type
-#             if compute_type not in ['SPARK', "DSS"]:
-#                 new_compute_type = 'DSS'
-#             else:
-#                 new_compute_type = compute_type
-#             jso = rdp.get_json_payload()
-#             jso['engineType'] = new_compute_type
-#             rdp.set_json_payload(jso)
-#             return self.project.get_recipe(recipe_name).set_definition_and_payload(rdp)['msg']
-        
-#         if recipe_type in ['sparkr']:
-#             raw_def = rdp.get_definition_and_payload().get_recipe_raw_definition()
-#             raw_def['params']['engineType'] = "DSS"
-#             rdp.set_json_payload(raw_def)
-#             self.project.get_recipe(recipe_name).set_definition_and_payload(rdp)['msg']
-        
-#         elif recipe_type in ['distinct',
-#                              'grouping',
-#                              'join',
-#                              'pivot',
-#                              'sort',
-#                              'split',
-#                              'vstack',
-# #                              'sampling', # Filter recipe 
-#                              'topn',
-#                              'window']:  # TO DO: Check to make sure all SQL recipes are as so.
-#             jso = rdp.get_json_payload()
-#             jso['engineType'] = compute_type
-#             rdp.set_json_payload(jso)
-#             self.project.get_recipe(recipe_name).set_definition_and_payload(rdp)
-#             return 
+        return 
 
     def list_dataset_names(self):
         """ Helper function.
@@ -499,9 +361,6 @@ class checkpoint_flow(object):
                       formatType, 
                       connectionType,
                       s3Bucket = None):
-#                       names = None,
-#                       verbose = True,
-#                       s3Bucket = None):
         """ Reformat an entire data flow.
         
         Args:
@@ -548,6 +407,4 @@ class checkpoint_flow(object):
                 print('Successfully built {}.'.format(dataset))
            
         return run_times
-#     'Run times were {} and total run time was {} seconds.'.format(run_times, sum(run_times.values()))
     
-        

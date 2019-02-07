@@ -22,12 +22,13 @@ res = """
         </head>
         <body>
 
-        """
+      """
 
 table = """<h2> Build results:</h2>
 
-        <table>
-          <tr>
-            <th> Dataset </th>
-            <th> Build time</th>
-          </tr>"""
+          <table>
+            <tr>
+              <th> Dataset </th>
+              <th> Build time</th>
+            </tr>
+        """
