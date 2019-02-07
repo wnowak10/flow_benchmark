@@ -34,8 +34,8 @@ app.controller('FoobarController', function($scope) {
             $scope.connections = [];
         });
     };
-    updateConnections();
-    $scope.$watch('config.connectionType', updateConnections);
+    dynamicButton();
+    $scope.$watch('config.dynamic', dynamicButton);
     
 // });
 });
