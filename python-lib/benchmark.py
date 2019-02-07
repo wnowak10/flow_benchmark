@@ -60,7 +60,8 @@ class checkpoint_flow(object):
     def set_file_format(self,
                         dataset_name, 
                         formatType,
-                        connectionType):
+                        connectionType,
+                       s3Bucket = None):
         """ Given a dataset `dataset_name`:
         - change the format to formatType
         - change the connection to connectionType
