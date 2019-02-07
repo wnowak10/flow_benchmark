@@ -84,10 +84,9 @@ class MyRunnable(Runnable):
                         <th> Engine type</th>
                       </tr>
                       <tr>
-                          <td> {} </td>
-                            <td> {} </td>
-                            <td> {} </td>
-                    
+                        <td> {} </td>
+                        <td> {} </td>
+                        <td> {} </td>
                       </tr>""".format(self.formatType, self.connectionType, self.computeEngine)
         
         def html_row(data_list):
@@ -96,8 +95,11 @@ class MyRunnable(Runnable):
                     <td> {} </td>
                 </tr>""".format(data_list[0], data_list[1])
             return row
+        
+        res += html_template.table
+        
         for i, _ in enumerate(flow_results):
-            res += html_template.table
+            
             res += html_row([flow_results.keys()[i], flow_results.values()[i]])
         res+="""
         </table>
