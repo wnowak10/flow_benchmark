@@ -193,7 +193,10 @@ class checkpoint_flow(object):
             bool: The return value. True for success, False otherwise.
         """
         print("Trying to set engine for {}.".format(recipe_name))
-
+        recipe          = self.project.get_recipe(recipe_name)
+        recipe_def      = recipe.get_definition_and_payload()
+        recipe_def_json = recipe_def.get_recipe_raw_definition()
+        
         # _____________________________________________________________________
         # Ban sync recipe, as this seems to not work?
         # !!!!!UNTESTED!!!!!
@@ -207,7 +210,7 @@ class checkpoint_flow(object):
         
         # If recipe is first after source data, don't use set engine.
         # For example, don't use HIVE or SQL when input is file system csv.
-        recipe_input_datsets = [i['ref'] for i in recipe_raw_def['inputs']['main']['items']]
+        recipe_input_datsets = [i['ref'] for i in recipe_def_json['inputs']['main']['items']]
         source_datasets = self.list_source_datasets()
         print("Inputs are: ", recipe_input_datsets)
         source_datasets = self.list_source_datasets()
@@ -216,10 +219,6 @@ class checkpoint_flow(object):
         if set(recipe_input_datsets)&set(source_datasets): # Check intersection
             if compute_type in ['SQL', 'HIVE']:
                 compute_type = "DSS"
-    
-        recipe          = self.project.get_recipe(recipe_name)
-        recipe_def      = recipe.get_definition_and_payload()
-        recipe_def_json = recipe_def.get_recipe_raw_definition()
         
         # _____________________________________________________________________
         # Set new recipe definition
