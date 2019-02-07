@@ -98,8 +98,7 @@ class MyRunnable(Runnable):
         
         res += html_template.table
         
-        for i, _ in enumerate(flow_results):
-            
+        for i, _ in enumerate(flow_results):    
             res += html_row([flow_results.keys()[i], flow_results.values()[i]])
         res+="""
         </table>
