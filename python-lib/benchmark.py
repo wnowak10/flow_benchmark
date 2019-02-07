@@ -498,8 +498,7 @@ class checkpoint_flow(object):
     def reformat_flow(self, 
                       formatType, 
                       connectionType,
-                      s3Bucket = None
-                      **kwargs):
+                      s3Bucket = None):
 #                       names = None,
 #                       verbose = True,
 #                       s3Bucket = None):
