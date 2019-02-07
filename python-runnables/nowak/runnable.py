@@ -98,10 +98,10 @@ class MyRunnable(Runnable):
         
         res += html_template.table
         
-        total_build_time_sum = 0
+        total_build_time_sum = np.nansum((0))
         for i, _ in enumerate(flow_results):    
             res += html_row([flow_results.keys()[i], flow_results.values()[i]])
-            total_build_time_sum += flow_results.values()[i]
+            total_build_time_sum = np.nansum((total_build_time_sum, flow_results.values()[i]))
         res+="""
         </table>
         """
