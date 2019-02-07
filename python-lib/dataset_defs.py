@@ -147,8 +147,7 @@ params = {
       u'explicitFiles': [],
       u'includeRules': [],
       u'mode': u'ALL'},
-     u'notReadyIfEmpty': False,
-     u'path': u'/NOWAKINSTALLATIONSUITEDUPLICATED.weather'  
+     u'notReadyIfEmpty': False  
     },
   	"HDFS" : {
   	  'connection': 'hdfs_managed',
