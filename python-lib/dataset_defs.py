@@ -142,6 +142,7 @@ params = {
 	  'writeWithCopyBadDataBehavior': 'NOVERIFY_ERROR'
   },
     "S3": {
+        'bucket': u'dscluster-paris-1',
       u'connection': u's3_direct',
       u'filesSelectionRules': {u'excludeRules': [],
       u'explicitFiles': [],
