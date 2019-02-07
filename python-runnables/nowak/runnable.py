@@ -75,6 +75,20 @@ class MyRunnable(Runnable):
         flow_results = cf.build_flow()
 
         res = html_template.res
+        res += """<h2> Build results:</h2>
+
+                    <table>
+                      <tr>
+                        <th> File type </th>
+                        <th> Connection type</th>
+                        <th> Engine type</th>
+                      </tr>
+                      <tr>
+                          <td> {} </td>
+                            <td> {} </td>
+                            <td> {} </td>
+                    
+                      </tr>""".format(self.formatType, self.connectionType, self.computeEngine)
         
         def html_row(data_list):
             row = """<tr>
@@ -83,6 +97,7 @@ class MyRunnable(Runnable):
                 </tr>""".format(data_list[0], data_list[1])
             return row
         for i, _ in enumerate(flow_results):
+            res += html_template.table
             res += html_row([flow_results.keys()[i], flow_results.values()[i]])
         res+="""
         </table>
