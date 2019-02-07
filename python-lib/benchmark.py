@@ -191,9 +191,10 @@ class checkpoint_flow(object):
             bool: The return value. True for success, False otherwise.
         """
         print("Trying to set engine for {}.".format(recipe_name))
-#         project = client.get_project("MS_BENCHMARKS")
-#         recipe_name = 'compute_train_prepared'
-#         compute_type = "SQL"
+
+        # Some logic to not do sync recipe?
+    
+    
         recipe = self.project.get_recipe(recipe_name)
         recipe_def = recipe.get_definition_and_payload()
         
@@ -454,7 +455,7 @@ class checkpoint_flow(object):
         """
         if clear_before_build:
             if self.project.get_dataset(output_dataset_name).get_definition()['type'] != 'UploadedFiles':
-                self.project.get_dataset(dataset_name=output_dataset_name).clear()
+#                 self.project.get_dataset(dataset_name=output_dataset_name).clear()
                 print('Dataset {} cleared.'.format(output_dataset_name))
         
         # https://doc.dataiku.com/dss/latest/publicapi/client-python/jobs.html
