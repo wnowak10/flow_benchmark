@@ -18,7 +18,7 @@ app.controller('FoobarController', function($scope) {
     var updateConnections = function() {
         $scope.callPythonDo({"funtastic": "connections"}).then(function(data) {
             console.log(data)
-            console.log(data.connection)
+            console.log(data.connections)
             $scope.connections = data.connections;
         }, function(data) {
             $scope.connections = [];
