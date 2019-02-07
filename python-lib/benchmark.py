@@ -455,7 +455,7 @@ class checkpoint_flow(object):
         """
         if clear_before_build:
             if self.project.get_dataset(output_dataset_name).get_definition()['type'] != 'UploadedFiles':
-#                 self.project.get_dataset(dataset_name=output_dataset_name).clear()
+                self.project.get_dataset(dataset_name=output_dataset_name).clear()
                 print('Dataset {} cleared.'.format(output_dataset_name))
         
         # https://doc.dataiku.com/dss/latest/publicapi/client-python/jobs.html
