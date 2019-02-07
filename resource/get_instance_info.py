@@ -13,4 +13,4 @@ def do(payload, config, plugin_config, inputs):
         return {'connections': connections}
     
     if payload["funtastic"] == "s3Bucket":
-        return {'s3Bucket': 5}
+        return {'s3Bucket': [5]}
