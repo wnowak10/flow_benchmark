@@ -34,5 +34,13 @@
               <option value="SQL">      SQL </option>
         </select>
     </div>
+    
+    <div class="control-group" >
+        <label class="control-label"> Connection Type: </label>
+        <div class="controls" >
+            <select dku-bs-select="{liveSearch:true}" ng-model="config.dynamic" ng-options="v for v in dynamic" />
+            <span class="help-inline"> Dataset connection. </span>
+        </div>
+    </div>
 
 </div>
