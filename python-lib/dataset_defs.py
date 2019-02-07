@@ -142,7 +142,7 @@ params = {
 	  'writeWithCopyBadDataBehavior': 'NOVERIFY_ERROR'
   },
     "S3": {
-      u'connection': u'filesystem_managed',
+      u'connection': u's3_direct',
       u'filesSelectionRules': {u'excludeRules': [],
       u'explicitFiles': [],
       u'includeRules': [],
