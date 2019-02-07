@@ -27,15 +27,15 @@ app.controller('FoobarController', function($scope) {
     updateConnections();
     $scope.$watch('config.connectionType', updateConnections);
     
-    var dynamicButton = function() {
-        $scope.callPythonDo({"funtastic": "dynamic"}).then(function(data) {
-            $scope.dynamic = data.dynamic;
+    var s3Bucket = function() {
+        $scope.callPythonDo({"funtastic": "s3Bucket"}).then(function(data) {
+            $scope.s3Bucket = data.s3Bucket;
         }, function(data) {
-            $scope.dynamic = [];
+            $scope.s3Bucket = [];
         });
     };
-    dynamicButton();
-    $scope.$watch('config.dynamic', dynamicButton);
+    s3Bucket();
+    $scope.$watch('config.s3Bucket', s3Bucket);
     
 // });
 });
