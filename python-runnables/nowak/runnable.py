@@ -104,9 +104,12 @@ class MyRunnable(Runnable):
             total_build_time_sum += flow_results.values()[i]
         res+="""
         </table>
-        </body>
-        </html>
         """
+#         </body>
+#         </html>
+        res+= """<h2> Total time for all builds: {} </h2>
+        </body>
+        </html>""".format(total_build_time_sum)
         return res
 #         return str(self.sparkPipeline)
 
