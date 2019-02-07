@@ -201,13 +201,14 @@ class checkpoint_flow(object):
         
         
         try: # If recipe_def has json payload.
+            print('Recipe type for straight json_payload access is {}.'.format(recipe_type))
             recipe_payload = recipe_def.get_json_payload()
             recipe_payload['engineType'] = compute_type
             recipe_def.set_json_payload(recipe_payload)
             recipe.set_definition_and_payload(recipe_def)
         
         except:
-
+            print('Recipe type for setting recipe_def_json is {}.'.format(recipe_type))
             try:
                 recipe_def_json['params']['engineType'] = compute_type
             except KeyError:
