@@ -149,7 +149,7 @@ class checkpoint_flow(object):
         if connectionType in ["Filesystem", "HDFS"]: # Include path for a dataset on filesystem. HDFS untested.
             changed['params']['path'] = '${projectKey}/'+dataset_name
         if connectionType == "S3":
-            changed['params']['bucket'] = self.s3Bucket
+            changed['params']['bucket'] = s3Bucket
             changed['params']['path'] = '/dataiku/${projectKey}/' + dataset_name #'${projectKey}.'+dataset_name  
         """
         ### TO DO!!! ###
