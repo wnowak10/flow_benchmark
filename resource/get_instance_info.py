@@ -11,3 +11,6 @@ def do(payload, config, plugin_config, inputs):
         client      = dataiku.api_client()
         connections = client.list_connections().keys()
         return {'connections': connections}
+    
+    if payload["funtastic"] == "dynamic":
+        return {'dynamic': 5}
