@@ -26,5 +26,16 @@ app.controller('FoobarController', function($scope) {
     };
     updateConnections();
     $scope.$watch('config.connectionType', updateConnections);
+    
+    var dynamicButton = function() {
+        $scope.callPythonDo({"funtastic": "dynamic"}).then(function(data) {
+            $scope.connections = data.connections;
+        }, function(data) {
+            $scope.connections = [];
+        });
+    };
+    updateConnections();
+    $scope.$watch('config.connectionType', updateConnections);
+    
 // });
 });
