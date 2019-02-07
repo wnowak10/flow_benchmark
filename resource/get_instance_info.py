@@ -10,4 +10,4 @@ def do(payload, config, plugin_config, inputs):
     if payload["funtastic"] == "connections":
         client      = dataiku.api_client()
         connections = client.list_connections().keys()
-        return {'connections': connections}
+        return {'connections': inputs} # connections
