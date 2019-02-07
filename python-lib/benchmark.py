@@ -61,7 +61,7 @@ class checkpoint_flow(object):
                         dataset_name, 
                         formatType,
                         connectionType,
-                       s3Bucket = None):
+                        s3Bucket = None):
         """ Given a dataset `dataset_name`:
         - change the format to formatType
         - change the connection to connectionType
@@ -498,9 +498,10 @@ class checkpoint_flow(object):
     def reformat_flow(self, 
                       formatType, 
                       connectionType,
-                      names = None,
-                      verbose = True,
-                     s3Bucket = None):
+                      **kwargs):
+#                       names = None,
+#                       verbose = True,
+#                       s3Bucket = None):
         """ Reformat an entire data flow.
         
         Args:
@@ -515,7 +516,8 @@ class checkpoint_flow(object):
             names = self.list_dataset_names()
 
         for i, dataset in enumerate(names):
-            print('Trying to change connection type for {}.'.format(dataset))
+            print('Trying to change format type for {}.'.format(dataset))
+            print(names)
             self.set_file_format(dataset, formatType, connectionType, s3Bucket)
 
     def build_flow(self, 
