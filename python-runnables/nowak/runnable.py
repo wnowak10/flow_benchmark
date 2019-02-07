@@ -27,6 +27,7 @@ class MyRunnable(Runnable):
         self.sparkPipeline = self.config.get('sparkPipeline')
 #         self.sparkPipeline  = True if self.config.get('sparkPipeline') == "True" else False # config.get('sparkPipeline') is a string sent from HTML checkbox value
         self.computeEngine  = self.config.get('computeEngine').upper()
+        self.s3Bucket = self.config.get('s3Bucket')
         
     def bad_config(self):
         """
@@ -69,7 +70,7 @@ class MyRunnable(Runnable):
         cf = benchmark.checkpoint_flow(project_key = self.project_key)
 
         cf.set_spark_pipelinability(self.sparkPipeline)
-        cf.reformat_flow(self.formatType, self.connectionType)
+        cf.reformat_flow(self.formatType, self.connectionType, self.s3Bucket)
         cf.set_compute_engines(self.computeEngine)
 
         flow_results = cf.build_flow()
