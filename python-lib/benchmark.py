@@ -221,7 +221,7 @@ class checkpoint_flow(object):
         
         # _____________________________________________________________________
         # Set new recipe definition
-        if recipe_type == 'shaker':
+        if recipe_type == 'shaker': # Special case to catch shaker. 
             recipe_def_json['params']['engineType'] = compute_type
             recipe_payload = recipe_def.get_json_payload()
             recipe_def.set_json_payload(recipe_payload)
