@@ -152,7 +152,7 @@ class checkpoint_flow(object):
             changed['params']['table'] = '${projectKey}_postgres-10.'+dataset_name
             changed['smartName'] = dataset_name
         if connectionType in ["Filesystem", "HDFS"]: # Include path for a dataset on filesystem. HDFS untested.
-            changed['params']['path'] = '${projectKey}/'+dataset_name
+            changed['params']['path'] = '${projectKey}/' + dataset_name
         if connectionType == "S3":
             changed['params']['bucket'] = s3Bucket
             changed['params']['path'] = '/dataiku/${projectKey}/' + dataset_name
@@ -199,7 +199,6 @@ class checkpoint_flow(object):
         
         # _____________________________________________________________________
         # Ban sync recipe, as this seems to not work?
-        # !!!!!UNTESTED!!!!!
         if recipe_type == 'sync':
             print("Cannot change engine on sync?")
             return
@@ -222,13 +221,13 @@ class checkpoint_flow(object):
         
         # _____________________________________________________________________
         # Set new recipe definition
-
         try: # If recipe_def has json payload.
-            print('Recipe type for json_payload access is: {}.'.format(recipe_type))
-            recipe_payload = recipe_def.get_json_payload()
-            recipe_payload['engineType'] = compute_type
-            recipe_def.set_json_payload(recipe_payload)
-            recipe.set_definition_and_payload(recipe_def)
+            if recipe_type != 'shaker':
+                print('Recipe type for json_payload access is: {}.'.format(recipe_type))
+                recipe_payload = recipe_def.get_json_payload()
+                recipe_payload['engineType'] = compute_type
+                recipe_def.set_json_payload(recipe_payload)
+                recipe.set_definition_and_payload(recipe_def)
         
         except:
             print('Recipe type for setting recipe_def_json is: {}.'.format(recipe_type))
