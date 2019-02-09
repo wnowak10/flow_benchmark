@@ -30,6 +30,7 @@ class MyRunnable(Runnable):
 #         self.sparkPipeline  = True if self.config.get('sparkPipeline') == "True" else False # config.get('sparkPipeline') is a string sent from HTML checkbox value
         self.computeEngine  = self.config.get('computeEngine').upper()
         self.s3Bucket = self.config.get('s3Bucket')
+        self.dontEdit = self.config.get('dontEdit')
         
     def bad_config(self):
         """
@@ -65,11 +66,11 @@ class MyRunnable(Runnable):
         if set_combination in bad_combinations:
             return True
         
-    def run(self, progress_callback, run_flow_as_is=False):
+    def run(self, progress_callback, dontEdit=False):
         if self.bad_config():
             return 'Configuration settings impossible - try another combination.'
         
-        if run_flow_as_is:
+        if dontEdit:
             flow_results = cf.build_flow()
         else:
             cf = benchmark.checkpoint_flow(project_key = self.project_key)
