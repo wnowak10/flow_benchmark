@@ -67,13 +67,14 @@ function s3id() {
     var connectionType = e.options[e.selectedIndex].text;
         
     if(connectionType.toLowerCase().includes("s3")) {
-        makeTextBox();
+        if(document.getElementById("myDiv") == null){
+//             document.getElementById("myDiv").disabled = true;
+            makeTextBox();
+        };
     }
     else {
-//         var divv = document.getElementById("myDiv"); 
-//         divv.remove();  
-        document.getElementById("myDiv").disabled = true;
-        console.log('disable?ED');
+        var divv = document.getElementById("myDiv"); 
+        divv.remove();          
     };
 };
         
