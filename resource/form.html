@@ -62,8 +62,9 @@ var  connectionType = e.options [e.selectedIndex] .text;
     var myDiv = document.getElementById("myDiv");
      var lab = myDiv.createElement("label");
       var lab.innerHTML = 'S3 Bucket:';
-    selectList = document.createElement("input");
-     
+//    selectList = document.createElement("input");
+      selectList = myDiv.createElement("input");
+   
       myDiv.appendChild(selectList);
 //      selectList.ng-model="config.s3Bucket"
 //     myDiv.appendChild(selectList);
