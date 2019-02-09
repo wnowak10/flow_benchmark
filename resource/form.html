@@ -68,6 +68,13 @@ function makeTextBox() {
 function s3id() {
     var e = document.getElementById("connectionType");
     var connectionType = e.options[e.selectedIndex].text;
+    if(document.getElementById('myDiv') == null){
+        console.log('NULL');
+    };
+    else{
+        console.log("EXISTS!");
+    };
+    
     
     if(connectionType.toLowerCase().includes("s3")) {
         makeTextBox();
