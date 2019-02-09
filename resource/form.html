@@ -61,28 +61,19 @@ function makeTextBox() {
           document.getElementById('myDiv').innerHTML += "<label id='s3Label'> S3 Bucket: </label>";
           document.getElementById('myDiv').innerHTML += "<input type='text' ng-model='config.s3Bucket' value='dscluster-paris-1'> </input>"; //  /><br />";
 }
-    
-  
-// $someDiv.append(ifNotExists("div.child").create("<div class='child'>"));
-    
+      
 function s3id() {
     var e = document.getElementById("connectionType");
     var connectionType = e.options[e.selectedIndex].text;
-    
-//     if(document.getElementById('s3Label') == null){
-//         console.log('NULL');
-//     }
-//     else{
-//         console.log("EXISTS!");
-//     };
-    
-    
+        
     if(connectionType.toLowerCase().includes("s3")) {
         makeTextBox();
     }
     else {
-        var divv = document.getElementById("myDiv"); 
-        divv.remove();  
+//         var divv = document.getElementById("myDiv"); 
+//         divv.remove();  
+        document.getElementById("myDiv").disabled = true;
+        console.log('disable?ED');
     };
 };
         
