@@ -1,6 +1,14 @@
 <div ng-controller="FoobarController">
     
     <div class="control-group" >
+        <label class="control-label">Run flow as already configured?</label>
+        <div class="controls">
+            <input type="checkbox" ng-model="config.dontEdit" value="True"/>
+            <span class="help-inline"> Just run flow as you have manually configured. </span>
+        </div>
+    </div>
+    
+    <div class="control-group" >
         <label class="control-label"> Compute Engine: </label>
         <div class="controls" >
             <select dku-bs-select="{liveSearch:true}" ng-model="config.computeEngine" ng-options="v for v in engines" />
