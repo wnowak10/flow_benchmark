@@ -11,9 +11,7 @@
     <div class="control-group" >
         <label class="control-label"> Connection Type: </label>
         <div class="controls" >
-            <form>
             <select onchange=s3id() id="connectionType" dku-bs-select="{liveSearch:true}" ng-model="config.connectionType" ng-options="v for v in connections" />
-                            </form>
             <span class="help-inline"> Dataset connection. </span>
         </div>
     </div>
@@ -55,7 +53,9 @@
 
 function s3id() {
   var x = document.getElementById("connectionType").value;
-  console.log(x);
+    var  e = document.getElementById (  "connectionType"  );
+var  strUser = e.options [e.selectedIndex] .text;
+  console.log(strUser);
     
 //   if(x.str.toLowerCase().includes("s3")){
 //     var myDiv = document.getElementById("myDiv");
