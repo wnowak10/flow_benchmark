@@ -50,7 +50,22 @@
 </div>
 
 <script>
+    
+function ifNotExists($x){
+   if(!$x || $x.length === 0) return { create : function(newX){ return newX; }}
+   else return { create : function(){ return $x } };
+}
 
+function makeTextBox() {
+    var myDiv = document.getElementById("myDiv");
+          document.getElementById('myDiv').innerHTML += "<label> S3 Bucket: </label>";
+          document.getElementById('myDiv').innerHTML += "<input type='text' ng-model='config.s3Bucket' value='dscluster-paris-1'> </input>"; //  /><br />";
+}
+    
+   
+//usage:
+$someDiv.append(ifNotExists("div.child").create("<div class='child'>"));
+    
 function s3id() {
     var  e = document.getElementById (  "connectionType"  );
     var  connectionType = e.options [e.selectedIndex] .text;
@@ -58,9 +73,7 @@ function s3id() {
     
       if(connectionType.toLowerCase().includes("s3")){
       console.log('work?');
-        var myDiv = document.getElementById("myDiv");
-          document.getElementById('myDiv').innerHTML += "<label> S3 Bucket: </label>";
-          document.getElementById('myDiv').innerHTML += "<input type='text' ng-model='config.s3Bucket' value='dscluster-paris-1'> </input>"; //  /><br />";
+        makeTextBox();
     }
     else {
     var divv = document.getElementById("myDiv"); 
