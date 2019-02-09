@@ -71,11 +71,10 @@ class MyRunnable(Runnable):
             return 'Configuration settings impossible - try another combination.'
         
         dontEdit = self.dontEdit
+        cf = benchmark.checkpoint_flow(project_key = self.project_key)
         if dontEdit:
             flow_results = cf.build_flow()
-        else:
-            cf = benchmark.checkpoint_flow(project_key = self.project_key)
-
+        else:    
             cf.set_spark_pipelinability(self.sparkPipeline)
             cf.reformat_flow(self.formatType, self.connectionType, self.s3Bucket)
             cf.set_compute_engines(self.computeEngine)
