@@ -70,6 +70,7 @@ class MyRunnable(Runnable):
         if self.bad_config():
             return 'Configuration settings impossible - try another combination.'
         
+        dontEdit = self.dontEdit
         if dontEdit:
             flow_results = cf.build_flow()
         else:
