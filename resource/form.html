@@ -66,16 +66,15 @@ function makeTextBox() {
 // $someDiv.append(ifNotExists("div.child").create("<div class='child'>"));
     
 function s3id() {
-    var  e = document.getElementById (  "connectionType"  );
-    var  connectionType = e.options [e.selectedIndex] .text;
-
-      if(connectionType.toLowerCase().includes("s3")){
-      console.log('work?');
+    var e = document.getElementById("connectionType");
+    var connectionType = e.options[e.selectedIndex].text;
+    
+    if(connectionType.toLowerCase().includes("s3")) {
         makeTextBox();
     }
     else {
-    var divv = document.getElementById("myDiv"); 
-    divv.remove();  
+        var divv = document.getElementById("myDiv"); 
+        divv.remove();  
     };
 };
     
