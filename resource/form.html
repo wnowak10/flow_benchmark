@@ -11,7 +11,9 @@
     <div class="control-group" >
         <label class="control-label"> Connection Type: </label>
         <div class="controls" >
+            <form>
             <select onchange=s3id() id="connectionType" dku-bs-select="{liveSearch:true}" ng-model="config.connectionType" ng-options="v for v in connections" />
+                            </form>
             <span class="help-inline"> Dataset connection. </span>
         </div>
     </div>
