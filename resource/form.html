@@ -60,14 +60,16 @@ var  connectionType = e.options [e.selectedIndex] .text;
   if(connectionType.toLowerCase().includes("s3")){
       console.log('work?');
     var myDiv = document.getElementById("myDiv");
+      document.getElementById('myDiv').innerHTML += "<input type='text' value='' /><br />";
+
 //      var lab = 
-         document.createElement("label");
-     lab.innerHTML = 'S3 Bucket:';
+//          document.createElement("label");
+//      lab.innerHTML = 'S3 Bucket:';
 //    selectList = 
        document.createElement("input");
 //       selectList = myDiv.createElement("input");
    
-      myDiv.appendChild(selectList);
+//       myDiv.appendChild(selectList);
 //      selectList.ng-model="config.s3Bucket"
 //     myDiv.appendChild(selectList);
 //     //Create and append the options
