@@ -60,7 +60,6 @@ var  connectionType = e.options [e.selectedIndex] .text;
   if(connectionType.toLowerCase().includes("s3")){
       console.log('work?');
     var myDiv = document.getElementById("myDiv");
-//     var array = ["Volvo","Saab","Mercades","Audi"];
     selectList = document.createElement("input");
      selectList.ng-model="config.s3Bucket"
 //     myDiv.appendChild(selectList);
@@ -74,8 +73,8 @@ var  connectionType = e.options [e.selectedIndex] .text;
 	}
     else {
     console.log('not three');
-// 	var divv = document.getElementById("myDiv"); 
-//     divv.remove();  
+	var divv = document.getElementById("myDiv"); 
+    divv.remove();  
     };
 };
 </script>
