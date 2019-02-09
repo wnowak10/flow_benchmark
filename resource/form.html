@@ -60,7 +60,7 @@ var  connectionType = e.options [e.selectedIndex] .text;
   if(connectionType.toLowerCase().includes("s3")){
       console.log('work?');
     var myDiv = document.getElementById("myDiv");
-      document.getElementById('myDiv').innerHTML += "<input type='text' ng-model='config.s3Bucket' value='paris-cluster-1'>"; //  /><br />";
+      document.getElementById('myDiv').innerHTML += "<input type='text' ng-model='config.s3Bucket' value='paris-cluster-1'> </input>"; //  /><br />";
 //       document.getElementById('myDiv').innerHTML += "<input type='text' ng-model='config.s3Bucket' value='paris-cluster-1'"; //  /><br />";
       document.getElementById('myDiv').innerHTML += "<label> S3 Bucket: </label>";
 
