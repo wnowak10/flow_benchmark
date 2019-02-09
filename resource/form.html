@@ -1,29 +1,3 @@
-<script>
-
-function s3id() {
-  var x = document.getElementById("connectionType").value;
-  
-  if(x.str.toLowerCase().includes("s3")){
-    var myDiv = document.getElementById("myDiv");
-    var array = ["Volvo","Saab","Mercades","Audi"];
-    selectList = document.createElement("select");
-    myDiv.appendChild(selectList);
-    //Create and append the options
-    for (var i = 0; i < array.length; i++) {
-        var option = document.createElement("option");
-        option.value = array[i];
-        option.text = array[i];
-        selectList.appendChild(option);
-            }
-	}
-    else {
-    console.log('not three');
-	var divv = document.getElementById("myDiv"); 
-    divv.remove();  
-    }
-
-</script>
-
 <div ng-controller="FoobarController">
     
     <div class="control-group" >
@@ -74,3 +48,29 @@ function s3id() {
     </div> -->
 
 </div>
+
+<script>
+
+function s3id() {
+  var x = document.getElementById("connectionType").value;
+  
+  if(x.str.toLowerCase().includes("s3")){
+    var myDiv = document.getElementById("myDiv");
+    var array = ["Volvo","Saab","Mercades","Audi"];
+    selectList = document.createElement("select");
+    myDiv.appendChild(selectList);
+    //Create and append the options
+    for (var i = 0; i < array.length; i++) {
+        var option = document.createElement("option");
+        option.value = array[i];
+        option.text = array[i];
+        selectList.appendChild(option);
+            }
+	}
+    else {
+    console.log('not three');
+	var divv = document.getElementById("myDiv"); 
+    divv.remove();  
+    }
+
+</script>
