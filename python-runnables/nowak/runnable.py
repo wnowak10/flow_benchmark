@@ -65,17 +65,20 @@ class MyRunnable(Runnable):
         if set_combination in bad_combinations:
             return True
         
-    def run(self, progress_callback):
+    def run(self, progress_callback, run_flow_as_is=False):
         if self.bad_config():
             return 'Configuration settings impossible - try another combination.'
         
-        cf = benchmark.checkpoint_flow(project_key = self.project_key)
+        if run_flow_as_is:
+            flow_results = cf.build_flow()
+        else:
+            cf = benchmark.checkpoint_flow(project_key = self.project_key)
 
-        cf.set_spark_pipelinability(self.sparkPipeline)
-        cf.reformat_flow(self.formatType, self.connectionType, self.s3Bucket)
-        cf.set_compute_engines(self.computeEngine)
+            cf.set_spark_pipelinability(self.sparkPipeline)
+            cf.reformat_flow(self.formatType, self.connectionType, self.s3Bucket)
+            cf.set_compute_engines(self.computeEngine)
 
-        flow_results = cf.build_flow()
+            flow_results = cf.build_flow()
 
         res = html_template.res
         res += """
