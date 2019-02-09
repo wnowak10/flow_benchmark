@@ -51,10 +51,10 @@
 
 <script>
     
-function ifNotExists($x){
-   if(!$x || $x.length === 0) return { create : function(newX){ return newX; }}
-   else return { create : function(){ return $x } };
-}
+// function ifNotExists($x){
+//    if(!$x || $x.length === 0) return { create : function(newX){ return newX; }}
+//    else return { create : function(){ return $x } };
+// }
 
 function makeTextBox() {
     var myDiv = document.getElementById("myDiv");
@@ -62,7 +62,7 @@ function makeTextBox() {
           document.getElementById('myDiv').innerHTML += "<input type='text' ng-model='config.s3Bucket' value='dscluster-paris-1'> </input>"; //  /><br />";
 }
     
-   
+  
 //usage:
 $someDiv.append(ifNotExists("div.child").create("<div class='child'>"));
     
