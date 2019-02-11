@@ -69,7 +69,7 @@ formatParams = {
 					    'style': 'escape_only_no_quote',
 					    'writeDataTypeMismatchBehavior': 'DISCARD_WARNING'
 					}
-    }
+    },
 	"HDFS" :	{
 		"parquet" :	{
 						'parquetBlockSizeMB': 128,
