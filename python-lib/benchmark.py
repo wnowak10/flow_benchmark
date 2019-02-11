@@ -124,7 +124,7 @@ class checkpoint_flow(object):
         """
         if 'adls' or 'wasb' in connectionType.lower():
             connectionType = 'Azure'
-        if 'adls' or 'wasb' in connectionType.lower():
+        if 'adls' in connectionType.lower() or 'wasb' in connectionType.lower():
             connectionType = 'HDFS'
         if 'hdfs' in connectionType.lower():
             connectionType = 'HDFS'
@@ -159,6 +159,9 @@ class checkpoint_flow(object):
         if connectionType == "S3":
             changed['params']['bucket'] = s3Bucket
             changed['params']['path'] = '/dataiku/${projectKey}/' + dataset_name
+        if connectionType =='Azure':
+            pass
+        
         """
         ### TO DO!!! ###
         These types are a mandatory part of a dataset definition JSON,
