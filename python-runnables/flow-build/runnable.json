@@ -1,6 +1,6 @@
 {
     "meta" : {
-        "label" : "Flow benchmark 2.0",
+        "label" : "Flow benchmark",
         "description" : "Set configurations for your flow and time a full rebuild.",
         "category" : "DSS maintenance",
         "icon" : "icon-long-arrow-right"
