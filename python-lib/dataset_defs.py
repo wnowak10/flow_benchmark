@@ -189,7 +189,7 @@ params = {
           u'includeRules': [],
           u'mode': u'ALL'},
          u'notReadyIfEmpty': False,
-         u'path': u'/titanic/train.csv'},
+         u'path': 'TO CHANGE'},
   	"HDFS" : {
   		'connection': 'hdfs_managed',
         'filesSelectionRules': {'excludeRules': [],
