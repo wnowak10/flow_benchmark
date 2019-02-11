@@ -79,8 +79,6 @@ function makeTextBox() {
     var myDiv = document.getElementById("myDiv");
     addElement('myDiv', 'label', 's3Label', "<label id='s3Label'> S3 Bucket: </label>");
     addElement('myDiv', 'text', 's3text', "<input type='text' ng-model='config.s3Bucket' value='dscluster-paris-1'> </input>");
-//           document.getElementById('myDiv').innerHTML += "<label id='s3Label'> S3 Bucket: </label>";
-//           document.getElementById('myDiv').innerHTML += "<input type='text' ng-model='config.s3Bucket' value='dscluster-paris-1'> </input>"; //  /><br />";
 }
       
 function s3id() {
@@ -94,9 +92,7 @@ function s3id() {
     }
     else {
         removeElement('s3Label');
-        removeElement('s3text');
-//         var divv = document.getElementById("myDiv"); 
-//         divv.remove();          
+        removeElement('s3text');   
     };
 };
         
