@@ -122,7 +122,10 @@ class checkpoint_flow(object):
         or HadoopDFS...my string match won't catch this and I will
         botch the mapping.
         """
-        
+        if 'adls' or 'wasb' in connectionType.lower():
+            connectionType = 'Azure'
+        if 'adls' or 'wasb' in connectionType.lower():
+            connectionType = 'HDFS'
         if 'hdfs' in connectionType.lower():
             connectionType = 'HDFS'
         elif 'file_system' in connectionType.lower() or 'filesystem' in connectionType.lower():
