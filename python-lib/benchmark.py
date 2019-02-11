@@ -124,10 +124,12 @@ class checkpoint_flow(object):
         """
         if 'adls' or 'wasb' in connectionType.lower():
             connectionType = 'Azure'
-        if 'adls' in connectionType.lower() or 'wasb' in connectionType.lower():
+        if connectionType.lower() in ['adls', 'wasb', 'hdfs']:
             connectionType = 'HDFS'
-        if 'hdfs' in connectionType.lower():
-            connectionType = 'HDFS'
+#         if 'adls' in connectionType.lower() or 'wasb' in connectionType.lower():
+#             connectionType = 'HDFS'
+#         if 'hdfs' in connectionType.lower():
+#             connectionType = 'HDFS'
         elif 'file_system' in connectionType.lower() or 'filesystem' in connectionType.lower():
             connectionType = 'Filesystem'
         elif 'sql' in connectionType.lower():
