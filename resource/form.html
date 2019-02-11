@@ -68,6 +68,12 @@ function addElement(parentId, elementTag, elementId, html) {
     newElement.innerHTML = html;
     p.appendChild(newElement);
 }
+    
+function removeElement(elementId) {
+    // Removes an element from the document
+    var element = document.getElementById(elementId);
+    element.parentNode.removeChild(element);
+}
 
 function makeTextBox() {
     var myDiv = document.getElementById("myDiv");
