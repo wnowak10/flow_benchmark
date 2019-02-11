@@ -62,14 +62,10 @@
 
 <script onload="s3id()">
 
-    // UNTESTED!!!
 function turnOffHTML() {
   var element = document.getElementById("flowConfig");
-//     var element = document.getElementById('toggleFahrenheit'),
-   var style = window.getComputedStyle(element);
-    console.log('style!!!!!!', style);
-    display = style.getPropertyValue('display');
-    console.log(display)
+  var style = window.getComputedStyle(element);
+  var display = style.getPropertyValue('display');
   if (display === "none") {
     element.style.display = "block";
   } else {
