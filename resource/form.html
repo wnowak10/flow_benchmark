@@ -54,7 +54,6 @@
     
 // https://www.abeautifulsite.net/adding-and-removing-elements-on-the-fly-using-javascript
 function addElement(parentId, elementTag, elementId, html) {
-    // Adds an element to the document
     var p = document.getElementById(parentId);
     var newElement = document.createElement(elementTag);
     newElement.setAttribute('id', elementId);
@@ -63,7 +62,6 @@ function addElement(parentId, elementTag, elementId, html) {
 }
     
 function removeElement(elementId) {
-    // Removes an element from the document
     var element = document.getElementById(elementId);
     element.parentNode.removeChild(element);
 }
