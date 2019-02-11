@@ -70,10 +70,10 @@ function turnOffHTML() {
     console.log('style!!!!!!', style);
     display = style.getPropertyValue('display');
     console.log(display)
-  if (x.style.display === "none") {
-    x.style.display = "block";
+  if (display === "none") {
+    element.style.display = "block";
   } else {
-    x.style.display = "none";
+    element.style.display = "none";
   }
 }
     
