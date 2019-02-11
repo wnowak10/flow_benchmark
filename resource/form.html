@@ -63,14 +63,18 @@
 <script onload="s3id()">
 
     // UNTESTED!!!
-// function turnOffHTML() {
-//   var x = document.getElementById("flowConfig");
-//   if (x.style.display === "none") {
-//     x.style.display = "block";
-//   } else {
-//     x.style.display = "none";
-//   }
-// }
+function turnOffHTML() {
+  var element = document.getElementById("flowConfig");
+//     var element = document.getElementById('toggleFahrenheit'),
+   var style = window.getComputedStyle(element);
+    console.log(style);
+//     top = style.getPropertyValue('top');
+  if (x.style.display === "none") {
+    x.style.display = "block";
+  } else {
+    x.style.display = "none";
+  }
+}
     
 
     
