@@ -122,14 +122,11 @@ class checkpoint_flow(object):
         or HadoopDFS...my string match won't catch this and I will
         botch the mapping.
         """
+        
         if 'adls' or 'wasb' in connectionType.lower():
             connectionType = 'Azure'
         if connectionType.lower() in ['adls', 'wasb', 'hdfs']:
             connectionType = 'HDFS'
-#         if 'adls' in connectionType.lower() or 'wasb' in connectionType.lower():
-#             connectionType = 'HDFS'
-#         if 'hdfs' in connectionType.lower():
-#             connectionType = 'HDFS'
         elif 'file_system' in connectionType.lower() or 'filesystem' in connectionType.lower():
             connectionType = 'Filesystem'
         elif 'sql' in connectionType.lower():
@@ -158,6 +155,7 @@ class checkpoint_flow(object):
             changed['smartName'] = dataset_name
         if connectionType in ["Filesystem", "HDFS"]: # Include path for a dataset on filesystem. HDFS untested.
             changed['params']['path'] = '${projectKey}/' + dataset_name
+            changed['params']['connection'] = self.connectionType
         if connectionType == "S3":
             changed['params']['bucket'] = s3Bucket
             changed['params']['path'] = '/dataiku/${projectKey}/' + dataset_name
