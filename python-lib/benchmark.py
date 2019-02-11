@@ -162,7 +162,7 @@ class checkpoint_flow(object):
             changed['params']['bucket'] = s3Bucket
             changed['params']['path'] = '/dataiku/${projectKey}/' + dataset_name
         if connectionType =='Azure':
-            pass
+            pass  # What to do for Azure connection?
         
         """
         ### TO DO!!! ###
