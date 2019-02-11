@@ -1,9 +1,11 @@
 <style type="text/css">
     
-#flowConfig{
+/* #flowConfig{
     display: none;
-}
+} */
+.hide { display: none; }
 
+    
 </style>
 
 
@@ -17,7 +19,7 @@
         </div>
     </div>
     
-    <div id='flowConfig'>
+    <div id='flowConfig' class='hide'>
         <div class="control-group" >
             <label class="control-label"> Compute Engine: </label>
             <div class="controls" >
@@ -63,13 +65,20 @@
 <script onload="s3id()">
 
     // UNTESTED!!!
-function turnOffHTML() {
-  var x = document.getElementById("flowConfig");
-  if (x.style.display === "none") {
-    x.style.display = "block";
-  } else {
-    x.style.display = "none";
-  }
+// function turnOffHTML() {
+//   var x = document.getElementById("flowConfig");
+//   if (x.style.display === "none") {
+//     x.style.display = "block";
+//   } else {
+//     x.style.display = "none";
+//   }
+// }
+    
+    function toggle() {
+  var fahrenheit = document.getElementById("flowConfig");
+//   var celsius = document.getElementById("celsius");
+  fahrenheit.classList.toggle('hide');
+//   celsius.classList.toggle('hide');
 }
     
 // https://www.abeautifulsite.net/adding-and-removing-elements-on-the-fly-using-javascript
