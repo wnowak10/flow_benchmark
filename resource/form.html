@@ -43,23 +43,16 @@
         </select>
     </div>
     
-    
+    <!--  A div for us to add S3 Bucket label.  -->
     <div id="myDiv">
          
     </div>
     
-<!--     <div class="control-group" >
-        <label class="control-label"> S3 Bucket (if applicable) </label>
-        <div class="controls" >
-            <input ng-model="config.s3Bucket" />
-            <span class="help-inline"> S3 Bucket. </span>
-        </div>
-    </div> -->
-
 </div>
 
 <script onload="s3id()">
     
+// https://www.abeautifulsite.net/adding-and-removing-elements-on-the-fly-using-javascript
 function addElement(parentId, elementTag, elementId, html) {
     // Adds an element to the document
     var p = document.getElementById(parentId);
