@@ -177,6 +177,8 @@ class checkpoint_flow(object):
             changed['type'] = 'PostgreSQL'
         elif connectionType == 'S3':
             changed['type'] = 'S3'
+        elif connectionType == 'Azure':  # UNTESTED!
+            changed['type'] = 'Azure'
             
         self.project.get_dataset(dataset_name).set_definition(changed)
         print('Dataset definition changed. Need to clear data and rebuild. Call `build_dataset()`.')
