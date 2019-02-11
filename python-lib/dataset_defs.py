@@ -182,14 +182,14 @@ params = {
         u'mode': u'ALL'},
         u'notReadyIfEmpty': False  
     },
-    "Azure": {
-    	u'connection': u's3_direct',
-        u'filesSelectionRules': {u'excludeRules': [],
-        u'explicitFiles': [],
-        u'includeRules': [],
-        u'mode': u'ALL'},
-        u'notReadyIfEmpty': False  
-    },
+    "Azure": {u'baseBlockID': 0,
+         u'connection': u'azure-blob-storage-source',
+         u'filesSelectionRules': {u'excludeRules': [],
+          u'explicitFiles': [],
+          u'includeRules': [],
+          u'mode': u'ALL'},
+         u'notReadyIfEmpty': False,
+         u'path': u'/titanic/train.csv'},
   	"HDFS" : {
   		'connection': 'hdfs_managed',
         'filesSelectionRules': {'excludeRules': [],
