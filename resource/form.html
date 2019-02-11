@@ -60,15 +60,21 @@
 
 <script>
     
-// function ifNotExists($x){
-//    if(!$x || $x.length === 0) return { create : function(newX){ return newX; }}
-//    else return { create : function(){ return $x } };
-// }
+function addElement(parentId, elementTag, elementId, html) {
+    // Adds an element to the document
+    var p = document.getElementById(parentId);
+    var newElement = document.createElement(elementTag);
+    newElement.setAttribute('id', elementId);
+    newElement.innerHTML = html;
+    p.appendChild(newElement);
+}
 
 function makeTextBox() {
     var myDiv = document.getElementById("myDiv");
-          document.getElementById('myDiv').innerHTML += "<label id='s3Label'> S3 Bucket: </label>";
-          document.getElementById('myDiv').innerHTML += "<input type='text' ng-model='config.s3Bucket' value='dscluster-paris-1'> </input>"; //  /><br />";
+    addElement('myDiv', 'label', 's3Label', "<label id='s3Label'> S3 Bucket: </label>");
+    addElement('myDiv', 'text', 's3text', "<input type='text' ng-model='config.s3Bucket' value='dscluster-paris-1'> </input>");
+//           document.getElementById('myDiv').innerHTML += "<label id='s3Label'> S3 Bucket: </label>";
+//           document.getElementById('myDiv').innerHTML += "<input type='text' ng-model='config.s3Bucket' value='dscluster-paris-1'> </input>"; //  /><br />";
 }
       
 function s3id() {
