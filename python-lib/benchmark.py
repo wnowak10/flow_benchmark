@@ -122,7 +122,8 @@ class checkpoint_flow(object):
         or HadoopDFS...my string match won't catch this and I will
         botch the mapping.
         """
-        initialConnectionType = connectionType
+        initialConnectionType = connectionType # For later reference in HDFS connection string
+        
         if 'azure' in connectionType.lower():
             connectionType = 'Azure'
         if len([s for s in ['adls', 'wasb', 'hdfs'] if s.lower() in connectionType.lower()]) > 0:
@@ -146,21 +147,29 @@ class checkpoint_flow(object):
         changed['formatParams'] = formatParams
         changed['formatType'] = formatType
         changed['params'] = dataset_defs.params[connectionType]
-            
-        # Exceptions / particular cases.
+        
+        """
+        Exceptions / particular cases.
+        Some of these might still require manual tuning.
+        
+        For example, `hiveTableNames` follow `dataset_name` for some 
+        connections and '${projectKey}' + dataset_name for other connections.
+        """
         if connectionType == 'SQL': # No formatParams for SQL connections.
             del changed['formatParams']
             del changed['formatType']
             changed['params']['table'] = '${projectKey}_postgres-10.'+dataset_name
             changed['smartName'] = dataset_name
+            
         if connectionType in ["Filesystem", "HDFS"]: # Include path for a dataset on filesystem. HDFS untested.
             changed['params']['path'] = '${projectKey}/' + dataset_name
             changed['params']['connection'] = initialConnectionType
-            changed['hiveTableName'] = '${projectKey}' + dataset_name
+            changed['hiveTableName'] = dataset_name # For some connections, # For others '${projectKey}' + dataset_name 
 
         if connectionType == "S3":
             changed['params']['bucket'] = s3Bucket
             changed['params']['path'] = '/dataiku/${projectKey}/' + dataset_name
+            
         if connectionType =='Azure':
             changed['params']['path'] = '/${projectKey}/' + dataset_name
         
