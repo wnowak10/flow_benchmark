@@ -191,7 +191,7 @@ params = {
               u'notReadyIfEmpty': False,
               u'path': 'TO_CHANGE'},
   	"HDFS" : {
-  		'connection': 'hdfs_managed',
+  		'connection': 'TOCHANGE',
         'filesSelectionRules': {'excludeRules': [],
 	    'explicitFiles': [],
 	    'includeRules': [],
