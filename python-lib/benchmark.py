@@ -38,7 +38,7 @@ def _time_job(job):
     """
     dates = []
     from datetime import datetime
-    for i, line in enumerate(jog.get_log().splitlines()):
+    for i, line in enumerate(job.get_log().splitlines()):
         if 'Done post-activity tasks' in line:
             date = datetime.strptime(line[1:20], '%Y/%m/%d-%H:%M:%S')
             dates.append(date)
