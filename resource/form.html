@@ -1,0 +1,122 @@
+<style type="text/css">
+    
+#flowConfig{
+    display: inline;
+}
+    
+#s3Bucket{
+    display: none;
+}
+    
+</style>
+
+
+<div ng-controller="FoobarController">
+    
+    <div class="control-group" >
+        <label class="control-label">Run flow as already configured?</label>
+        <div class="controls">
+            <input type="checkbox" ng-model="config.dontEdit" value="True" onclick="turnOffHTML()" id='checkBox'/> <!-- checked/-->
+            <span class="help-inline"> Run flow as currently configured. This will IGNORE following instructions. </span>
+        </div>
+    </div>
+    
+    <div id='flowConfig'>
+        <div class="control-group" >
+            <label class="control-label"> Compute Engine: </label>
+            <div class="controls" >
+                <select dku-bs-select="{liveSearch:true}" ng-model="config.computeEngine" ng-options="v for v in engines" />
+                <span class="help-inline"> How is computation handled? </span>
+            </div>
+        </div>
+        
+        <div class="control-group" >
+            <label class="control-label"> Connection Type: </label>
+            <div class="controls" >
+                <select onchange=s3id() id="connectionType" dku-bs-select="{liveSearch:true}" ng-model="config.connectionType" ng-options="v for v in connections" />
+                <span class="help-inline"> Dataset connection. </span>
+            </div>
+        </div>
+        
+        <div class="control-group" >
+            <label class="control-label">Spark pipeline-able?</label>
+            <div class="controls">
+                <input type="checkbox" ng-model="config.sparkPipeline" value="True"/>
+                <span class="help-inline"> Enable spark pipelines in flow. </span>
+            </div>
+        </div>
+
+        <div class = "control-group">
+            <label class="control-label">File format: </label>
+            <select ng-model="config.formatType">
+                  <option value="csv">      csv </option>
+                  <option value="parquet">  parquet </option>
+                  <option value="avro">     avro </option>
+                  <option value="orc">      orc </option>
+                  <option value="SQL">      SQL </option>
+            </select>
+        </div>
+        
+        <div class = "control-group">
+            <label class="control-label"> s3Bucket: </label>
+            <input type='text' id = 's3Bucket' ng-model='config.s3Bucket' value='dscluster-paris-1'> </input>
+        </div>
+    
+    </div>
+
+</div>
+
+<script onload="s3id()">
+    
+document.getElementById("checkBox").checked = false;
+
+function turnOffHTML() {
+  var element = document.getElementById("flowConfig");
+  var style = window.getComputedStyle(element);
+  var display = style.getPropertyValue('display');
+  if (display === "none") {
+    element.style.display = "block";
+  } else {
+    element.style.display = "none";
+  }
+}
+    
+function s3id() {
+    var e = document.getElementById("connectionType");
+    var connectionType = e.options[e.selectedIndex].text;
+        
+    if(connectionType.toLowerCase().includes("s3")) {
+            var element = document.getElementById("s3Bucket");
+            var style = window.getComputedStyle(element);
+            var display = style.getPropertyValue('display');
+            element.style.display = "block";
+        }
+    else{
+        var element = document.getElementById("s3Bucket");
+            var style = window.getComputedStyle(element);
+            var display = style.getPropertyValue('display');
+            element.style.display = "none";
+    };
+};
+        
+// https://www.abeautifulsite.net/adding-and-removing-elements-on-the-fly-using-javascript
+function addElement(parentId, elementTag, elementId, html) {
+    var p = document.getElementById(parentId);
+    var newElement = document.createElement(elementTag);
+    newElement.setAttribute('id', elementId);
+    newElement.innerHTML = html;
+    p.appendChild(newElement);
+}
+    
+function removeElement(elementId) {
+    var element = document.getElementById(elementId);
+    element.parentNode.removeChild(element);
+}
+
+function makeTextBox() {
+    var myDiv = document.getElementById("myDiv");
+    addElement('myDiv', 'label', 's3Label', "<label id='s3Label'> S3 Bucket: </label>");
+    addElement('myDiv', 'text', 's3text', "<input type='text' ng-model='config.s3Bucket' value='dscluster-paris-1'> </input>");
+}
+        
+</script>

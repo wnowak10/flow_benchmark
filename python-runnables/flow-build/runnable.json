@@ -1,0 +1,14 @@
+{
+    "meta" : {
+        "label" : "Flow benchmark",
+        "description" : "Set configurations for your flow and time a full rebuild.",
+        "category" : "DSS maintenance",
+        "icon" : "icon-long-arrow-right"
+    },
+    "impersonate" : false,
+    "permissions" : ["ADMIN"],
+    "resultType" : "HTML",
+    "paramsTemplate" : "form.html",
+    "paramsModule" : "update_instance_info.module",
+    "paramsPythonSetup" : "get_instance_info.py"
+}

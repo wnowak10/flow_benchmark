@@ -1,32 +1,13 @@
-// This file is the descriptor for the DSS Plugin zurich_benchmark
 {
-    // The identifier of the plugin.
-    // This must be globally unique, and only contain A-Za-z0-9_-
-    // BEWARE: Changing this value is a dangerous operation and
-    // needs manual administrator intervention to fix directory names
     "id" : "flow_benchmark",
-
-    // Version. It is highly recommended to use Semantic Versioning
-    "version" : "0.0.1",
-
-
-    // Meta data for display purposes
+    "version" : "0.3.0",
     "meta" : {
-        // Name of this plugin that appears in the interface.
-        "label" : "Flow Benchmarking 2.0",
-
-        "description" : "A longer string explaining what the plugin does",
-        "author" : "wnowak",
-
-        // The icon of a plugin must be one of the FontAwesome 3.1 icons
-        "icon" : "icon-ok-circle",
-
+        "label" : "Flow benchmark",
+        "description" : "Set configurations for your flow and time a full rebuild.",
+        "author" : "Dataiku (Will Nowak)",
+        "icon" : "icon-long-arrow-right",
         "licenseInfo" : "Apache Software License",
-
-        // URL where the user can learn more about the plugin
-        "url" : "https://doc.dataiku.com/dss/latest/publicapi/client-python/index.html",
-
-        // List of tags for filtering the list of plugins
-        "tags" : ["na"]
+        "url" : "https://www.dataiku.com",
+        "tags" : ["datasets", "engines", "builds", "timing"]
     }
 }
