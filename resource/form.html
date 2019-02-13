@@ -55,7 +55,7 @@
         
         <div class = "control-group">
             <label class="control-label"> s3Bucket: </label>
-            <input type='text' ng-model='config.s3Bucket' value='dscluster-paris-1'> </input>
+            <input type='text' id = 's3Bucket' ng-model='config.s3Bucket' value='dscluster-paris-1'> </input>
         </div>
         
         <!--  A div for us to add S3 Bucket label.  -->
@@ -79,6 +79,27 @@ function turnOffHTML() {
     element.style.display = "none";
   }
 }
+    
+    function s3id() {
+    var e = document.getElementById("connectionType");
+    var connectionType = e.options[e.selectedIndex].text;
+        
+    if(connectionType.toLowerCase().includes("s3")) {
+            var element = document.getElementById("flowConfig");
+            var style = window.getComputedStyle(element);
+            var display = style.getPropertyValue('display');
+              if (display === "none") {
+                element.style.display = "block";
+              } else {
+                element.style.display = "none";
+              }
+        };
+    };
+//     else {
+//         removeElement('s3Label');
+//         removeElement('s3text');   
+//     };
+// };
         
 // https://www.abeautifulsite.net/adding-and-removing-elements-on-the-fly-using-javascript
 function addElement(parentId, elementTag, elementId, html) {
@@ -100,19 +121,19 @@ function makeTextBox() {
     addElement('myDiv', 'text', 's3text', "<input type='text' ng-model='config.s3Bucket' value='dscluster-paris-1'> </input>");
 }
       
-function s3id() {
-    var e = document.getElementById("connectionType");
-    var connectionType = e.options[e.selectedIndex].text;
+// function s3id() {
+//     var e = document.getElementById("connectionType");
+//     var connectionType = e.options[e.selectedIndex].text;
         
-    if(connectionType.toLowerCase().includes("s3")) {
-        if(document.getElementById("s3Label") == null){
-            makeTextBox();
-        };
-    }
-    else {
-        removeElement('s3Label');
-        removeElement('s3text');   
-    };
-};
+//     if(connectionType.toLowerCase().includes("s3")) {
+//         if(document.getElementById("s3Label") == null){
+//             makeTextBox();
+//         };
+//     }
+//     else {
+//         removeElement('s3Label');
+//         removeElement('s3text');   
+//     };
+// };
         
 </script>
