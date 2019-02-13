@@ -94,9 +94,10 @@ function s3id() {
             var display = style.getPropertyValue('display');
               if (display === "none") {
                 element.style.display = "block";
-              } else {
-                element.style.display = "none";
-              }
+              };
+//                else {
+//                 element.style.display = "none";
+//               }
         }
     else{
         var element = document.getElementById("s3Bucket");
@@ -104,12 +105,7 @@ function s3id() {
             var display = style.getPropertyValue('display');
             element.style.display = "none";
     };
-    };
-//     else {
-//         removeElement('s3Label');
-//         removeElement('s3text');   
-//     };
-// };
+};
         
 // https://www.abeautifulsite.net/adding-and-removing-elements-on-the-fly-using-javascript
 function addElement(parentId, elementTag, elementId, html) {
