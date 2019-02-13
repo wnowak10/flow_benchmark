@@ -36,7 +36,10 @@ def _time_job(job):
     as it allows us to parse smaller components of job run
     if one eventually wanted to build this out.
     """
-    return [sum(int(i) for i in re.findall( r"(?<=processed in )\d+(?=ms)" , job.get_log()))][0]/1000.0
+    job_log_after_sync = job.get_log().split('Done post-activity tasks', 1)[1]
+    return [sum(int(i) for i in re.findall( r"(?<=processed in )\d+(?=ms)" , job_log_after_sync))][0]/1000.0
+#     return [sum(int(i) for i in re.findall( r"(?<=processed in )\d+(?=ms)" , job.get_log()))][0]/1000.0
+#     return [sum(int(i) for i in re.findall( r"(?<=processed in )\d+(?=ms)" , job.get_log()))][0]/1000.0
 
 # _____________________________________________________________________________
 # Checkpoint flow class.
