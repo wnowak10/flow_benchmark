@@ -39,9 +39,9 @@ def _time_job(job):
     dates = []
     from datetime import datetime
     for i, line in enumerate(jog.get_log().splitlines()):
-    if 'Done post-activity tasks' in line:
-        date = datetime.strptime(line[1:20], '%Y/%m/%d-%H:%M:%S')
-        dates.append(date)
+        if 'Done post-activity tasks' in line:
+            date = datetime.strptime(line[1:20], '%Y/%m/%d-%H:%M:%S')
+            dates.append(date)
     return (dates[-1] - dates[0]).seconds  # Dates 0 is after sync ends, Dates -1 is end time for final task
 #     job_log_after_sync = job.get_log().split('Done post-activity tasks', 1)[1]
 #     return [sum(int(i) for i in re.findall( r"(?<=processed in )\d+(?=ms)" , job_log_after_sync))][0]/1000.0
