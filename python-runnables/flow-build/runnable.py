@@ -88,12 +88,14 @@ class MyRunnable(Runnable):
                         <th> File type </th>
                         <th> Connection type</th>
                         <th> Engine type</th>
+                        <th> Spark pipeline? </th>
                       </tr>
                       <tr>
                         <td> {} </td>
                         <td> {} </td>
                         <td> {} </td>
-                      </tr>""".format(self.formatType, self.connectionType, self.computeEngine)
+                        <td> {} </td>
+                      </tr>""".format(self.formatType, self.connectionType, self.computeEngine, self.sparkPipeline)
         
         def html_row(data_list):
             row = """<tr>
