@@ -118,20 +118,5 @@ function makeTextBox() {
     addElement('myDiv', 'label', 's3Label', "<label id='s3Label'> S3 Bucket: </label>");
     addElement('myDiv', 'text', 's3text', "<input type='text' ng-model='config.s3Bucket' value='dscluster-paris-1'> </input>");
 }
-      
-// function s3id() {
-//     var e = document.getElementById("connectionType");
-//     var connectionType = e.options[e.selectedIndex].text;
-        
-//     if(connectionType.toLowerCase().includes("s3")) {
-//         if(document.getElementById("s3Label") == null){
-//             makeTextBox();
-//         };
-//     }
-//     else {
-//         removeElement('s3Label');
-//         removeElement('s3text');   
-//     };
-// };
         
 </script>
