@@ -14,6 +14,14 @@
 <div ng-controller="FoobarController">
     
     <div class="control-group" >
+        <label class="control-label">Number of flow runs?</label>
+        <div class="controls">
+            <input type="text" ng-model="config.numRuns" id='numRuns'/>
+            <span class="help-inline"> How many times to replicate this run. </span>
+        </div>
+    </div>
+    
+    <div class="control-group" >
         <label class="control-label">Run flow as already configured?</label>
         <div class="controls">
             <input type="checkbox" ng-model="config.dontEdit" value="True" onclick="turnOffHTML()" id='checkBox'/> <!-- checked/-->

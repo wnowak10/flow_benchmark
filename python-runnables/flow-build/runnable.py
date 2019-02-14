@@ -31,6 +31,7 @@ class MyRunnable(Runnable):
         self.computeEngine  = self.config.get('computeEngine').upper()
         self.s3Bucket = self.config.get('s3Bucket')
         self.dontEdit = self.config.get('dontEdit')
+        self.numRuns = int(self.config.get('numRuns'))
         
     def bad_config(self):
         """
@@ -70,16 +71,23 @@ class MyRunnable(Runnable):
         if self.bad_config():
             return 'Configuration settings impossible - try another combination.'
         
+        all_flow_results = []
+        
         dontEdit = self.dontEdit
         cf = benchmark.checkpoint_flow(project_key = self.project_key)
         if dontEdit:
-            flow_results = cf.build_flow()
+            for i in range(self.numRuns):
+                flow_results = cf.build_flow()
+                all_flow_results.append(flow_results)
         else:    
             cf.set_spark_pipelinability(self.sparkPipeline)
             cf.reformat_flow(self.formatType, self.connectionType, self.s3Bucket)
             cf.set_compute_engines(self.computeEngine)
-
-            flow_results = cf.build_flow()
+            
+            for i in range(self.numRuns):
+                flow_results = cf.build_flow()
+                all_flow_results.append(flow_results)
+#             flow_results = cf.build_flow()
 
         res = html_template.res
         res += """
@@ -107,17 +115,15 @@ class MyRunnable(Runnable):
         res += html_template.table
         
         total_build_time_sum = np.nansum((0))
-        for i, _ in enumerate(flow_results):    
-            res += html_row([flow_results.keys()[i], flow_results.values()[i]])
-            total_build_time_sum = np.nansum((total_build_time_sum, flow_results.values()[i]))
+        for flow_results in all_flow_results:
+            for i, _ in enumerate(flow_results):    
+                res += html_row([flow_results.keys()[i], flow_results.values()[i]])
+                total_build_time_sum = np.nansum((total_build_time_sum, flow_results.values()[i]))
         res+="""
         </table>
         """
-#         </body>
-#         </html>
-        res+= """<h2> Total time for all builds: {} </h2>
+        res+= """<h2> Average time for all builds: {} </h2>
         </body>
-        </html>""".format(total_build_time_sum)
+        </html>""".format(total_build_time_sum / len(all_flow_results))
         return res
-#         return str(self.sparkPipeline)
 
