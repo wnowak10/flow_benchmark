@@ -93,6 +93,12 @@ class checkpoint_flow(object):
             - 'parquet'
             - 'avro'
             - 'ORC
+            
+         Essential definition keys to change in this JSON are:
+               * formatParams
+               * formatType
+               * type
+               * params
 
         Returns:
             bool: The return value. True for success, False otherwise.
@@ -121,15 +127,7 @@ class checkpoint_flow(object):
             return
 
         changed = dataset_def.copy()
-        
-        """Essential definition keys to change in this JSON are:
-               * formatParams
-               * formatType
-               * type
-               * params
-         """
-
-        
+                
         """
         Get the formatParams from my dictionary. 
         `dataset_defs.py` contains Python dictionaries which contain
