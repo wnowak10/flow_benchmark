@@ -120,7 +120,7 @@ class checkpoint_flow(object):
                * params
         
         """
-        connectionDefinition = client.get_connection(connectionType).get_definition()
+        connectionDefinition = self.client.get_connection(connectionType).get_definition()
         connectionType = connectionDefinition['type']
         
         """
