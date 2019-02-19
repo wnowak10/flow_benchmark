@@ -110,6 +110,10 @@ class checkpoint_flow(object):
         except: # Datasets that are exposed from other projects mysteriously don't have a JSON definition available.
             return
         
+        connectionDefinition = self.client.get_connection(connectionType).get_definition()
+        userConnectionString = connectionType
+        connectionType = connectionDefinition['type']
+        
         # Don't change anything if this was an uploaded file.
         # This should be redundant given `_check_source_data` above.
         if dataset_def['type'] == 'UploadedFiles':
