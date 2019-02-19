@@ -145,10 +145,12 @@ class checkpoint_flow(object):
         `dataset_defs.py` contains Python dictionaries which contain
         appropriate content to populate Dataiku dataset JSON definitions
         according to a new definition.
+        
+        Set the new formatParams key in the dataset definition JSON
+        called `changed`.
         """
-        formatParams = dataset_defs.formatParams[connectionType][formatType]
-        # Set the new formatParams key in the dataset definition JSON
-        # called `changed`.
+        formatParams            = dataset_defs.formatParams[connectionType][formatType]
+        
         changed['formatParams'] = formatParams
         changed['formatType']   = formatType
         changed['params']       = dataset_defs.params[connectionType]
