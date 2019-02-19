@@ -153,7 +153,7 @@ class checkpoint_flow(object):
         try:
             root = connectionDefinition['params']['namingRule']['root']
         except:
-            print("NO ROOT")
+            root = '/'
         try:
             tableNameDatasetNamePrefix = connectionDefinition['params']['namingRule']['tableNameDatasetNamePrefix']
         except:
