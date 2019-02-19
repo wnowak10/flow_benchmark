@@ -107,6 +107,7 @@ class checkpoint_flow(object):
         # Get the dataset's JSON definition.
         try:
             dataset_def = self.project.get_dataset(dataset_name).get_definition()
+        # FIND tag for exposed dataset and flag that way.
         except: # Datasets that are exposed from other projects mysteriously don't have a JSON definition available.
             return
         
@@ -134,16 +135,18 @@ class checkpoint_flow(object):
         """
         initialConnectionType = connectionType # For later reference in HDFS connection string
         
-        if 'azure' in connectionType.lower():
-            connectionType = 'Azure'
-        if len([s for s in ['adls', 'wasb', 'hdfs'] if s.lower() in connectionType.lower()]) > 0:
-            connectionType = 'HDFS'
-        elif 'file_system' in connectionType.lower() or 'filesystem' in connectionType.lower():
-            connectionType = 'Filesystem'
-        elif 'sql' in connectionType.lower():
-            connectionType = 'SQL'
-        elif 's3' in connectionType.lower():
-            connectionType= 'S3'
+        # TO DO: Query API to get information a connection.
+        connectionType = client.get_connection(connectionType).get_definition()['type']
+#         if 'azure' in connectionType.lower():
+#             connectionType = 'Azure'
+#         if len([s for s in ['adls', 'wasb', 'hdfs'] if s.lower() in connectionType.lower()]) > 0:
+#             connectionType = 'HDFS'
+#         elif 'file_system' in connectionType.lower() or 'filesystem' in connectionType.lower():
+#             connectionType = 'Filesystem'
+#         elif 'sql' in connectionType.lower():
+#             connectionType = 'SQL'
+#         elif 's3' in connectionType.lower():
+#             connectionType= 'S3'
         
         """
         Get the formatParams from my dictionary. 
@@ -165,6 +168,11 @@ class checkpoint_flow(object):
         For example, `hiveTableNames` follow `dataset_name` for some 
         connections and '${projectKey}' + dataset_name for other connections.
         """
+        
+        # GET PATH depending on connectionType
+        # UNTEST!
+        path_prefix = client.get_connection(connectionType).get_definition()['params']['root']
+        
         if connectionType == 'SQL': # No formatParams for SQL connections.
             del changed['formatParams']
             del changed['formatType']
@@ -176,9 +184,11 @@ class checkpoint_flow(object):
             changed['params']['connection'] = initialConnectionType
             changed['hiveTableName'] = dataset_name # For some connections, # For others '${projectKey}' + dataset_name 
 
+            
         if connectionType == "S3":
             changed['params']['bucket'] = s3Bucket
-            changed['params']['path'] = '/dataiku/${projectKey}/' + dataset_name
+            changed['params']['path'] = path_prefix + dataset_name
+#             changed['params']['path'] = '/dataiku/${projectKey}/' + dataset_name
             
         if connectionType =='Azure':
             changed['params']['path'] = '/${projectKey}/' + dataset_name
@@ -188,16 +198,16 @@ class checkpoint_flow(object):
         These types are a mandatory part of a dataset definition JSON,
         but it is unclear to me what all possible options are.
         """
-        if connectionType == "Filesystem":
-            changed['type']= 'Filesystem'
-        elif connectionType == 'HDFS': 
-            changed['type'] = 'HDFS'
-        elif connectionType == 'SQL':
-            changed['type'] = 'PostgreSQL'
-        elif connectionType == 'S3':
-            changed['type'] = 'S3'
-        elif connectionType == 'Azure':  # UNTESTED!
-            changed['type'] = 'Azure'
+#         if connectionType == "Filesystem":
+#             changed['type']= 'Filesystem'
+#         elif connectionType == 'HDFS': 
+#             changed['type'] = 'HDFS'
+#         elif connectionType == 'SQL':
+#             changed['type'] = 'PostgreSQL'
+#         elif connectionType == 'S3':
+#             changed['type'] = 'S3'
+#         elif connectionType == 'Azure':  # UNTESTED!
+#             changed['type'] = 'Azure'
             
         self.project.get_dataset(dataset_name).set_definition(changed)
         print('Dataset definition changed. Need to clear data and rebuild. Call `build_dataset()`.')
@@ -230,6 +240,7 @@ class checkpoint_flow(object):
         # Ban sync recipe, as this seems to not work?
         if recipe_type == 'sync':
             print("Cannot change engine on sync?")
+            # NOTE: There are other 'fast sync'
             return
 
         # _____________________________________________________________________
@@ -438,6 +449,7 @@ class checkpoint_flow(object):
             else:
                 run_times[terminal_dataset] = _time_job(job)
                 print('Successfully built {}.'.format(dataset))
-           
+        
+        # Referenced in runnable.py as `flow_results`
         return run_times
     
