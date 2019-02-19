@@ -136,7 +136,7 @@ class checkpoint_flow(object):
         or HadoopDFS...my string match won't catch this and I will
         botch the mapping.
         """
-        initialConnectionType = connectionType # For later reference in HDFS connection string
+#         initialConnectionType = connectionType # For later reference in HDFS connection string
         
 #         if 'azure' in connectionType.lower():
 #             connectionType = 'Azure'
@@ -177,7 +177,7 @@ class checkpoint_flow(object):
             
         if connectionType in ["Filesystem", "HDFS"]: # Include path for a dataset on filesystem. HDFS untested.
             changed['params']['path'] = '${projectKey}/' + dataset_name
-            changed['params']['connection'] = initialConnectionType
+            changed['params']['connection'] = userConnectionString
             changed['hiveTableName'] = dataset_name # For some connections, # For others '${projectKey}' + dataset_name 
 
         if connectionType == "S3":
