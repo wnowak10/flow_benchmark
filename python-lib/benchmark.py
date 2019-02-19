@@ -150,6 +150,20 @@ class checkpoint_flow(object):
         # UNTESTED!
 #         path_prefix = client.get_connection(connectionType).get_definition()['params']['root']
 #         client.get_connection(connectionType).get_definition()['params']['namingRule']['hdfsPathDatasetNamePrefix']
+        root = connectionDefinition['params']['root']
+        try:
+            tableNameDatasetNamePrefix = connectionDefinition['params']['tableNameDatasetNamePrefix']
+        except:
+            print('No tableNameDatasetNamePrefix')
+        try:
+            hdfsPathDatasetNamePrefix = connectionDefinition['params']['hdfsPathDatasetNamePrefix']
+        except:
+            print('No hdfsPathDatasetNamePrefix')
+        try:
+            pathDatasetNamePrefix = connectionDefinition['params']['pathDatasetNamePrefix']
+        except:
+            print('No pathDatasetNamePrefix')
+            
         if connectionType == 'PostgreSQL': # No formatParams for SQL connections.
             del changed['formatParams']
             del changed['formatType']
@@ -159,16 +173,15 @@ class checkpoint_flow(object):
             changed['smartName'] = dataset_name
             
         if connectionType in ["Filesystem"]:
-            fs_root = connectionDefinition['params']['root']
-            changed['params']['path'] = fs_root +'/' + dataset_name
+            changed['params']['path'] = root +'/' + pathDatasetNamePrefix + '/' + dataset_name
             
         if connectionType in ["HDFS"]:
-            changed['params']['path'] = '${projectKey}/' + dataset_name
+            changed['params']['path'] = root +'/' + hdfsPathDatasetNamePrefix + '/' + dataset_name
             changed['params']['connection'] = connectionType
             changed['hiveTableName'] = dataset_name # For some connections, # For others '${projectKey}' + dataset_name 
             
         if connectionType == "S3":
-            changed['params']['bucket'] = s3Bucket
+            changed['params']['bucket'] = connectionDefinition['params']['chbucket']
             changed['params']['path'] = path_prefix + dataset_name
 #             changed['params']['path'] = '/dataiku/${projectKey}/' + dataset_name
             
