@@ -34,7 +34,7 @@ def _time_job(job):
             date = datetime.strptime(line[1:20], '%Y/%m/%d-%H:%M:%S')
             dates.append(date)
     num_seconds = (dates[-1] - dates[0]).seconds   
-        # UNTESTED!
+    # UNTESTED!
     if num_seconds <=60:
         return (dates[-1] - dates[0]).seconds
     elif 60 < num_seconds < 3600:
@@ -120,9 +120,6 @@ class checkpoint_flow(object):
                * params
         
         """
-#         initialConnectionType = connectionType # For later reference in HDFS connection string
-        
-        # TO DO: Query API to get information a connection.
         connectionDefinition = client.get_connection(connectionType).get_definition()
         connectionType = connectionDefinition['type']
         
