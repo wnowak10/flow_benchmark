@@ -180,7 +180,7 @@ class checkpoint_flow(object):
             
         if connectionType in ["HDFS"]:
             changed['params']['path'] = root +'/' + hdfsPathDatasetNamePrefix + '/' + dataset_name
-            changed['params']['connection'] = 'hdfs'
+            changed['params']['connection'] = connectionType
             changed['hiveTableName'] = root +'/' + tableNameDatasetNamePrefix + '/' + dataset_name # For some connections, # For others '${projectKey}' + dataset_name 
             
         if connectionType == "S3":
