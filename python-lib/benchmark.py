@@ -150,17 +150,17 @@ class checkpoint_flow(object):
         # UNTESTED!
 #         path_prefix = client.get_connection(connectionType).get_definition()['params']['root']
 #         client.get_connection(connectionType).get_definition()['params']['namingRule']['hdfsPathDatasetNamePrefix']
-        root = connectionDefinition['params']['root']
+        root = connectionDefinition['params']['namingRule'['root']
         try:
-            tableNameDatasetNamePrefix = connectionDefinition['params']['tableNameDatasetNamePrefix']
+            tableNameDatasetNamePrefix = connectionDefinition['params']['namingRule']['tableNameDatasetNamePrefix']
         except:
             print('No tableNameDatasetNamePrefix')
         try:
-            hdfsPathDatasetNamePrefix = connectionDefinition['params']['hdfsPathDatasetNamePrefix']
+            hdfsPathDatasetNamePrefix = connectionDefinition['params']['namingRule'['hdfsPathDatasetNamePrefix']
         except:
             print('No hdfsPathDatasetNamePrefix')
         try:
-            pathDatasetNamePrefix = connectionDefinition['params']['pathDatasetNamePrefix']
+            pathDatasetNamePrefix = connectionDefinition['params']['namingRule'['pathDatasetNamePrefix']
         except:
             print('No pathDatasetNamePrefix')
             
