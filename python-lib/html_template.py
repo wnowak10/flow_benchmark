@@ -31,6 +31,7 @@ res = """
         </script>
 
       """
+# <pre> -- Jed's way to add logs from successful macro runs.
 
 table = """<h2> Build results:</h2>
 
