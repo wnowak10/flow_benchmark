@@ -418,7 +418,6 @@ class checkpoint_flow(object):
         """
         if names is None:
             names = self.list_dataset_names()
-            logger.info("Dataset names are: {}".format(names))
             
         terminal_datasets = []
         for dataset in names:
