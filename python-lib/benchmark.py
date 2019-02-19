@@ -170,9 +170,9 @@ class checkpoint_flow(object):
         """
         
         # GET PATH depending on connectionType
-        # UNTEST!
-        path_prefix = client.get_connection(connectionType).get_definition()['params']['root']
-        
+        # UNTESTED!
+#         path_prefix = client.get_connection(connectionType).get_definition()['params']['root']
+#         client.get_connection(connectionType).get_definition()['params']['namingRule']['hdfsPathDatasetNamePrefix']
         if connectionType == 'SQL': # No formatParams for SQL connections.
             del changed['formatParams']
             del changed['formatType']
