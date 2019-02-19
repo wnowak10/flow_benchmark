@@ -46,9 +46,9 @@ def _time_job(job):
         # UNTESTED!
     if num_seconds <=60:
         return (dates[-1] - dates[0]).seconds
-    if num_seconds > 60:
+    elif 60 < num_seconds < 3600:
         return (dates[-1] - dates[0]).minutes
-    if num_seconds > 3600:
+    elif num_seconds >= 3600:
         return (dates[-1] - dates[0]).hours     
 #     return (dates[-1] - dates[0]).seconds  # Dates 0 is after sync ends, Dates -1 is end time for final task
 
