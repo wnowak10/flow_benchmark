@@ -134,28 +134,11 @@ class checkpoint_flow(object):
                * type
                * params
         
-        ConnectionType can be named by user, so rely on string search
-        to map user connection type to valid backend data connection type.
-        
-        ### TO DO!!! ###
-        This is fragile. Maybe I make a connection called Hadoop
-        or HadoopDFS...my string match won't catch this and I will
-        botch the mapping.
         """
-        initialConnectionType = connectionType # For later reference in HDFS connection string
+#         initialConnectionType = connectionType # For later reference in HDFS connection string
         
         # TO DO: Query API to get information a connection.
         connectionType = client.get_connection(connectionType).get_definition()['type']
-#         if 'azure' in connectionType.lower():
-#             connectionType = 'Azure'
-#         if len([s for s in ['adls', 'wasb', 'hdfs'] if s.lower() in connectionType.lower()]) > 0:
-#             connectionType = 'HDFS'
-#         elif 'file_system' in connectionType.lower() or 'filesystem' in connectionType.lower():
-#             connectionType = 'Filesystem'
-#         elif 'sql' in connectionType.lower():
-#             connectionType = 'SQL'
-#         elif 's3' in connectionType.lower():
-#             connectionType= 'S3'
         
         """
         Get the formatParams from my dictionary. 
@@ -167,8 +150,8 @@ class checkpoint_flow(object):
         # Set the new formatParams key in the dataset definition JSON
         # called `changed`.
         changed['formatParams'] = formatParams
-        changed['formatType'] = formatType
-        changed['params'] = dataset_defs.params[connectionType]
+        changed['formatType']   = formatType
+        changed['params']       = dataset_defs.params[connectionType]
         
         """
         Exceptions / particular cases.
@@ -202,21 +185,6 @@ class checkpoint_flow(object):
         if connectionType =='Azure':
             changed['params']['path'] = '/${projectKey}/' + dataset_name
         
-        """
-        ### TO DO!!! ###
-        These types are a mandatory part of a dataset definition JSON,
-        but it is unclear to me what all possible options are.
-        """
-#         if connectionType == "Filesystem":
-#             changed['type']= 'Filesystem'
-#         elif connectionType == 'HDFS': 
-#             changed['type'] = 'HDFS'
-#         elif connectionType == 'SQL':
-#             changed['type'] = 'PostgreSQL'
-#         elif connectionType == 'S3':
-#             changed['type'] = 'S3'
-#         elif connectionType == 'Azure':  # UNTESTED!
-#             changed['type'] = 'Azure'
             
         self.project.get_dataset(dataset_name).set_definition(changed)
         print('Dataset definition changed. Need to clear data and rebuild. Call `build_dataset()`.')
