@@ -192,16 +192,17 @@ class checkpoint_flow(object):
         These types are a mandatory part of a dataset definition JSON,
         but it is unclear to me what all possible options are.
         """
-        if connectionType == "Filesystem":
-            changed['type']= 'Filesystem'
-        elif connectionType == 'HDFS': 
-            changed['type'] = 'HDFS'
-        elif connectionType == 'SQL':
-            changed['type'] = 'PostgreSQL'
-        elif connectionType == 'S3':
-            changed['type'] = 'S3'
-        elif connectionType == 'Azure':  # UNTESTED!
-            changed['type'] = 'Azure'
+        changed['type'] = connectionType
+#         if connectionType == "Filesystem":
+#             changed['type']= 'Filesystem'
+#         elif connectionType == 'HDFS': 
+#             changed['type'] = 'HDFS'
+#         elif connectionType == 'SQL':
+#             changed['type'] = 'PostgreSQL'
+#         elif connectionType == 'S3':
+#             changed['type'] = 'S3'
+#         elif connectionType == 'Azure':  # UNTESTED!
+#             changed['type'] = 'Azure'
             
         self.project.get_dataset(dataset_name).set_definition(changed)
         print('Dataset definition changed. Need to clear data and rebuild. Call `build_dataset()`.')
