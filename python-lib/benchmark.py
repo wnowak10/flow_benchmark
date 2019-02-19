@@ -138,7 +138,8 @@ class checkpoint_flow(object):
 #         initialConnectionType = connectionType # For later reference in HDFS connection string
         
         # TO DO: Query API to get information a connection.
-        connectionType = client.get_connection(connectionType).get_definition()['type']
+        connectionDefinition = client.get_connection(connectionType).get_definition()
+        connectionType = connectionDefinition['type']
         
         """
         Get the formatParams from my dictionary. 
@@ -167,15 +168,21 @@ class checkpoint_flow(object):
         # UNTESTED!
 #         path_prefix = client.get_connection(connectionType).get_definition()['params']['root']
 #         client.get_connection(connectionType).get_definition()['params']['namingRule']['hdfsPathDatasetNamePrefix']
-        if connectionType == 'SQL': # No formatParams for SQL connections.
+        if connectionType == 'PostgreSQL': # No formatParams for SQL connections.
             del changed['formatParams']
             del changed['formatType']
-            changed['params']['table'] = '${projectKey}_postgres-10.'+dataset_name
+            tablePrefix = connectionDefinition['tableNameDatasetNamePrefix']
+            changed['params']['table'] = tablePrefix + dataset_name
+#             '${projectKey}_postgres-10.'+dataset_name
             changed['smartName'] = dataset_name
             
-        if connectionType in ["Filesystem", "HDFS"]: # Include path for a dataset on filesystem. HDFS untested.
+        if connectionType in ["Filesystem"]:
+            fs_root = connectionDefinition['params']['root']
+            changed['params']['path'] = fs_root +'/' + dataset_name
+            
+        if connectionType in ["HDFS"]:
             changed['params']['path'] = '${projectKey}/' + dataset_name
-            changed['params']['connection'] = initialConnectionType
+            changed['params']['connection'] = connectionType
             changed['hiveTableName'] = dataset_name # For some connections, # For others '${projectKey}' + dataset_name 
 
             
