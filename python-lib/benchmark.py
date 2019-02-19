@@ -156,11 +156,11 @@ class checkpoint_flow(object):
         except:
             print('No tableNameDatasetNamePrefix')
         try:
-            hdfsPathDatasetNamePrefix = connectionDefinition['params']['namingRule'['hdfsPathDatasetNamePrefix']
+            hdfsPathDatasetNamePrefix = connectionDefinition['params']['namingRule']['hdfsPathDatasetNamePrefix']
         except:
             print('No hdfsPathDatasetNamePrefix')
         try:
-            pathDatasetNamePrefix = connectionDefinition['params']['namingRule'['pathDatasetNamePrefix']
+            pathDatasetNamePrefix = connectionDefinition['params']['namingRule']['pathDatasetNamePrefix']
         except:
             print('No pathDatasetNamePrefix')
             
