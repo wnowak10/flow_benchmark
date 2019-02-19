@@ -214,7 +214,8 @@ class checkpoint_flow(object):
         if set(recipe_input_datsets)&set(source_datasets): # Check intersection
             if compute_type in ['SQL', 'HIVE']:
                 compute_type = "DSS"
-        
+                
+        # Need to intelligently switch to HIVE
         if compute_type == 'HADOOP_MAPREDUCE' and recipe_type in ['grouping', 'window']:
             compute_type = 'HIVE'
         # _____________________________________________________________________
