@@ -157,7 +157,7 @@ class checkpoint_flow(object):
         if connectionType in ["Filesystem", "HDFS"]: # Include path for a dataset on filesystem. HDFS untested.
             changed['params']['path'] = '${projectKey}/' + dataset_name
             changed['params']['connection'] = userConnectionString
-            changed['hiveTableName'] = '${projectKey}_' + dataset_name # For some connections, # For others '${projectKey}' + dataset_name 
+            changed['params']['hiveTableName'] = '${projectKey}_' + dataset_name # For some connections, # For others '${projectKey}' + dataset_name 
 
         if connectionType == "S3":
             changed['params']['bucket'] = s3Bucket
