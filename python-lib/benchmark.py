@@ -184,7 +184,6 @@ class checkpoint_flow(object):
             changed['params']['path'] = '${projectKey}/' + dataset_name
             changed['params']['connection'] = connectionType
             changed['hiveTableName'] = dataset_name # For some connections, # For others '${projectKey}' + dataset_name 
-
             
         if connectionType == "S3":
             changed['params']['bucket'] = s3Bucket
