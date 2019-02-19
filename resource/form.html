@@ -94,16 +94,16 @@ function s3id() {
     var connectionType = e.options[e.selectedIndex].text;
         
     if(connectionType.toLowerCase().includes("s3")) {
-            var element = document.getElementById("s3Bucket");
-            var style = window.getComputedStyle(element);
-            var display = style.getPropertyValue('display');
-            element.style.display = "block";
+        var element = document.getElementById("s3Bucket");
+        var style = window.getComputedStyle(element);
+        var display = style.getPropertyValue('display');
+        element.style.display = "block";
         }
     else{
         var element = document.getElementById("s3Bucket");
-            var style = window.getComputedStyle(element);
-            var display = style.getPropertyValue('display');
-            element.style.display = "none";
+        var style = window.getComputedStyle(element);
+        var display = style.getPropertyValue('display');
+        element.style.display = "none";
     };
 };
         
@@ -114,17 +114,17 @@ function addElement(parentId, elementTag, elementId, html) {
     newElement.setAttribute('id', elementId);
     newElement.innerHTML = html;
     p.appendChild(newElement);
-}
+};
     
 function removeElement(elementId) {
     var element = document.getElementById(elementId);
     element.parentNode.removeChild(element);
-}
+};
 
 function makeTextBox() {
     var myDiv = document.getElementById("myDiv");
     addElement('myDiv', 'label', 's3Label', "<label id='s3Label'> S3 Bucket: </label>");
     addElement('myDiv', 'text', 's3text', "<input type='text' ng-model='config.s3Bucket' value='dscluster-paris-1'> </input>");
-}
+};
         
 </script>
