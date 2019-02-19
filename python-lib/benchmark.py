@@ -10,7 +10,6 @@ import numpy as np
 
 import dataiku
 
-# import new_definitions
 import dataset_defs
 
 import logging
