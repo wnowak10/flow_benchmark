@@ -122,7 +122,6 @@ class MyRunnable(Runnable):
         # TO DO: Make plurals less confusing.
         total_build_time_sum = np.nansum((0))
         for flow_results in all_flow_results:
-            print(flow_results)
             for i, _ in enumerate(flow_results): 
                 res += html_row([flow_results.keys()[i], flow_results.values()[i]])
                 total_build_time_sum = np.nansum((total_build_time_sum, flow_results.values()[i]))
