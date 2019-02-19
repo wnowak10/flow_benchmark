@@ -215,7 +215,7 @@ class checkpoint_flow(object):
             if compute_type in ['SQL', 'HIVE']:
                 compute_type = "DSS"
         
-        if compute_type == 'HADOOP_MAPREDUCE' and recipe_type in ['grouping']:
+        if compute_type == 'HADOOP_MAPREDUCE' and recipe_type in ['grouping', 'window']:
             compute_type = 'HIVE'
         # _____________________________________________________________________
         # Set new recipe definition
