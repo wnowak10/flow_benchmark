@@ -12,8 +12,6 @@ import dataiku
 
 import dataset_defs
 
-import logging
-
 # _____________________________________________________________________________
 # Setup
 
