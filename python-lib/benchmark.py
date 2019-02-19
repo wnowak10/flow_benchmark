@@ -138,16 +138,16 @@ class checkpoint_flow(object):
         """
         initialConnectionType = connectionType # For later reference in HDFS connection string
         
-        if 'azure' in connectionType.lower():
-            connectionType = 'Azure'
-        if len([s for s in ['adls', 'wasb', 'hdfs'] if s.lower() in connectionType.lower()]) > 0:
-            connectionType = 'HDFS'
-        elif 'file_system' in connectionType.lower() or 'filesystem' in connectionType.lower():
-            connectionType = 'Filesystem'
-        elif 'sql' in connectionType.lower():
-            connectionType = 'SQL'
-        elif 's3' in connectionType.lower():
-            connectionType= 'S3'
+#         if 'azure' in connectionType.lower():
+#             connectionType = 'Azure'
+#         if len([s for s in ['adls', 'wasb', 'hdfs'] if s.lower() in connectionType.lower()]) > 0:
+#             connectionType = 'HDFS'
+#         elif 'file_system' in connectionType.lower() or 'filesystem' in connectionType.lower():
+#             connectionType = 'Filesystem'
+#         elif 'sql' in connectionType.lower():
+#             connectionType = 'SQL'
+#         elif 's3' in connectionType.lower():
+#             connectionType= 'S3'
         
         """
         Get the formatParams from my dictionary. 
