@@ -121,6 +121,7 @@ class checkpoint_flow(object):
         
         """
         connectionDefinition = self.client.get_connection(connectionType).get_definition()
+        userConnectionString = connectionType
         connectionType = connectionDefinition['type']
         
         """
@@ -180,7 +181,7 @@ class checkpoint_flow(object):
             
         if connectionType in ["HDFS"]:
             changed['params']['path'] = root +'/' + hdfsPathDatasetNamePrefix + '/' + dataset_name
-            changed['params']['connection'] = connectionType
+            changed['params']['connection'] = userConnectionString
             changed['hiveTableName'] = root +'/' + tableNameDatasetNamePrefix + '/' + dataset_name # For some connections, # For others '${projectKey}' + dataset_name 
             
         if connectionType == "S3":
